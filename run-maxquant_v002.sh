@@ -1,9 +1,12 @@
+
 #!/usr/bin/bash env
 #######################to do
 ########if mqpar already exists warning message!!!
 ########documentation of run dauer!!
 set -euo pipefail
 trap 's=$?; echo >&2 "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
+
+start=`date +%s`
 
 Help()
 {
@@ -19,10 +22,6 @@ Help()
    echo "h     Print this help"
    echo
 }
-
-
-
-
 
 version="new"
 runs=1
@@ -149,3 +148,12 @@ mv ./log.txt ./$projname
 
 #remove mqpar_temp file
 mv ./mqpar_tmp/$filename.xml ./mqpar_tmp/done
+
+
+#get runtime
+end=`date +%s`
+runtime=$((end-start))
+
+hours=$((runtime / 3600)); minutes=$(( (runtime % 3600) / 60 )); seconds=$(( (runtime % 3600) % 60 ))
+
+echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)" | tee -a log.txt
