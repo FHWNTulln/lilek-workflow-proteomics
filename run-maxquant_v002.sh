@@ -1,8 +1,4 @@
-
 #!/usr/bin/bash env
-#######################to do
-########if mqpar already exists warning message!!!
-########documentation of run dauer!!
 set -euo pipefail
 trap 's=$?; echo >&2 "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
@@ -39,6 +35,32 @@ do
     esac
 done
 
+#######################
+# check directories
+#######################
+folder=/proj/proteomics/
+if [ -d "$folder$projname" ]; then
+  # Take action if $DIR exists. #
+  cd $folder
+  echo "#####################################" | tee -a log.txt
+  echo "check directories" | tee -a log.txt
+  echo "#####################################" | tee -a log.txt
+  echo "Project Folder {$folder$projname} exists. Continue" | tee -a log.txt
+  mkdir -p ./$projname/data ./$projname/mqpar ./$projname/results
+else
+  echo "Project Folder {$folder$projname} doesn't exists. Aborting..." | tee -a log.txt
+  exit 1
+fi
+
+# check if mqpar file exsists
+if [ -f "./$projname/mqpar/$filename.xml" ]; then
+  echo "mqpar file ./$projname/mqpar/$filename.xml already exists. Aborting..." | tee -a log.txt
+  echo "deleting log-file"
+  rm ./log.txt
+  exit 1
+fi
+
+
 
 ########################
 # settings
@@ -52,25 +74,6 @@ echo "Filename: $filename" | tee log.txt
 echo "Project name: $projname" | tee -a log.txt
 echo "Version: $version" | tee -a log.txt
 echo "No. of runs: $runs" | tee -a log.txt
-
-#######################
-# check directories
-#######################
-echo "#####################################" | tee -a log.txt
-echo "check directories" | tee -a log.txt
-echo "#####################################" | tee -a log.txt
-folder=/proj/proteomics/
-if [ -d "$folder$projname" ]; then
-  # Take action if $DIR exists. #
-  cd $folder
-  echo "Project Folder {$folder$projname} exists. Continue" | tee -a log.txt
-  mkdir -p ./$projname/data ./$projname/mqpar ./$projname/results
-else
-  echo "Project Folder {$folder$projname} doesn't exists. Aborting..." | tee -a log.txt
-  exit 1
-fi
-
-
 
 #########################
 # activate maxquant
