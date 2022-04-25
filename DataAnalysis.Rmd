@@ -1,0 +1,431 @@
+---
+title: "Experiment MaxQuant - Evaluation with LFQ and Razor&Unique"
+autor: David Lilek
+output:
+  html_document:
+    df_print: paged
+    fig.align: center
+    self_contained: yes
+    fig.height: 4
+    fig.width: 8
+    theme: united
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    number_sections: yes
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, warning=FALSE}
+#load libraries
+library(tidyverse)
+library(dplyr)
+library(gplots)
+library(reshape2) #for melting data for boxplot with ggplot
+```
+
+# Introduction
+
+## LFQ-Procedure
+
+Filtering:
+
+-   `Potential.contaminant!="+"` -> remove where contaminants
+-   `!is.null(data_raw\$Reverse)`-> remove where reverse = +
+-   `!is.null(data_raw\$Only.identified.by.site))` -> remove where only identified by site = +
+
+Then the `log2`of the LFQ intensities was calculated and all `-Inf` values were substituted by NA using the following command: `lfq[lfq == -Inf] <- NA`
+
+Then the number of lfq values was used for the further evaluation, visualization and statistical testing. In the following this data will be called LFQ.
+
+## Unique | Razor&Unique procedure
+
+Filtering:
+
+-   `Potential.contaminant!="+"` -> remove where contaminants
+-   `!is.null(data_raw\$Reverse)`-> remove where reverse = +
+-   `!is.null(data_raw\$Only.identified.by.site))` -> remove where only identified by site = +
+
+-   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | in this case `unique`was set to 2.
+
+```{r eval=FALSE, include=FALSE, results="asis"}
+#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
+#read in all data with pattern .txt
+
+# get file list
+file.list <- list.files(path = path, pattern='*.txt')
+
+# read in files - for each file one variable is created
+for (i in 1:length(file.list)) assign(file.list[i], read.delim(paste(path,file.list[i],sep="")))
+
+
+sample_names_raw <- c("A1","A2","A3")
+unique <- 2  #how many petides should be necassary to identify a protein
+
+sample_names <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
+
+filtering <- function(data_raw){
+  subset(data_raw,
+         Potential.contaminant!="+", # remove where contaminant = +
+         !is.null(data_raw$Reverse), #remove where reverse = +
+         !is.null(data_raw$Only.identified.by.site),
+  )
+}
+
+CV <- function(x){
+  (sd(x)/mean(x))*100
+}
+
+for (x in file.list){
+  cat("\n")
+  cat("###",x,"\n")
+  data_raw <- get(x)
+
+  data <- filtering(data_raw)
+  
+  results <- data.frame(matrix(ncol = length(sample_names_raw), nrow = nrow(data)))
+  colnames(results) <- sample_names_raw
+   cat("\n")
+  print("####################")
+  cat("\n")
+  print(x)
+   cat("\n")
+  print("####################")
+   cat("\n")
+    i <- 0
+  for (i in 1:length(sample_names)){
+    name <- sample_names[i]
+    tmp <- (data[name] >= unique)
+    results[i] <- tmp
+     cat("\n")
+    print(name)
+     cat("\n")
+    print(sum(tmp, na.rm = TRUE))
+     cat("\n")
+  }
+  
+  assign(paste("results",x,sep="_"),results) #create individual variable names
+    
+  venn(results)
+  cat("\n")
+}
+
+
+
+```
+
+# Data Analysis
+
+The txt-files were read in, processed and filtered automatically. This section shows the code, several plots and also some summary statistics which are only shown for further discussion on the results, for the documentation of the statistical evaluation and are not labeled/discussed yet. If you are interested in the summary of the results go to `Summary`.
+
+```{r, results="asis"}
+###############################
+#
+#define settings
+#
+###############################
+
+sample_names_raw <- c("A1","A2","A3")
+unique <- 2  #how many petides should be necassary to identify a protein
+
+RAZOR <- TRUE #TRUE | FALSE
+UNIQUE <- TRUE #TRUE | FALSE
+LFQ <- TRUE #TRUE | FALSE
+
+#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
+
+sample_names_razor <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
+sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
+#another option would be
+#uniq <- data %>% select(starts_with("Unique.peptides."))
+
+filtering <- function(data_raw){
+   subset(data_raw,
+          Potential.contaminant!="+", # remove where contaminant = +
+          !is.null(data_raw$Reverse), #remove where reverse = +
+          !is.null(data_raw$Only.identified.by.site),
+          )
+}
+
+CV <- function(x){
+  (sd(x)/mean(x))*100
+}
+
+#read in all data with pattern .txt
+# get file list
+file.list <- list.files(path = path, pattern='*.txt')
+# read in files - for each file one variable is created
+for (i in 1:length(file.list)) assign(file.list[i], read.delim(paste(path,file.list[i],sep="")))
+
+
+my_data <- list()
+for (i in seq_along(file.list)) {
+    my_data[[i]] <- read.delim(paste(path,file.list[i],sep=""))
+}
+
+file.path <- paste(path,file.list,sep="") 
+tmp <- lapply(file.path, read.delim)
+names(tmp) <- file.list
+
+
+#create data frame for lfq
+results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
+row.names(results_2gether_lfq) <- file.list
+colnames(results_2gether_lfq) <- sample_names_raw
+#create data frame for razor
+results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
+row.names(results_2gether_razor) <- file.list
+colnames(results_2gether_razor) <- sample_names_raw
+
+if (RAZOR == TRUE) {
+  cat("\n")
+  cat("##","Razor","\n")
+  cat("\n")
+for (x in file.list){
+  cat("\n")
+  cat("###",x,"\n")
+  data_raw <- get(x)
+
+  data <- filtering(data_raw)
+  
+  results <- data.frame(matrix(ncol = length(sample_names_raw), nrow = nrow(data)))
+  colnames(results) <- sample_names_raw
+  i <- 0
+  for (i in 1:length(sample_names_razor)){
+    name <- sample_names_razor[i]
+    tmp <- (data[name] >= unique)
+    results[i] <- tmp
+    print(name)
+    print(sum(tmp, na.rm = TRUE))
+  }
+  
+  assign(paste("results_razor",x,sep="_"),results) #create individual variable names
+  
+  #make venn diagramm
+  #venn(results)
+  
+  results_2gether_razor[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+  cat("\n")
+}
+}
+
+if (LFQ == TRUE) {
+    cat("\n")
+  cat("##","LFQ","\n")
+  cat("\n")
+  for (x in file.list){
+    cat("\n")
+    cat("###",x,"\n")
+    data_raw <- get(x)
+    
+    data <- filtering(data_raw)
+    
+    results <- data.frame(matrix(ncol = length(sample_names_raw), nrow = nrow(data)))
+    colnames(results) <- sample_names_raw
+    i <- 0
+    for (i in 1:length(sample_names_lfq)){
+      name <- sample_names_lfq[i]
+      tmp <- log2(data[name])
+      tmp[tmp == -Inf] <- NA
+      results[i] <- tmp
+      print(name)
+      print(sum(!is.na(tmp)))
+    }
+    
+    assign(paste("results_lfq",x,sep="_"),results) #create individual variable names
+    
+    venn(as.data.frame(!is.na(results)))
+    
+    results_2gether_lfq[x,] <-    sapply(results,function(x)sum(!is.na(x)))
+    cat("\n")
+  }
+}
+
+#add number in column 4 for selection
+results_2gether_razor$number <- c(1:length(file.list))
+results_2gether_lfq$number <- c(1:length(file.list))
+```
+
+# OLD STUFF
+
+# Summary
+
+## Comparison of different MaxQuant versions
+
+### Razor
+
+Here only the results are plotted for documentation without discussion. For details on the comparison of different MaxQuant versions using LFQ or Razor look at the section `Summary Comparison of different versions`.
+
+```{r}
+razor_comp <- results_2gether_razor[c(1,3,15,25,27,29),-4]
+print(razor_comp)
+boxplot(t(razor_comp), 
+        names=seq(1:6),
+        xlab="Experiment No",
+        ylab="Identifications Razor",
+        cex.lab = 0.8)
+
+res_new <- t(razor_comp[c(1:3),])
+res_old <- t(razor_comp[c(4:6),])
+#print(res_new-res_old)
+
+shapiro.test(res_new-res_old)
+
+t <- t.test(res_new-res_old,
+       µ=0)
+print(t)
+```
+
+### LFQ
+
+```{r}
+lfq_comp <- results_2gether_lfq[c(1,3,15,25,27,29),-4]
+print(lfq_comp)
+boxplot(t(lfq_comp), 
+        names=seq(1:6),
+        xlab="Experiment No",
+        ylab="Identifications LFQ",
+        cex.lab = 0.8)
+
+res_new <- t(lfq_comp[c(1:3),])
+res_old <- t(lfq_comp[c(4:6),])
+#print(res_new-res_old)
+
+shapiro.test(res_new-res_old)
+
+t.test(res_new-res_old,
+       µ=0)
+```
+
+### Summary Comparison of different Versions
+
+In conclusion from `210709_MaxQuant_V003.html` the following two things were stated: 
+
+* the older version shows significant more identifications than the newer version (median of the difference new-old = -7)
+* because of this always the latest version of MaxQuant should be used
+
+Re-analyzing the LFQ values shows the same results than before (median of the difference new-old = -7). Also using Razor the same conclusio can be drawn (median of the difference new-old = -9) that there's a significant difference in the number of identifications (p=`r round(t$p.value,4)`).
+
+## Comparison rerun
+
+### Razor
+
+Here only the results are plotted for documentation without discussion. For details on the comparison of re-running using LFQ or Razor look at the section `Summary Comparison LFQ-Razor`.
+
+```{r}
+boxplot(results_2gether_razor[c(5:14),-4])
+rsd_002 <- apply(results_2gether_razor[c(5:14),-4],1,CV)
+rsd_003 <- apply(results_2gether_razor[c(15:24),-4],1,CV)
+
+boxplot(rsd_002,rsd_003,
+        xlab="rerun experiment no.",
+        names=c("002","003"),
+        ylab="relative sd")
+```
+
+
+### LFQ
+
+Here only the results are plotted for documentation without discussion. For details on the comparison of re-running using LFQ or Razor look at the section `Comparison LFQ-Razor`.
+
+```{r}
+boxplot(results_2gether_lfq[c(5:14),-4])
+boxplot(results_2gether_lfq[c(15:24),-4])
+rsd_002 <- apply(results_2gether_lfq[c(5:14),-4],1,CV)
+rsd_003 <- apply(results_2gether_lfq[c(15:24),-4],1,CV)
+
+boxplot(rsd_002,rsd_003,
+        xlab="rerun experiment no.",
+        names=c("002","003"),
+        ylab="relative sd")
+```
+
+### Summary Comparison LFQ-Razor
+
+* for comparison data from experiment 002 and 003 were used and boxplots for the number of protein identification were created
+* also the rsd (relative standard deviation) was caclulated an visualized using a boxplot
+
+From the results the following conclusion can be drawn:
+
+* LFQ seems to yield lower no. of protein identificiations compared to Razor independet if MBR is used (002) or not (003)
+* The differenc of no. protein identifications between LFQ and Razor in one extract seems to fluctuate (sometimes bigger (A2) or lower (A3)) depending on the extract
+```{r}
+rsd_002_r <- apply(results_2gether_razor[c(5:14),-4],1,CV)
+rsd_003_r <- apply(results_2gether_razor[c(15:24),-4],1,CV)
+rsd_002 <- apply(results_2gether_lfq[c(5:14),-4],1,CV)
+rsd_003 <- apply(results_2gether_lfq[c(15:24),-4],1,CV)
+```
+* rsd is lower when using lfq compared to Razor
+  + median rsd LFQ 002 `r round(median(rsd_002),4)`
+  + median rsd Razor 002 `r round(median(rsd_002_r),4)`
+  + median rsd LFQ 003 `r round(median(rsd_003),4)`
+  + median rsd Razor 003 `r round(median(rsd_003_r),4)`
+
+```{r}
+razor <- results_2gether_razor[c(5:24),-4]
+lfq <- results_2gether_lfq[c(5:24),-4]
+
+factor <- factor(c(rep("002_razor",10),rep("003_razor",10)))
+razor$factor <- factor
+factor <- factor(c(rep("002_lfq",10),rep("003_lfq",10)))
+lfq$factor <- factor
+
+data_tmp <- rbind (razor,lfq)
+
+dat.m <- melt(data_tmp, measure.vars=c('A1','A2','A3'))
+
+ggplot(subset(dat.m, factor == "002_razor" | factor == "002_lfq")) +
+  geom_boxplot(aes(x=variable, y=value, color=factor)) +
+  labs(title="Comparison Rerun LFQ-Razor Experiment 002",
+       x ="Extract", y = "No. identified proteins",
+       color="Experiment")
+ggplot(subset(dat.m, factor == "003_razor" | factor == "003_lfq")) +
+  geom_boxplot(aes(x=variable, y=value, color=factor)) +
+  labs(title="Comparison Rerun LFQ-Razor Experimt 003",
+       x ="Extract", y = "No. identified proteins",
+       color="Experiment")
+
+boxplot(rsd_002_r,rsd_003_r,rsd_002,rsd_003,
+        xlab="rerun experiment no.",
+        names=c("002 razor","003 razor","002 lfq", "003 lfq"),
+        ylab="relative sd")
+
+```
+
+
+
+## Comparison different order
+
+As can be seen different orders of the raw-files didn't seem to have an influence on the no. of protein identifications 
+
+* independent if the option fractions was used (experiment 002) or not (experiment 001) and
+* independet if Razor or LFQ was used for evaluation.
+
+In both cases the option `match between runs` was used. 
+
+**Results Razor**
+
+```{r}
+results_2gether_razor[c(1:4),-4]
+```
+
+**Results LFQ**
+
+```{r}
+results_2gether_lfq[c(1:4),-4]
+```
+
+
+# Conclusion
+
+* using **different versions** the same conclusion can be drawn using LFQ or Razor -> older version shows more protein identifications
+* **re-running** of the same experiment
+  + LFQ yields lower protein identificiations than Razor - the magnitude of the difference doesn't correlate with the no. of protein identifications but seems to depend on the extraction/sample
+  + rsd for LFQ is lower than for Razor
+* **different order** doesn't affect the protein identifications independet if LFQ or Razor is used
