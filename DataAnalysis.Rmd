@@ -71,8 +71,8 @@ RAZOR <- TRUE #TRUE | FALSE
 UNIQUE <- TRUE #TRUE | FALSE
 LFQ <- TRUE #TRUE | FALSE
 
-path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
-#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
+#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
 
 filtering <- function(data_raw){
    subset(data_raw,
@@ -105,20 +105,27 @@ if (GET_SAMPLE_NAMES == TRUE){
 }
 
 sample_names_razor <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
+sample_names_unique <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
 sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
 #another option would be
 #uniq <- data %>% select(starts_with("Unique.peptides."))
-#create data frame for lfq
-results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
-row.names(results_2gether_lfq) <- file.list
-colnames(results_2gether_lfq) <- sample_names_raw
 #create data frame for razor
 results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
 row.names(results_2gether_razor) <- file.list
 colnames(results_2gether_razor) <- sample_names_raw
+#create data frame for unique
+results_2gether_unique <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
+row.names(results_2gether_razor) <- file.list
+colnames(results_2gether_razor) <- sample_names_raw
+#create data frame for lfq
+results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
+row.names(results_2gether_lfq) <- file.list
+colnames(results_2gether_lfq) <- sample_names_raw
+
 
 #results lists
 results_razor <- list()
+results_unique <- list()
 results_lfq <- list()
 
 if (RAZOR == TRUE) {
@@ -151,6 +158,35 @@ for (x in file.list){
 }
 }
 
+if (UNIQUE == TRUE) {
+  cat("\n")
+  cat("##","Unique","\n")
+  cat("\n")
+for (x in file.list){
+  cat("\n")
+  cat("###",substring(x, 1, nchar(x)-4),"\n")
+  data_raw <- as.data.frame(res_raw[[x]])
+  data <- filtering(data_raw)
+  results <- data.frame(matrix(ncol = length(sample_names_raw), nrow = nrow(data)))
+  colnames(results) <- sample_names_raw
+  i <- 0
+  for (i in 1:length(sample_names_unique)){
+    name <- sample_names_unique[i]
+    tmp <- (data[name] >= unique)
+    results[i] <- tmp
+    cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+  }
+  
+  results_unique[[x]] <- results
+  #assign(paste("results_razor",x,sep="_"),results) #create individual variable names
+  
+  #make venn diagramm
+  #venn(results)
+  
+  results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+  cat("\n")
+}
+}
 if (LFQ == TRUE) {
     cat("\n")
   cat("##","LFQ","\n")
