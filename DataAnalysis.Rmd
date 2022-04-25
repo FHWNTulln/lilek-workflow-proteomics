@@ -1,6 +1,7 @@
 ---
-title: "Experiment MaxQuant - Evaluation with LFQ and Razor&Unique"
+title: "DataAnalysis - Postprocessing Results MaxQuant"
 autor: David Lilek
+date: "`r format(Sys.time(), '%d %B %Y, %X')`"
 output:
   html_document:
     df_print: paged
@@ -15,6 +16,10 @@ output:
     number_sections: yes
     code_folding: hide
 ---
+
+```{r start, message=FALSE, warning=FALSE, include=FALSE}
+start_time = format(Sys.time(), '%X')
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -71,9 +76,10 @@ RAZOR <- TRUE #TRUE | FALSE
 UNIQUE <- TRUE #TRUE | FALSE
 LFQ <- TRUE #TRUE | FALSE
 
-#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
-path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
+#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
 
+# load functions
 filtering <- function(data_raw){
    subset(data_raw,
           Potential.contaminant!="+", # remove where contaminant = +
@@ -109,6 +115,7 @@ sample_names_unique <- paste("Razor...unique.peptides.",sample_names_raw, sep=""
 sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
 #another option would be
 #uniq <- data %>% select(starts_with("Unique.peptides."))
+
 #create data frame for razor
 results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
 row.names(results_2gether_razor) <- file.list
@@ -187,6 +194,7 @@ for (x in file.list){
   cat("\n")
 }
 }
+
 if (LFQ == TRUE) {
     cat("\n")
   cat("##","LFQ","\n")
@@ -220,7 +228,29 @@ if (LFQ == TRUE) {
 
 #add number in column 4 for selection
 results_2gether_razor$number <- c(1:length(file.list))
+results_2gether_unique$number <- c(1:length(file.list))
 results_2gether_lfq$number <- c(1:length(file.list))
+
+#remove variables - clean up
+rm(data,
+   data_raw,
+   name,
+   results,
+   sample_names_razor,
+   sample_names_unique,
+   sample_names_lfq,
+   tmp,
+   x)
+```
+
+# Used time
+
+```{r end, message=FALSE, warning=FALSE, include=FALSE}
+end_time = format(Sys.time(), '%X')
+```
+
+```{r used time, echo=FALSE, message=TRUE, warning=FALSE}
+print(paste("Time used for analysis:", round(as.difftime(end_time, units = "mins")-as.difftime(start_time, units = "mins"),digits=2),"minutes"))
 ```
 
 # OLD STUFF
