@@ -52,73 +52,6 @@ Filtering:
 
 -   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | in this case `unique`was set to 2.
 
-```{r eval=FALSE, include=FALSE, results="asis"}
-#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
-path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
-#read in all data with pattern .txt
-
-# get file list
-file.list <- list.files(path = path, pattern='*.txt')
-
-# read in files - for each file one variable is created
-for (i in 1:length(file.list)) assign(file.list[i], read.delim(paste(path,file.list[i],sep="")))
-
-
-sample_names_raw <- c("A1","A2","A3")
-unique <- 2  #how many petides should be necassary to identify a protein
-
-sample_names <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
-
-filtering <- function(data_raw){
-  subset(data_raw,
-         Potential.contaminant!="+", # remove where contaminant = +
-         !is.null(data_raw$Reverse), #remove where reverse = +
-         !is.null(data_raw$Only.identified.by.site),
-  )
-}
-
-CV <- function(x){
-  (sd(x)/mean(x))*100
-}
-
-for (x in file.list){
-  cat("\n")
-  cat("###",x,"\n")
-  data_raw <- get(x)
-
-  data <- filtering(data_raw)
-  
-  results <- data.frame(matrix(ncol = length(sample_names_raw), nrow = nrow(data)))
-  colnames(results) <- sample_names_raw
-   cat("\n")
-  print("####################")
-  cat("\n")
-  print(x)
-   cat("\n")
-  print("####################")
-   cat("\n")
-    i <- 0
-  for (i in 1:length(sample_names)){
-    name <- sample_names[i]
-    tmp <- (data[name] >= unique)
-    results[i] <- tmp
-     cat("\n")
-    print(name)
-     cat("\n")
-    print(sum(tmp, na.rm = TRUE))
-     cat("\n")
-  }
-  
-  assign(paste("results",x,sep="_"),results) #create individual variable names
-    
-  venn(results)
-  cat("\n")
-}
-
-
-
-```
-
 # Data Analysis
 
 The txt-files were read in, processed and filtered automatically. This section shows the code, several plots and also some summary statistics which are only shown for further discussion on the results, for the documentation of the statistical evaluation and are not labeled/discussed yet. If you are interested in the summary of the results go to `Summary`.
@@ -163,8 +96,8 @@ file.list <- list.files(path = path, pattern='*.txt')
 # create file path
 file.path <- paste(path,file.list,sep = "")
 # read in files - for each file one variable is created - results are stored in a list
-res <- lapply(file.path, read.delim)
-names(res) <- file.list
+res_raw <- lapply(file.path, read.delim)
+names(res_raw) <- file.list
 
 
 #create data frame for lfq
@@ -176,6 +109,10 @@ results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_raw), nrow
 row.names(results_2gether_razor) <- file.list
 colnames(results_2gether_razor) <- sample_names_raw
 
+#results lists
+results_razor <- list()
+results_lfq <- list()
+
 if (RAZOR == TRUE) {
   cat("\n")
   cat("##","Razor","\n")
@@ -183,7 +120,7 @@ if (RAZOR == TRUE) {
 for (x in file.list){
   cat("\n")
   cat("###",substring(x, 1, nchar(x)-4),"\n")
-  data_raw <- as.data.frame(res[[x]])
+  data_raw <- as.data.frame(res_raw[[x]])
   data <- filtering(data_raw)
   results <- data.frame(matrix(ncol = length(sample_names_raw), nrow = nrow(data)))
   colnames(results) <- sample_names_raw
@@ -192,11 +129,11 @@ for (x in file.list){
     name <- sample_names_razor[i]
     tmp <- (data[name] >= unique)
     results[i] <- tmp
-    print(name)
-    print(sum(tmp, na.rm = TRUE))
+    cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
   }
   
-  assign(paste("results_razor",x,sep="_"),results) #create individual variable names
+  results_razor[[x]] <- results
+  #assign(paste("results_razor",x,sep="_"),results) #create individual variable names
   
   #make venn diagramm
   #venn(results)
@@ -213,7 +150,7 @@ if (LFQ == TRUE) {
   for (x in file.list){
     cat("\n")
     cat("###",substring(x, 1, nchar(x)-4),"\n")
-    data_raw <- as.data.frame(res[[x]])
+    data_raw <- as.data.frame(res_raw[[x]])
     data <- filtering(data_raw)
     
     results <- data.frame(matrix(ncol = length(sample_names_raw), nrow = nrow(data)))
@@ -224,13 +161,13 @@ if (LFQ == TRUE) {
       tmp <- log2(data[name])
       tmp[tmp == -Inf] <- NA
       results[i] <- tmp
-      print(name)
-      print(sum(!is.na(tmp)))
+      cat(name,"<br/>",sum(!is.na(tmp)),"<br/>")
     }
     
-    assign(paste("results_lfq",x,sep="_"),results) #create individual variable names
+    results_lfq[[x]] <- results
+    #assign(paste("results_lfq",x,sep="_"),results) #create individual variable names
     
-    venn(as.data.frame(!is.na(results)))
+    #venn(as.data.frame(!is.na(results)))
     
     results_2gether_lfq[x,] <-    sapply(results,function(x)sum(!is.na(x)))
     cat("\n")
