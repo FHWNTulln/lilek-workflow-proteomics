@@ -63,20 +63,16 @@ The txt-files were read in, processed and filtered automatically. This section s
 #
 ###############################
 
-sample_names_raw <- c("A1","A2","A3")
+GET_SAMPLE_NAMES <- TRUE # if set to false define it in the next line
+# sample_names_raw <- c("A1","A2","A3")
 unique <- 2  #how many peptides should be necessary to identify a protein
 
 RAZOR <- TRUE #TRUE | FALSE
 UNIQUE <- TRUE #TRUE | FALSE
 LFQ <- TRUE #TRUE | FALSE
 
-#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
-path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
-
-sample_names_razor <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
-sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
-#another option would be
-#uniq <- data %>% select(starts_with("Unique.peptides."))
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
+#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
 
 filtering <- function(data_raw){
    subset(data_raw,
@@ -99,7 +95,19 @@ file.path <- paste(path,file.list,sep = "")
 res_raw <- lapply(file.path, read.delim)
 names(res_raw) <- file.list
 
+#get sample names
+if (GET_SAMPLE_NAMES == TRUE){
+    tmp <- colnames(res_raw[[1]])
+    tmp <- tmp[grep("Razor...unique.peptides.",tmp)]
+    tmp <- sub(".*Razor...unique.peptides.", "",tmp)
+    sample_names_raw <- tmp
+    rm(tmp)
+}
 
+sample_names_razor <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
+sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
+#another option would be
+#uniq <- data %>% select(starts_with("Unique.peptides."))
 #create data frame for lfq
 results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
 row.names(results_2gether_lfq) <- file.list
@@ -181,15 +189,9 @@ results_2gether_lfq$number <- c(1:length(file.list))
 
 # OLD STUFF
 
-# Summary
 
-## Comparison of different MaxQuant versions
 
-### Razor
-
-Here only the results are plotted for documentation without discussion. For details on the comparison of different MaxQuant versions using LFQ or Razor look at the section `Summary Comparison of different versions`.
-
-```{r}
+```{r eval=FALSE, include=FALSE}
 razor_comp <- results_2gether_razor[c(1,3,15,25,27,29),-4]
 print(razor_comp)
 boxplot(t(razor_comp), 
@@ -209,9 +211,9 @@ t <- t.test(res_new-res_old,
 print(t)
 ```
 
-### LFQ
 
-```{r}
+
+```{r eval=FALSE, include=FALSE}
 lfq_comp <- results_2gether_lfq[c(1,3,15,25,27,29),-4]
 print(lfq_comp)
 boxplot(t(lfq_comp), 
@@ -230,22 +232,9 @@ t.test(res_new-res_old,
        µ=0)
 ```
 
-### Summary Comparison of different Versions
 
-In conclusion from `210709_MaxQuant_V003.html` the following two things were stated: 
 
-* the older version shows significant more identifications than the newer version (median of the difference new-old = -7)
-* because of this always the latest version of MaxQuant should be used
-
-Re-analyzing the LFQ values shows the same results than before (median of the difference new-old = -7). Also using Razor the same conclusio can be drawn (median of the difference new-old = -9) that there's a significant difference in the number of identifications (p=`r round(t$p.value,4)`).
-
-## Comparison rerun
-
-### Razor
-
-Here only the results are plotted for documentation without discussion. For details on the comparison of re-running using LFQ or Razor look at the section `Summary Comparison LFQ-Razor`.
-
-```{r}
+```{r eval=FALSE, include=FALSE}
 boxplot(results_2gether_razor[c(5:14),-4])
 rsd_002 <- apply(results_2gether_razor[c(5:14),-4],1,CV)
 rsd_003 <- apply(results_2gether_razor[c(15:24),-4],1,CV)
@@ -257,11 +246,9 @@ boxplot(rsd_002,rsd_003,
 ```
 
 
-### LFQ
+.
 
-Here only the results are plotted for documentation without discussion. For details on the comparison of re-running using LFQ or Razor look at the section `Comparison LFQ-Razor`.
-
-```{r}
+```{r eval=FALSE, include=FALSE}
 boxplot(results_2gether_lfq[c(5:14),-4])
 boxplot(results_2gether_lfq[c(15:24),-4])
 rsd_002 <- apply(results_2gether_lfq[c(5:14),-4],1,CV)
@@ -273,28 +260,16 @@ boxplot(rsd_002,rsd_003,
         ylab="relative sd")
 ```
 
-### Summary Comparison LFQ-Razor
 
-* for comparison data from experiment 002 and 003 were used and boxplots for the number of protein identification were created
-* also the rsd (relative standard deviation) was caclulated an visualized using a boxplot
-
-From the results the following conclusion can be drawn:
-
-* LFQ seems to yield lower no. of protein identificiations compared to Razor independet if MBR is used (002) or not (003)
-* The differenc of no. protein identifications between LFQ and Razor in one extract seems to fluctuate (sometimes bigger (A2) or lower (A3)) depending on the extract
-```{r}
+```{r eval=FALSE, include=FALSE}
 rsd_002_r <- apply(results_2gether_razor[c(5:14),-4],1,CV)
 rsd_003_r <- apply(results_2gether_razor[c(15:24),-4],1,CV)
 rsd_002 <- apply(results_2gether_lfq[c(5:14),-4],1,CV)
 rsd_003 <- apply(results_2gether_lfq[c(15:24),-4],1,CV)
 ```
-* rsd is lower when using lfq compared to Razor
-  + median rsd LFQ 002 `r round(median(rsd_002),4)`
-  + median rsd Razor 002 `r round(median(rsd_002_r),4)`
-  + median rsd LFQ 003 `r round(median(rsd_003),4)`
-  + median rsd Razor 003 `r round(median(rsd_003_r),4)`
 
-```{r}
+
+```{r eval=FALSE, include=FALSE}
 razor <- results_2gether_razor[c(5:24),-4]
 lfq <- results_2gether_lfq[c(5:24),-4]
 
@@ -327,32 +302,15 @@ boxplot(rsd_002_r,rsd_003_r,rsd_002,rsd_003,
 
 
 
-## Comparison different order
-
-As can be seen different orders of the raw-files didn't seem to have an influence on the no. of protein identifications 
-
-* independent if the option fractions was used (experiment 002) or not (experiment 001) and
-* independet if Razor or LFQ was used for evaluation.
-
-In both cases the option `match between runs` was used. 
 
 **Results Razor**
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 results_2gether_razor[c(1:4),-4]
 ```
 
 **Results LFQ**
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 results_2gether_lfq[c(1:4),-4]
 ```
-
-
-# Conclusion
-
-* using **different versions** the same conclusion can be drawn using LFQ or Razor -> older version shows more protein identifications
-* **re-running** of the same experiment
-  + LFQ yields lower protein identificiations than Razor - the magnitude of the difference doesn't correlate with the no. of protein identifications but seems to depend on the extraction/sample
-  + rsd for LFQ is lower than for Razor
-* **different order** doesn't affect the protein identifications independet if LFQ or Razor is used
