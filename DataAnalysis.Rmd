@@ -81,11 +81,10 @@ path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/2022040
 
 # load functions
 filtering <- function(data_raw){
-   subset(data_raw,
-          Potential.contaminant!="+", # remove where contaminant = +
-          !is.null(data_raw$Reverse), #remove where reverse = +
-          !is.null(data_raw$Only.identified.by.site),
-          )
+  data_raw %>% filter( 
+    Potential.contaminant == "",
+    Reverse == "",
+    Only.identified.by.site == "")
 }
 
 CV <- function(x){
