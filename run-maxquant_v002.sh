@@ -84,11 +84,13 @@ echo "#####################################" | tee -a log.txt
 if [ $version = "new" ]
 then
 	echo "new version of maxquant is used"
+  source /apps/anaconda3/etc/profile.d/conda.sh
 	conda activate maxquant2
 	echo "Current conda environment is $CONDA_DEFAULT_ENV" | tee -a log.txt
 
 else
 	echo "old version of maxquant is used"
+  source /apps/anaconda3/etc/profile.d/conda.sh
 	conda activate maxquant
 	echo "Current conda environment is $CONDA_DEFAULT_ENV" | tee -a log.txt
 fi
