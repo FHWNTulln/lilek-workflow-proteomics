@@ -149,7 +149,7 @@ echo "#####################################" | tee -a log.txt
 
 
 #move logfile
-mv ./log.txt ./$projname 
+mv ./log.txt ./$projname/results/results_run$c_$filename
 
 #remove mqpar_temp file
 mv ./mqpar_tmp/$filename.xml ./mqpar_tmp/done

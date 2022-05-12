@@ -13,6 +13,8 @@ e.g. /proj/proteomics/<proj directory>/<results>/
 #maxdepth to search also in subdirectories
 find . -maxdepth 5 -name "proteinGroups.txt" -exec bash -c 'for x; do x=${x#./}; cp -i "$x" "/proj/proteomics/tmp/${x//\//_}"; done' _ {} +
 
+#cp -i ask to overwrite
+#cp -u 	kopiert nur, wenn Zieldatei älter als Quelldatei
 
 #just display all proteinGroups.txt files
 find . -maxdepth 5 -name "proteinGroups.txt"

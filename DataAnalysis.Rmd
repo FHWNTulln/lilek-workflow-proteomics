@@ -112,7 +112,7 @@ if (GET_SAMPLE_NAMES == TRUE){
 }
 
 sample_names_razor <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
-sample_names_unique <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
+sample_names_unique <- paste("Unique.peptides.",sample_names_raw, sep="")
 sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
 #another option would be
 #uniq <- data %>% select(starts_with("Unique.peptides."))
