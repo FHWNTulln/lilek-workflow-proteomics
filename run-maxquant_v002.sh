@@ -149,11 +149,10 @@ echo "#####################################" | tee -a log.txt
 
 
 #move logfile
-mv ./log.txt ./$projname/results/results_run$c_$filename
+mv ./log.txt ./$projname/results/log_$filename.txt
 
 #remove mqpar_temp file
 mv ./mqpar_tmp/$filename.xml ./mqpar_tmp/done
-
 
 #get runtime
 end=`date +%s`
