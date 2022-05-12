@@ -31,6 +31,7 @@ library(tidyverse)
 library(dplyr)
 library(gplots)
 library(reshape2) #for melting data for boxplot with ggplot
+library(pheatmap)
 ```
 
 # Introduction
@@ -39,9 +40,9 @@ library(reshape2) #for melting data for boxplot with ggplot
 
 Filtering:
 
--   `Potential.contaminant!="+"` -> remove where contaminants
--   `!is.null(data_raw\$Reverse)`-> remove where reverse = +
--   `!is.null(data_raw\$Only.identified.by.site))` -> remove where only identified by site = +
+-   `Potential.contaminant == ""` -> remove where contaminants
+-   `Reverse == ""`-> remove where reverse = +
+-   `Only.identified.by.site == ""` -> remove where only identified by site = +
 
 Then the `log2`of the LFQ intensities was calculated and all `-Inf` values were substituted by NA using the following command: `lfq[lfq == -Inf] <- NA`
 
@@ -51,9 +52,9 @@ Then the number of lfq values was used for the further evaluation, visualization
 
 Filtering:
 
--   `Potential.contaminant!="+"` -> remove where contaminants
--   `!is.null(data_raw\$Reverse)`-> remove where reverse = +
--   `!is.null(data_raw\$Only.identified.by.site))` -> remove where only identified by site = +
+-   `Potential.contaminant == ""` -> remove where contaminants
+-   `Reverse == ""`-> remove where reverse = +
+-   `Only.identified.by.site == ""` -> remove where only identified by site = +
 
 -   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | in this case `unique`was set to 2.
 
@@ -72,11 +73,12 @@ GET_SAMPLE_NAMES <- TRUE # if set to false define it in the next line
 # sample_names_raw <- c("A1","A2","A3")
 unique <- 2  #how many peptides should be necessary to identify a protein
 
-RAZOR <- TRUE #TRUE | FALSE
-UNIQUE <- TRUE #TRUE | FALSE
+RAZOR <- FALSE #TRUE | FALSE
+UNIQUE <- FALSE #TRUE | FALSE
 LFQ <- TRUE #TRUE | FALSE
 
-path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220405_TR_QC_withxmlfileformCM/"
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_pooled_rerun_4masterthesis/"
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_rerun_4masterthesis/"
 #path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
 
 # load functions
@@ -121,8 +123,8 @@ row.names(results_2gether_razor) <- file.list
 colnames(results_2gether_razor) <- sample_names_raw
 #create data frame for unique
 results_2gether_unique <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
-row.names(results_2gether_razor) <- file.list
-colnames(results_2gether_razor) <- sample_names_raw
+row.names(results_2gether_unique) <- file.list
+colnames(results_2gether_unique) <- sample_names_raw
 #create data frame for lfq
 results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
 row.names(results_2gether_lfq) <- file.list
@@ -213,15 +215,30 @@ if (LFQ == TRUE) {
       tmp[tmp == -Inf] <- NA
       results[i] <- tmp
       cat(name,"<br/>",sum(!is.na(tmp)),"<br/>")
+      
     }
     
     results_lfq[[x]] <- results
     #assign(paste("results_lfq",x,sep="_"),results) #create individual variable names
     
     #venn(as.data.frame(!is.na(results)))
+    paletteLength <- 50
+myColor <- colorRampPalette(c("navy", "white", "firebrick3"))(paletteLength)
+      lfq4pheatmap <- results
+      lfq4pheatmap[is.na(lfq4pheatmap)] <- 0
+      
+      pheatmap(lfq4pheatmap,
+         color = myColor,
+         treeheight_row = 10,
+         angle_col ="45",
+         treeheight_col = 10,
+         legend = TRUE,
+         labels_row = rep("",nrow(lfq4pheatmap)))
+
     
     results_2gether_lfq[x,] <-    sapply(results,function(x)sum(!is.na(x)))
     cat("\n")
+    
   }
 }
 
@@ -248,9 +265,14 @@ rm(data,
 end_time = format(Sys.time(), '%X')
 ```
 
+
+
+
 ```{r used time, echo=FALSE, message=TRUE, warning=FALSE}
 print(paste("Time used for analysis:", round(as.difftime(end_time, units = "mins")-as.difftime(start_time, units = "mins"),digits=2),"minutes"))
 ```
+
+
 
 # OLD STUFF
 
