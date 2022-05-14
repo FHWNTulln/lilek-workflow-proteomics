@@ -140,6 +140,24 @@ done
 
 
 
+
+
+###############################
+# get run time
+###############################
+echo "#####################################" | tee -a log.txt
+echo "runtime" | tee -a log.txt
+echo "#####################################" | tee -a log.txt
+#get runtime
+end=`date +%s`
+runtime=$((end-start))
+
+hours=$((runtime / 3600)); minutes=$(( (runtime % 3600) / 60 )); seconds=$(( (runtime % 3600) % 60 ))
+
+echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)" | tee -a log.txt
+
+
+
 ###############################
 # clean up
 ###############################
@@ -149,15 +167,7 @@ echo "#####################################" | tee -a log.txt
 
 
 #move logfile
-mv ./log.txt ./$projname/results/log_$filename.txt
+mv ./log.txt ./$projname/results/results_$filename
 
 #remove mqpar_temp file
 mv ./mqpar_tmp/$filename.xml ./mqpar_tmp/done
-
-#get runtime
-end=`date +%s`
-runtime=$((end-start))
-
-hours=$((runtime / 3600)); minutes=$(( (runtime % 3600) / 60 )); seconds=$(( (runtime % 3600) % 60 ))
-
-echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)" | tee -a log.txt
