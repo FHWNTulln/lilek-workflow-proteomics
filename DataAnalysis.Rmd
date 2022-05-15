@@ -30,7 +30,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(dplyr)
 library(gplots)
-library(reshape2) #for melting data for boxplot with ggplot
+library(reshape2) 
 library(pheatmap)
 ```
 
@@ -44,9 +44,9 @@ Filtering:
 -   `Reverse == ""`-> remove where reverse = +
 -   `Only.identified.by.site == ""` -> remove where only identified by site = +
 
-Then the `log2`of the LFQ intensities was calculated and all `-Inf` values were substituted by NA using the following command: `lfq[lfq == -Inf] <- NA`
+Then the `log2`of the LFQ intensities is calculated and all `-Inf` values were substituted by NA using the following command: `lfq[lfq == -Inf] <- NA`
 
-Then the number of lfq values was used for the further evaluation, visualization and statistical testing. In the following this data will be called LFQ.
+Then the number of lfq values is used for the further evaluation, visualization and statistical testing. In the following this data will be called LFQ.
 
 ## Unique | Razor&Unique procedure
 
@@ -56,11 +56,11 @@ Filtering:
 -   `Reverse == ""`-> remove where reverse = +
 -   `Only.identified.by.site == ""` -> remove where only identified by site = +
 
--   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | in this case `unique`was set to 2.
+-   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | typically this is set to 1 or 2
 
 # Data Analysis
 
-The txt-files were read in, processed and filtered automatically. This section shows the code, several plots and also some summary statistics which are only shown for further discussion on the results, for the documentation of the statistical evaluation and are not labeled/discussed yet. If you are interested in the summary of the results go to `Summary`.
+The txt-files are read in, processed and filtered automatically. This section shows the code, heatmaps for LFQ values and also some summary statistics which are only shown for further discussion on the results, for the documentation of the statistical evaluation and are not labeled/discussed yet. 
 
 ```{r, results="asis"}
 ###############################
@@ -70,7 +70,7 @@ The txt-files were read in, processed and filtered automatically. This section s
 ###############################
 
 GET_SAMPLE_NAMES <- TRUE # if set to false define it in the next line
-# sample_names_raw <- c("A1","A2","A3")
+#sample_names_raw <- c("A1","A2","A3")
 unique <- 2  #how many peptides should be necessary to identify a protein
 
 RAZOR <- FALSE #TRUE | FALSE
@@ -78,8 +78,6 @@ UNIQUE <- FALSE #TRUE | FALSE
 LFQ <- TRUE #TRUE | FALSE
 
 path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_pooled_rerun_4masterthesis/"
-path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_rerun_4masterthesis/"
-#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/R/"
 
 # load functions
 filtering <- function(data_raw){
@@ -111,6 +109,7 @@ if (GET_SAMPLE_NAMES == TRUE){
     rm(tmp)
 }
 
+#create sample names
 sample_names_razor <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
 sample_names_unique <- paste("Unique.peptides.",sample_names_raw, sep="")
 sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
@@ -129,7 +128,6 @@ colnames(results_2gether_unique) <- sample_names_raw
 results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_raw), nrow = length(file.list)))
 row.names(results_2gether_lfq) <- file.list
 colnames(results_2gether_lfq) <- sample_names_raw
-
 
 #results lists
 results_razor <- list()
@@ -157,10 +155,7 @@ for (x in file.list){
   
   results_razor[[x]] <- results
   #assign(paste("results_razor",x,sep="_"),results) #create individual variable names
-  
-  #make venn diagramm
-  #venn(results)
-  
+
   results_2gether_razor[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
   cat("\n")
 }
@@ -187,10 +182,7 @@ for (x in file.list){
   
   results_unique[[x]] <- results
   #assign(paste("results_razor",x,sep="_"),results) #create individual variable names
-  
-  #make venn diagramm
-  #venn(results)
-  
+
   results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
   cat("\n")
 }
@@ -220,11 +212,14 @@ if (LFQ == TRUE) {
     
     results_lfq[[x]] <- results
     #assign(paste("results_lfq",x,sep="_"),results) #create individual variable names
-    
-    #venn(as.data.frame(!is.na(results)))
+    #create heatmaps
     paletteLength <- 50
-myColor <- colorRampPalette(c("navy", "white", "firebrick3"))(paletteLength)
+    myColor <- colorRampPalette(c("navy", "white",  "firebrick3"))(paletteLength)
       lfq4pheatmap <- results
+      if (ncol(lfq4pheatmap) < 2){
+        cat("\n")
+        cat("##"," No heatmap possible. Too less columns in the result table.","\n")
+      } else {
       lfq4pheatmap[is.na(lfq4pheatmap)] <- 0
       
       pheatmap(lfq4pheatmap,
@@ -235,8 +230,8 @@ myColor <- colorRampPalette(c("navy", "white", "firebrick3"))(paletteLength)
          legend = TRUE,
          labels_row = rep("",nrow(lfq4pheatmap)))
 
-    
-    results_2gether_lfq[x,] <-    sapply(results,function(x)sum(!is.na(x)))
+      }
+    results_2gether_lfq[x,] <- sapply(results,function(x)sum(!is.na(x)))
     cat("\n")
     
   }
@@ -264,9 +259,6 @@ rm(data,
 ```{r end, message=FALSE, warning=FALSE, include=FALSE}
 end_time = format(Sys.time(), '%X')
 ```
-
-
-
 
 ```{r used time, echo=FALSE, message=TRUE, warning=FALSE}
 print(paste("Time used for analysis:", round(as.difftime(end_time, units = "mins")-as.difftime(start_time, units = "mins"),digits=2),"minutes"))
