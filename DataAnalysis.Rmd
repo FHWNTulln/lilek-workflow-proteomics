@@ -27,15 +27,15 @@ output:
 ###############################
 
 GET_SAMPLE_NAMES <- FALSE # if set to FALSE define it in the next line
-sample_names_user <- sample(LETTERS,10)
+sample_names_user <- sample(LETTERS,1)
 unique <- 2  #how many peptides should be at least necessary to identify a protein
 
 RAZOR <- TRUE #TRUE | FALSE
 UNIQUE <- TRUE #TRUE | FALSE
 LFQ <- TRUE #TRUE | FALSE
 
-#path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_pooled_rerun_4masterthesis/"
-path = "C:/Users/lilek/Desktop/20220406_TR_QC_MBR_rerun_4masterthesis/"
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_pooled_rerun_4masterthesis/"
+#path = "C:/Users/lilek/Desktop/20220406_TR_QC_MBR_rerun_4masterthesis/"
 
 ```
 
@@ -262,6 +262,16 @@ results_2gether_razor$number <- c(1:length(file.list))
 results_2gether_unique$number <- c(1:length(file.list))
 results_2gether_lfq$number <- c(1:length(file.list))
 
+#remove variables - clean up
+rm(data,
+   data_raw,
+   name,
+   results,
+   sample_names_razor,
+   sample_names_unique,
+   sample_names_lfq,
+   tmp,
+   x)
 
 ```
 
