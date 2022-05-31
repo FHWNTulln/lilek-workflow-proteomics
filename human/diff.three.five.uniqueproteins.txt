@@ -1,0 +1,442 @@
+############### sp proteins
+A0A3B3IS91|PLGRF_HUMAN POLG alternative reading frame OS=Homo sapiens OX=9606 GN=POLG PE=1 SV=2
+A1L429|GG12C_HUMAN G antigen 12B/C/D/E OS=Homo sapiens OX=9606 GN=GAGE12B PE=1 SV=1
+A6NE21|F90AI_HUMAN Putative protein FAM90A18P/FAM90A19P OS=Homo sapiens OX=9606 GN=FAM90A18P PE=5 SV=1
+A6NEW6|F90AG_HUMAN Putative protein FAM90A16P/FAM90A17P OS=Homo sapiens OX=9606 GN=FAM90A16P PE=5 SV=1
+A6ZKI3|RTL8C_HUMAN Retrotransposon Gag-like protein 8C OS=Homo sapiens OX=9606 GN=RTL8C PE=1 SV=1
+A8MXU0|DB108_HUMAN Putative beta-defensin 108A OS=Homo sapiens OX=9606 GN=DEFB108A PE=5 SV=2
+A8MYA2|CX049_HUMAN Uncharacterized protein CXorf49 OS=Homo sapiens OX=9606 GN=CXorf49B PE=2 SV=3
+B1AH88|TSPOB_HUMAN Putative peripheral benzodiazepine receptor-related protein OS=Homo sapiens OX=9606 GN=TSPO PE=5 SV=1
+B7ZAP0|RBG10_HUMAN Rab GTPase-activating protein 1-like, isoform 10 OS=Homo sapiens OX=9606 GN=RABGAP1L PE=1 SV=1
+C0HLS1|OSCRI_HUMAN SCRIB overlapping open reading frame protein OS=Homo sapiens OX=9606 GN=SCRIB PE=1 SV=1
+C0HLU2|SEHBP_HUMAN Transcriptional regulator SEHBP OS=Homo sapiens OX=9606 GN=ZNF689 PE=1 SV=1
+C9J1S8|TR49D_HUMAN Tripartite motif-containing protein 49D OS=Homo sapiens OX=9606 GN=TRIM49D1 PE=2 SV=1
+F7VJQ1|APRIO_HUMAN Alternative prion protein OS=Homo sapiens OX=9606 GN=PRNP PE=1 SV=1
+L0R6Q1|S35U4_HUMAN SLC35A4 upstream open reading frame protein OS=Homo sapiens OX=9606 GN=SLC35A4 PE=3 SV=1
+L0R8F8|MIDUO_HUMAN MIEF1 upstream open reading frame protein OS=Homo sapiens OX=9606 GN=MIEF1 PE=1 SV=1
+O14598|VCY1_HUMAN Testis-specific basic protein Y 1 OS=Homo sapiens OX=9606 GN=VCY1B PE=1 SV=1
+O14599|VCY2_HUMAN Testis-specific basic protein Y 2 OS=Homo sapiens OX=9606 GN=BPY2C PE=1 SV=2
+O14603|PRY_HUMAN PTPN13-like protein, Y-linked OS=Homo sapiens OX=9606 GN=PRYP4 PE=1 SV=2
+O15263|DFB4A_HUMAN Beta-defensin 4A OS=Homo sapiens OX=9606 GN=DEFB4A PE=1 SV=1
+O15482|TEX28_HUMAN Testis-specific protein TEX28 OS=Homo sapiens OX=9606 GN=TEX28P2 PE=1 SV=1
+O42043|ENK18_HUMAN Endogenous retrovirus group K member 18 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-18 PE=1 SV=2
+O43687|AKA7A_HUMAN A-kinase anchor protein 7 isoforms alpha and beta OS=Homo sapiens OX=9606 GN=AKAP7 PE=1 SV=4
+O60224|SSX4_HUMAN Protein SSX4 OS=Homo sapiens OX=9606 GN=SSX4B PE=1 SV=1
+O71037|ENK19_HUMAN Endogenous retrovirus group K member 19 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-19 PE=1 SV=2
+O75920|SERF1_HUMAN Small EDRK-rich factor 1 OS=Homo sapiens OX=9606 GN=SERF1A PE=1 SV=1
+O95278|EPM2A_HUMAN Laforin OS=Homo sapiens OX=9606 GN=EPM2A PE=1 SV=2
+O95467|GNAS3_HUMAN Neuroendocrine secretory protein 55 OS=Homo sapiens OX=9606 GN=GNAS PE=2 SV=1
+O96033|MOC2A_HUMAN Molybdopterin synthase sulfur carrier subunit OS=Homo sapiens OX=9606 GN=MOCS2 PE=1 SV=1
+P01562|IFNA1_HUMAN Interferon alpha-1/13 OS=Homo sapiens OX=9606 GN=IFNA13 PE=1 SV=1
+P02810|PRPC_HUMAN Salivary acidic proline-rich phosphoprotein 1/2 OS=Homo sapiens OX=9606 GN=PRH1 PE=1 SV=2
+P04908|H2A1B_HUMAN Histone H2A type 1-B/E OS=Homo sapiens OX=9606 GN=H2AC4 PE=1 SV=2
+P06881|CALCA_HUMAN Calcitonin gene-related peptide 1 OS=Homo sapiens OX=9606 GN=CALCA PE=1 SV=4
+P0C0L5|CO4B_HUMAN Complement C4-B OS=Homo sapiens OX=9606 GN=C4B_2 PE=1 SV=2
+P0C0S8|H2A1_HUMAN Histone H2A type 1 OS=Homo sapiens OX=9606 GN=H2AC11 PE=1 SV=2
+P0C5Z0|H2AB2_HUMAN Histone H2A-Bbd type 2/3 OS=Homo sapiens OX=9606 GN=H2AB2 PE=1 SV=1
+P0C7T4|HMSDV_HUMAN Minor histocompatibility protein HMSD variant form OS=Homo sapiens OX=9606 GN=HMSD PE=1 SV=1
+P0DI83|NARR_HUMAN Ras-related protein Rab-34, isoform NARR OS=Homo sapiens OX=9606 GN=RAB34 PE=1 SV=1
+P0DN86|CGB3_HUMAN Choriogonadotropin subunit beta 3 OS=Homo sapiens OX=9606 GN=CGB3 PE=1 SV=1
+P0DP91|ERPG3_HUMAN Chimeric ERCC6-PGBD3 protein OS=Homo sapiens OX=9606 GN=ERCC6 PE=1 SV=1
+P0DPB5|RPC22_HUMAN Protein POLR1D, isoform 2 OS=Homo sapiens OX=9606 GN=POLR1D PE=1 SV=1
+P0DPQ6|DT3UO_HUMAN DDIT3 upstream open reading frame protein OS=Homo sapiens OX=9606 GN=DDIT3 PE=1 SV=1
+P10265|VPK10_HUMAN Endogenous retrovirus group K member 10 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-10 PE=1 SV=2
+P12532|KCRU_HUMAN Creatine kinase U-type, mitochondrial OS=Homo sapiens OX=9606 GN=CKMT1A PE=1 SV=1
+P16619|CL3L1_HUMAN C-C motif chemokine 3-like 1 OS=Homo sapiens OX=9606 GN=CCL3L1 PE=1 SV=1
+P23610|HAP40_HUMAN 40-kDa huntingtin-associated protein OS=Homo sapiens OX=9606 GN=F8A1 PE=1 SV=2
+P32969|RL9_HUMAN 60S ribosomal protein L9 OS=Homo sapiens OX=9606 GN=RPL9P9 PE=1 SV=1
+P42167|LAP2B_HUMAN Lamina-associated polypeptide 2, isoforms beta/gamma OS=Homo sapiens OX=9606 GN=TMPO PE=1 SV=2
+P43356|MAGA2_HUMAN Melanoma-associated antigen 2 OS=Homo sapiens OX=9606 GN=MAGEA2B PE=1 SV=1
+P43362|MAGA9_HUMAN Melanoma-associated antigen 9 OS=Homo sapiens OX=9606 GN=MAGEA9B PE=1 SV=1
+P47929|LEG7_HUMAN Galectin-7 OS=Homo sapiens OX=9606 GN=LGALS7B PE=1 SV=2
+P58400|NRX1B_HUMAN Neurexin-1-beta OS=Homo sapiens OX=9606 GN=NRXN1 PE=1 SV=3
+P58401|NRX2B_HUMAN Neurexin-2-beta OS=Homo sapiens OX=9606 GN=NRXN2 PE=1 SV=1
+P59665|DEF1_HUMAN Neutrophil defensin 1 OS=Homo sapiens OX=9606 GN=DEFA1B PE=1 SV=1
+P60896|SEM1_HUMAN 26S proteasome complex subunit SEM1 OS=Homo sapiens OX=9606 GN=SEM1 PE=1 SV=1
+P61566|ENK24_HUMAN Endogenous retrovirus group K member 24 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-24 PE=2 SV=1
+P61567|ENK7_HUMAN Endogenous retrovirus group K member 7 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-7 PE=2 SV=1
+P61570|ENK25_HUMAN Endogenous retrovirus group K member 25 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-25 PE=3 SV=1
+P61571|REC21_HUMAN Endogenous retrovirus group K member 21 Rec protein OS=Homo sapiens OX=9606 GN=ERVK-21 PE=1 SV=1
+P61572|REC19_HUMAN Endogenous retrovirus group K member 19 Rec protein OS=Homo sapiens OX=9606 GN=ERVK-19 PE=1 SV=1
+P61573|REC9_HUMAN Endogenous retrovirus group K member 9 Rec protein OS=Homo sapiens OX=9606 GN=ERVK-9 PE=1 SV=1
+P61575|RECK8_HUMAN Endogenous retrovirus group K member 8 Rec protein OS=Homo sapiens OX=9606 GN=ERVK-8 PE=1 SV=1
+P61579|ERK25_HUMAN Endogenous retrovirus group K member 25 Rec protein OS=Homo sapiens OX=9606 GN=ERVK-25 PE=1 SV=1
+P61580|NP10_HUMAN Endogenous retrovirus group K member 10 Np9 protein OS=Homo sapiens OX=9606 GN=ERVK-10 PE=1 SV=1
+P61581|NP24_HUMAN Endogenous retrovirus group K member 24 Np9 protein OS=Homo sapiens OX=9606 GN=ERVK-24 PE=1 SV=1
+P61582|NP7_HUMAN Endogenous retrovirus group K member 7 Np9 protein OS=Homo sapiens OX=9606 GN=ERVK-7 PE=3 SV=1
+P61583|NP5_HUMAN Endogenous retrovirus group K member 5 Np9 protein OS=Homo sapiens OX=9606 GN=ERVK-5 PE=3 SV=1
+P62683|GAK21_HUMAN Endogenous retrovirus group K member 21 Gag polyprotein OS=Homo sapiens OX=9606 GN=ERVK-21 PE=1 SV=2
+P62685|GAK8_HUMAN Endogenous retrovirus group K member 8 Gag polyprotein OS=Homo sapiens OX=9606 GN=ERVK-8 PE=1 SV=2
+P62805|H4_HUMAN Histone H4 OS=Homo sapiens OX=9606 GN=H4-16 PE=1 SV=2
+P62807|H2B1C_HUMAN Histone H2B type 1-C/E/F/G/I OS=Homo sapiens OX=9606 GN=H2BC10 PE=1 SV=4
+P63092|GNAS2_HUMAN Guanine nucleotide-binding protein G(s) subunit alpha isoforms short OS=Homo sapiens OX=9606 GN=GNAS PE=1 SV=1
+P63119|VPK21_HUMAN Endogenous retrovirus group K member 21 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-21 PE=3 SV=1
+P63120|VPK19_HUMAN Endogenous retrovirus group K member 19 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-19 PE=3 SV=1
+P63122|VPK8_HUMAN Endogenous retrovirus group K member 8 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-8 PE=3 SV=1
+P63123|VPK18_HUMAN Endogenous retrovirus group K member 18 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-18 PE=3 SV=1
+P63125|VPK25_HUMAN Endogenous retrovirus group K member 25 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-25 PE=3 SV=1
+P63126|GAK9_HUMAN Endogenous retrovirus group K member 9 Gag polyprotein OS=Homo sapiens OX=9606 GN=ERVK-9 PE=1 SV=2
+P63127|VPK9_HUMAN Endogenous retrovirus group K member 9 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-9 PE=3 SV=1
+P63129|VPK24_HUMAN Endogenous retrovirus group K member 24 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-24 PE=3 SV=1
+P63130|GAK7_HUMAN Endogenous retrovirus group K member 7 Gag polyprotein OS=Homo sapiens OX=9606 GN=ERVK-7 PE=3 SV=2
+P63131|VPK7_HUMAN Endogenous retrovirus group K member 7 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-7 PE=3 SV=1
+P68431|H31_HUMAN Histone H3.1 OS=Homo sapiens OX=9606 GN=H3C12 PE=1 SV=2
+P69905|HBA_HUMAN Hemoglobin subunit alpha OS=Homo sapiens OX=9606 GN=HBA1 PE=1 SV=2
+P78358|CTG1B_HUMAN Cancer/testis antigen 1 OS=Homo sapiens OX=9606 GN=CTAG1A PE=1 SV=1
+P81534|D103A_HUMAN Beta-defensin 103 OS=Homo sapiens OX=9606 GN=DEFB103A PE=1 SV=2
+P84243|H33_HUMAN Histone H3.3 OS=Homo sapiens OX=9606 GN=H3-3A PE=1 SV=2
+P84996|ALEX_HUMAN Protein ALEX OS=Homo sapiens OX=9606 GN=GNAS PE=1 SV=1
+P87889|GAK10_HUMAN Endogenous retrovirus group K member 10 Gag polyprotein OS=Homo sapiens OX=9606 GN=ERVK-10 PE=1 SV=4
+Q02325|PLGB_HUMAN Plasminogen-like protein B OS=Homo sapiens OX=9606 GN=PLGLB1 PE=3 SV=1
+Q08AF8|GOG8F_HUMAN Putative golgin subfamily A member 8F/8G OS=Homo sapiens OX=9606 GN=GOLGA8F PE=5 SV=1
+Q0WX57|U17LO_HUMAN Ubiquitin carboxyl-terminal hydrolase 17-like protein 24 OS=Homo sapiens OX=9606 GN=USP17L24 PE=1 SV=2
+Q13066|GAG2B_HUMAN G antigen 2B/2C OS=Homo sapiens OX=9606 GN=GAGE2B PE=1 SV=1
+Q13765|NACA_HUMAN Nascent polypeptide-associated complex subunit alpha OS=Homo sapiens OX=9606 GN=NACA PE=1 SV=1
+Q13948|CASP_HUMAN Protein CASP OS=Homo sapiens OX=9606 GN=CUX1 PE=1 SV=2
+Q15415|RBY1F_HUMAN RNA-binding motif protein, Y chromosome, family 1 member F/J OS=Homo sapiens OX=9606 GN=RBMY1F PE=1 SV=2
+Q16385|SSX2_HUMAN Protein SSX2 OS=Homo sapiens OX=9606 GN=SSX2B PE=1 SV=2
+Q16637|SMN_HUMAN Survival motor neuron protein OS=Homo sapiens OX=9606 GN=SMN1 PE=1 SV=1
+Q5HYR2|DMRTC_HUMAN Doublesex- and mab-3-related transcription factor C1 OS=Homo sapiens OX=9606 GN=DMRTC1B PE=2 SV=1
+Q5JQC4|CT47A_HUMAN Cancer/testis antigen 47A OS=Homo sapiens OX=9606 GN=CT47A12 PE=2 SV=1
+Q5JQF8|PAP1M_HUMAN Polyadenylate-binding protein 1-like 2 OS=Homo sapiens OX=9606 GN=PABPC1L2A PE=2 SV=1
+Q5TFQ8|SIRBL_HUMAN Signal-regulatory protein beta-1 isoform 3 OS=Homo sapiens OX=9606 GN=SIRPB1 PE=1 SV=1
+Q5TZK3|FAM74_HUMAN Protein FAM74A4/A6 OS=Homo sapiens OX=9606 GN=FAM74A4 PE=1 SV=1
+Q5VT28|FAM27_HUMAN Protein FAM27A/B/C OS=Homo sapiens OX=9606 GN=FAM27B PE=3 SV=1
+Q69383|REC6_HUMAN Endogenous retrovirus group K member 6 Rec protein OS=Homo sapiens OX=9606 GN=ERVK-6 PE=1 SV=1
+Q69384|ENK6_HUMAN Endogenous retrovirus group K member 6 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-6 PE=1 SV=1
+Q6B8I1|DS13A_HUMAN Dual specificity protein phosphatase 13 isoform A OS=Homo sapiens OX=9606 GN=DUSP13 PE=1 SV=1
+Q6EEV4|GL1AD_HUMAN DNA-directed RNA polymerase II subunit GRINL1A, isoforms 4/5 OS=Homo sapiens OX=9606 GN=POLR2M PE=1 SV=1
+Q6FI13|H2A2A_HUMAN Histone H2A type 2-A OS=Homo sapiens OX=9606 GN=H2AC18 PE=1 SV=3
+Q6IEY1|OR4F3_HUMAN Olfactory receptor 4F3/4F16/4F29 OS=Homo sapiens OX=9606 GN=OR4F29 PE=1 SV=1
+Q6P1K8|T2H2L_HUMAN General transcription factor IIH subunit 2-like protein OS=Homo sapiens OX=9606 GN=GTF2H2C_2 PE=1 SV=1
+Q70YC4|TALAN_HUMAN Talanin OS=Homo sapiens OX=9606 GN=ZNF365 PE=2 SV=2
+Q71DI3|H32_HUMAN Histone H3.2 OS=Homo sapiens OX=9606 GN=H3C13 PE=1 SV=3
+Q7LDI9|GAK6_HUMAN Endogenous retrovirus group K member 6 Gag polyprotein OS=Homo sapiens OX=9606 GN=ERVK-6 PE=1 SV=3
+Q8IU53|CASC2_HUMAN Protein CASC2, isoforms 1/2 OS=Homo sapiens OX=9606 GN=CASC2 PE=4 SV=1
+Q8IVW1|ARL17_HUMAN ADP-ribosylation factor-like protein 17 OS=Homo sapiens OX=9606 GN=ARL17A PE=2 SV=2
+Q8IZN7|D107A_HUMAN Beta-defensin 107 OS=Homo sapiens OX=9606 GN=DEFB107A PE=2 SV=3
+Q8N104|D106A_HUMAN Beta-defensin 106 OS=Homo sapiens OX=9606 GN=DEFB106A PE=1 SV=1
+Q8N2E6|TOR2X_HUMAN Prosalusin OS=Homo sapiens OX=9606 GN=TOR2A PE=1 SV=1
+Q8N726|ARF_HUMAN Tumor suppressor ARF OS=Homo sapiens OX=9606 GN=CDKN2A PE=1 SV=2
+Q8NDB6|FA156_HUMAN Protein FAM156A/FAM156B OS=Homo sapiens OX=9606 GN=FAM156A PE=1 SV=1
+Q8NG35|D105A_HUMAN Beta-defensin 105 OS=Homo sapiens OX=9606 GN=DEFB105A PE=2 SV=1
+Q8NGT9|OR2A1_HUMAN Olfactory receptor 2A1/2A42 OS=Homo sapiens OX=9606 GN=OR2A1 PE=3 SV=2
+Q8NHW4|CC4L_HUMAN C-C motif chemokine 4-like OS=Homo sapiens OX=9606 GN=CCL4L1 PE=1 SV=1
+Q8WTQ1|D104A_HUMAN Beta-defensin 104 OS=Homo sapiens OX=9606 GN=DEFB104A PE=1 SV=2
+Q902F8|ENK8_HUMAN Endogenous retrovirus group K member 8 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-8 PE=1 SV=1
+Q96JG8|MAGD4_HUMAN Melanoma-associated antigen D4 OS=Homo sapiens OX=9606 GN=MAGED4B PE=1 SV=3
+Q96LI6|HSFY1_HUMAN Heat shock transcription factor, Y-linked OS=Homo sapiens OX=9606 GN=HSFY1 PE=1 SV=1
+Q96QH8|LYZL5_HUMAN Sperm acrosome-associated protein 5 OS=Homo sapiens OX=9606 GN=SPACA5B PE=2 SV=1
+Q99666|RGPD5_HUMAN RANBP2-like and GRIP domain-containing protein 5/6 OS=Homo sapiens OX=9606 GN=RGPD5 PE=1 SV=3
+Q9BQ83|SLX1_HUMAN Structure-specific endonuclease subunit SLX1 OS=Homo sapiens OX=9606 GN=SLX1A PE=1 SV=1
+Q9BQY6|WFDC6_HUMAN WAP four-disulfide core domain protein 6 OS=Homo sapiens OX=9606 GN=WFDC6 PE=1 SV=1
+Q9BXH1|BBC3_HUMAN Bcl-2-binding component 3, isoforms 1/2 OS=Homo sapiens OX=9606 GN=BBC3 PE=1 SV=1
+Q9GZY0|NXF2_HUMAN Nuclear RNA export factor 2 OS=Homo sapiens OX=9606 GN=NXF2B PE=1 SV=1
+Q9H195|MUC3B_HUMAN Mucin-3B (Fragments) OS=Homo sapiens OX=9606 GN=MUC3B PE=2 SV=2
+Q9H3K6|BOLA2_HUMAN BolA-like protein 2 OS=Homo sapiens OX=9606 GN=BOLA2B PE=1 SV=1
+Q9H496|IFG15_HUMAN Torsin-1A-interacting protein 2, isoform IFRG15 OS=Homo sapiens OX=9606 GN=TOR1AIP2 PE=1 SV=1
+Q9HC47|CTGE1_HUMAN Cutaneous T-cell lymphoma-associated antigen 1 OS=Homo sapiens OX=9606 GN=CTAGE1 PE=2 SV=1
+Q9HD64|XAGE1_HUMAN X antigen family member 1 OS=Homo sapiens OX=9606 GN=XAGE1A PE=1 SV=3
+Q9HDB5|NRX3B_HUMAN Neurexin-3-beta OS=Homo sapiens OX=9606 GN=NRXN3 PE=1 SV=4
+Q9HDB8|ENK5_HUMAN Endogenous retrovirus group K member 5 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-5 PE=2 SV=1
+Q9NS26|SPNXA_HUMAN Sperm protein associated with the nucleus on the X chromosome A OS=Homo sapiens OX=9606 GN=SPANXA1 PE=1 SV=1
+Q9UBD0|HSFX1_HUMAN Heat shock transcription factor, X-linked OS=Homo sapiens OX=9606 GN=HSFX1 PE=1 SV=1
+Q9UEU5|GGE2D_HUMAN G antigen 2D OS=Homo sapiens OX=9606 GN=GAGE2D PE=1 SV=1
+Q9UKH3|ENK9_HUMAN Endogenous retrovirus group K member 9 Env polyprotein OS=Homo sapiens OX=9606 GN=ERVK-9 PE=1 SV=1
+Q9ULZ0|T53G3_HUMAN TP53-target gene 3 protein OS=Homo sapiens OX=9606 GN=TP53TG3F PE=2 SV=2
+Q9Y5P2|CSAG2_HUMAN Chondrosarcoma-associated gene 2/3 protein OS=Homo sapiens OX=9606 GN=CSAG2 PE=1 SV=2
+Q9Y6F7|CDY2_HUMAN Testis-specific chromodomain protein Y 2 OS=Homo sapiens OX=9606 GN=CDY2A PE=1 SV=1
+Q9Y6F8|CDY1_HUMAN Testis-specific chromodomain protein Y 1 OS=Homo sapiens OX=9606 GN=CDY1B PE=1 SV=1
+Q9Y6I0|VPK6_HUMAN Endogenous retrovirus group K member 6 Pro protein OS=Homo sapiens OX=9606 GN=ERVK-6 PE=3 SV=2
+Q9YNA8|GAK19_HUMAN Endogenous retrovirus group K member 19 Gag polyprotein OS=Homo sapiens OX=9606 GN=ERVK-19 PE=1 SV=3
+A0A024R1R8|A0A024R1R8_HUMAN Coiled-coil domain-containing protein 72 OS=Homo sapiens OX=9606 GN=hCG_2014768 PE=3 SV=1
+A0A024RCN7|A0A024RCN7_HUMAN Chromosome 6 open reading frame 48, isoform CRA_a OS=Homo sapiens OX=9606 GN=SNHG32 PE=4 SV=1
+A0A075B6H5|A0A075B6H5_HUMAN T cell receptor beta variable 20/OR9-2 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRBV20OR9-2 PE=4 SV=1
+A0A075B6U6|A0A075B6U6_HUMAN T cell receptor alpha variable 8-7 (pseudogene) (Fragment) OS=Homo sapiens OX=9606 GN=TRAV8-7 PE=4 SV=2
+A0A075B6U7|A0A075B6U7_HUMAN T cell receptor alpha joining 23 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ23 PE=4 SV=1
+A0A075B6U8|A0A075B6U8_HUMAN T cell receptor alpha joining 12 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ12 PE=4 SV=1
+A0A075B6U9|A0A075B6U9_HUMAN T cell receptor alpha joining 2 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ2 PE=4 SV=1
+A0A075B6V0|A0A075B6V0_HUMAN T cell receptor alpha joining 16 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ16 PE=4 SV=1
+A0A075B6V1|A0A075B6V1_HUMAN T cell receptor alpha joining 43 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ43 PE=4 SV=1
+A0A075B6V2|A0A075B6V2_HUMAN T cell receptor alpha joining 21 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ21 PE=4 SV=1
+A0A075B6V3|A0A075B6V3_HUMAN T cell receptor alpha joining 48 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ48 PE=4 SV=1
+A0A075B6V6|A0A075B6V6_HUMAN T cell receptor delta joining 2 (Fragment) OS=Homo sapiens OX=9606 GN=TRDJ2 PE=4 SV=1
+A0A075B6V7|A0A075B6V7_HUMAN T cell receptor alpha joining 26 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ26 PE=4 SV=1
+A0A075B6V8|A0A075B6V8_HUMAN T cell receptor alpha joining 5 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ5 PE=4 SV=1
+A0A075B6V9|A0A075B6V9_HUMAN T cell receptor alpha joining 59 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ59 PE=4 SV=1
+A0A075B6W1|A0A075B6W1_HUMAN T cell receptor delta joining 3 (Fragment) OS=Homo sapiens OX=9606 GN=TRDJ3 PE=4 SV=1
+A0A075B6W2|A0A075B6W2_HUMAN T cell receptor alpha joining 52 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ52 PE=4 SV=1
+A0A075B6W3|A0A075B6W3_HUMAN T cell receptor alpha joining 33 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ33 PE=4 SV=1
+A0A075B6W4|A0A075B6W4_HUMAN T cell receptor alpha joining 46 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ46 PE=4 SV=1
+A0A075B6W6|A0A075B6W6_HUMAN T cell receptor alpha joining 27 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ27 PE=4 SV=1
+A0A075B6W7|A0A075B6W7_HUMAN T cell receptor alpha joining 38 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ38 PE=4 SV=1
+A0A075B6W8|A0A075B6W8_HUMAN T cell receptor alpha joining 17 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ17 PE=4 SV=1
+A0A075B6W9|A0A075B6W9_HUMAN T cell receptor alpha joining 53 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ53 PE=4 SV=1
+A0A075B6X0|A0A075B6X0_HUMAN T cell receptor alpha joining 45 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ45 PE=4 SV=1
+A0A075B6X3|A0A075B6X3_HUMAN T cell receptor alpha joining 32 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ32 PE=4 SV=1
+A0A075B6X4|A0A075B6X4_HUMAN T cell receptor alpha joining 28 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ28 PE=4 SV=1
+A0A075B6X7|A0A075B6X7_HUMAN T cell receptor alpha joining 50 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ50 PE=4 SV=1
+A0A075B6X8|A0A075B6X8_HUMAN T cell receptor alpha joining 44 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ44 PE=4 SV=1
+A0A075B6X9|A0A075B6X9_HUMAN T cell receptor alpha joining 18 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ18 PE=4 SV=1
+A0A075B6Y0|A0A075B6Y0_HUMAN T cell receptor alpha joining 49 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ49 PE=4 SV=1
+A0A075B6Y1|A0A075B6Y1_HUMAN T cell receptor alpha joining 30 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ30 PE=4 SV=1
+A0A075B6Y2|A0A075B6Y2_HUMAN T cell receptor alpha joining 35 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ35 PE=4 SV=1
+A0A075B6Y4|A0A075B6Y4_HUMAN T cell receptor alpha joining 19 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ19 PE=4 SV=1
+A0A075B6Y5|A0A075B6Y5_HUMAN T cell receptor alpha joining 47 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ47 PE=4 SV=1
+A0A075B6Y8|A0A075B6Y8_HUMAN T cell receptor alpha joining 11 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ11 PE=4 SV=1
+A0A075B6Z0|A0A075B6Z0_HUMAN T cell receptor alpha joining 22 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ22 PE=4 SV=1
+A0A075B6Z1|A0A075B6Z1_HUMAN T cell receptor alpha joining 20 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ20 PE=4 SV=1
+A0A075B6Z2|A0A075B6Z2_HUMAN T cell receptor alpha joining 56 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ56 PE=4 SV=1
+A0A075B6Z3|A0A075B6Z3_HUMAN T cell receptor alpha joining 6 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ6 PE=4 SV=1
+A0A075B6Z4|A0A075B6Z4_HUMAN T cell receptor delta joining 4 (Fragment) OS=Homo sapiens OX=9606 GN=TRDJ4 PE=4 SV=1
+A0A075B6Z5|A0A075B6Z5_HUMAN T cell receptor alpha joining 4 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ4 PE=4 SV=1
+A0A075B6Z8|A0A075B6Z8_HUMAN T cell receptor alpha joining 25 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ25 PE=4 SV=1
+A0A075B6Z9|A0A075B6Z9_HUMAN T cell receptor alpha joining 24 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ24 PE=4 SV=2
+A0A075B702|A0A075B702_HUMAN T cell receptor alpha joining 41 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ41 PE=4 SV=1
+A0A075B704|A0A075B704_HUMAN T cell receptor alpha joining 57 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ57 PE=4 SV=1
+A0A075B708|A0A075B708_HUMAN T cell receptor alpha joining 61 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ61 PE=4 SV=1
+A0A075B709|A0A075B709_HUMAN T cell receptor alpha joining 13 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ13 PE=4 SV=2
+A0A075B710|A0A075B710_HUMAN T cell receptor alpha joining 39 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ39 PE=4 SV=1
+A0A075B711|A0A075B711_HUMAN T cell receptor alpha joining 29 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ29 PE=4 SV=1
+A0A075B712|A0A075B712_HUMAN T cell receptor alpha joining 54 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ54 PE=4 SV=1
+A0A075B713|A0A075B713_HUMAN T cell receptor alpha joining 1 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ1 PE=4 SV=1
+A0A075B714|A0A075B714_HUMAN T cell receptor alpha joining 7 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ7 PE=4 SV=1
+A0A075B734|A0A075B734_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC100509620 PE=3 SV=1
+A0A075B7B6|A0A075B7B6_HUMAN Immunoglobulin heavy variable 4/OR15-8 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV4OR15-8 PE=4 SV=1
+A0A075B7B8|A0A075B7B8_HUMAN Immunoglobulin heavy variable 3/OR16-12 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV3OR16-12 PE=1 SV=1
+A0A075B7B9|A0A075B7B9_HUMAN Protein IGHD2OR15-2A (Fragment) OS=Homo sapiens OX=9606 GN=IGHD2OR15-2B PE=4 SV=1
+A0A075B7D0|A0A075B7D0_HUMAN Immunoglobulin heavy variable 1/OR15-1 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV1OR15-1 PE=1 SV=1
+A0A075B7D4|A0A075B7D4_HUMAN Immunoglobulin kappa variable 1/OR2-108 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGKV1OR2-108 PE=1 SV=1
+A0A075B7D8|A0A075B7D8_HUMAN Immunoglobulin heavy variable 3/OR15-7 (pseudogene) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV3OR15-7 PE=1 SV=1
+A0A075B7E0|A0A075B7E0_HUMAN Protein IGHD3OR15-3A (Fragment) OS=Homo sapiens OX=9606 GN=IGHD3OR15-3B PE=4 SV=1
+A0A075B7E8|A0A075B7E8_HUMAN Immunoglobulin heavy variable 3/OR16-13 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV3OR16-13 PE=1 SV=1
+A0A075B7F0|A0A075B7F0_HUMAN Immunoglobulin heavy variable 3/OR16-10 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV3OR16-10 PE=1 SV=1
+A0A075B7F1|A0A075B7F1_HUMAN Immunoglobulin heavy variable 3/OR16-8 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV3OR16-8 PE=1 SV=1
+A0A087WU04|A0A087WU04_HUMAN T cell receptor alpha joining 36 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ36 PE=4 SV=1
+A0A087WU88|A0A087WU88_HUMAN Putative potassium voltage-gated channel subfamily E member 1B OS=Homo sapiens OX=9606 GN=KCNE1B PE=3 SV=1
+A0A087WUM9|A0A087WUM9_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=2
+A0A087WUV0|A0A087WUV0_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A087WVK4|A0A087WVK4_HUMAN Putative elongin-A3 member C (Fragment) OS=Homo sapiens OX=9606 GN=ELOA3CP PE=4 SV=2
+A0A087WW49|A0A087WW49_HUMAN Ig-like domain-containing protein (Fragment) OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A087WWU0|A0A087WWU0_HUMAN Uncharacterized protein (Fragment) OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A087WYE8|A0A087WYE8_HUMAN Immunoglobulin heavy variable 1/OR21-1 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV1OR21-1 PE=1 SV=1
+A0A087WZ39|A0A087WZ39_HUMAN T cell receptor beta variable 15 (Fragment) OS=Homo sapiens OX=9606 GN=TRBV15 PE=1 SV=1
+A0A087X096|A0A087X096_HUMAN T cell receptor alpha joining 37 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ37 PE=4 SV=1
+A0A087X1C1|A0A087X1C1_HUMAN Thymosin beta-15B OS=Homo sapiens OX=9606 GN=TMSB15B PE=3 SV=1
+A0A087X1L8|A0A087X1L8_HUMAN Ig-like domain-containing protein OS=Homo sapiens OX=9606 GN=LOC102723996 PE=4 SV=1
+A0A096LNW5|A0A096LNW5_HUMAN Notch 2 N-terminal-like R (pseudogene) OS=Homo sapiens OX=9606 GN=NOTCH2NLR PE=4 SV=2
+A0A096LPG2|A0A096LPG2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A096LPH7|A0A096LPH7_HUMAN TRAPPC10 domain-containing protein (Fragment) OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A096LPJ9|A0A096LPJ9_HUMAN Alpha-crystallin A chain OS=Homo sapiens OX=9606 GN=CRYAA2 PE=3 SV=1
+A0A096LPK6|A0A096LPK6_HUMAN Uncharacterized protein (Fragment) OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0A0MT69|A0A0A0MT69_HUMAN Immunoglobulin kappa joining 4 (Fragment) OS=Homo sapiens OX=9606 GN=IGKJ4 PE=1 SV=1
+A0A0A0MT82|A0A0A0MT82_HUMAN Immunoglobulin lambda joining 2 (Fragment) OS=Homo sapiens OX=9606 GN=IGLJ2 PE=4 SV=1
+A0A0A0MT84|A0A0A0MT84_HUMAN T cell receptor gamma joining P2 (Fragment) OS=Homo sapiens OX=9606 GN=TRGJP2 PE=4 SV=1
+A0A0A0MT85|A0A0A0MT85_HUMAN Immunoglobulin kappa joining 2 (Fragment) OS=Homo sapiens OX=9606 GN=IGKJ2 PE=4 SV=1
+A0A0A0MT86|A0A0A0MT86_HUMAN Immunoglobulin lambda joining 5 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGLJ5 PE=4 SV=1
+A0A0A0MT92|A0A0A0MT92_HUMAN Immunoglobulin lambda joining 7 (Fragment) OS=Homo sapiens OX=9606 GN=IGLJ7 PE=4 SV=1
+A0A0A0MT93|A0A0A0MT93_HUMAN Immunoglobulin lambda joining 6 (Fragment) OS=Homo sapiens OX=9606 GN=IGLJ6 PE=4 SV=1
+A0A0A0MT96|A0A0A0MT96_HUMAN Immunoglobulin kappa joining 3 (Fragment) OS=Homo sapiens OX=9606 GN=IGKJ3 PE=4 SV=1
+A0A0A0MT97|A0A0A0MT97_HUMAN T cell receptor gamma joining P1 (Fragment) OS=Homo sapiens OX=9606 GN=TRGJP1 PE=4 SV=1
+A0A0A0MT99|A0A0A0MT99_HUMAN Immunoglobulin lambda joining 3 (Fragment) OS=Homo sapiens OX=9606 GN=IGLJ3 PE=1 SV=1
+A0A0A0MTA1|A0A0A0MTA1_HUMAN Immunoglobulin lambda joining 4 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGLJ4 PE=4 SV=1
+A0A0A0MTA2|A0A0A0MTA2_HUMAN T cell receptor beta joining 2-2P (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=TRBJ2-2P PE=4 SV=1
+A0A0A0MTA3|A0A0A0MTA3_HUMAN Immunoglobulin kappa joining 5 (Fragment) OS=Homo sapiens OX=9606 GN=IGKJ5 PE=4 SV=1
+A0A0B4J1T7|A0A0B4J1T7_HUMAN Lymphocyte antigen 6 family member G6E OS=Homo sapiens OX=9606 GN=LY6G6E PE=4 SV=1
+A0A0B4J1W7|A0A0B4J1W7_HUMAN Nuclear pore complex-interacting protein family, member A9 OS=Homo sapiens OX=9606 GN=NPIPA9 PE=3 SV=1
+A0A0B4J2B5|A0A0B4J2B5_HUMAN Immunoglobulin heavy variable 3/OR16-9 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV3OR16-9 PE=1 SV=1
+A0A0B4J2B6|A0A0B4J2B6_HUMAN Immunoglobulin heavy variable 2/OR16-5 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV2OR16-5 PE=4 SV=1
+A0A0B4J2B8|A0A0B4J2B8_HUMAN Immunoglobulin heavy variable 1/OR15-9 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV1OR15-9 PE=1 SV=1
+A0A0B4J2E5|A0A0B4J2E5_HUMAN Utp12 domain-containing protein OS=Homo sapiens OX=9606 GN=LOC102724159 PE=1 SV=1
+A0A0C4DGP1|A0A0C4DGP1_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0C4DH63|A0A0C4DH63_HUMAN T cell receptor gamma joining P (Fragment) OS=Homo sapiens OX=9606 GN=TRGJP PE=4 SV=1
+A0A0C4DH90|A0A0C4DH90_HUMAN Immunoglobulin kappa variable 3/OR2-268 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGKV3OR2-268 PE=4 SV=5
+A0A0G2JKD1|A0A0G2JKD1_HUMAN Mucin-21 OS=Homo sapiens OX=9606 GN=MUC21 PE=4 SV=1
+A0A0G2JKW9|A0A0G2JKW9_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0G2JLE6|A0A0G2JLE6_HUMAN HCG2042992 OS=Homo sapiens OX=9606 GN=KRTAP4-8 PE=1 SV=1
+A0A0G2JLJ8|A0A0G2JLJ8_HUMAN Immunoglobulin heavy diversity 5/OR15-5A (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHD5OR15-5A PE=4 SV=4
+A0A0G2JLW4|A0A0G2JLW4_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0G2JMH3|A0A0G2JMH3_HUMAN ARL17 domain-containing protein OS=Homo sapiens OX=9606 GN=LOC107984156 PE=4 SV=1
+A0A0G2JMM0|A0A0G2JMM0_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0G2JMS6|A0A0G2JMS6_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=3 SV=1
+A0A0G2JN01|A0A0G2JN01_HUMAN Killer cell immunoglobulin-like receptor, three Ig domains pseudogene 1 OS=Homo sapiens OX=9606 GN=KIR3DP1 PE=4 SV=1
+A0A0G2JN53|A0A0G2JN53_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0G2JND7|A0A0G2JND7_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0G2JNF4|A0A0G2JNF4_HUMAN Killer cell immunoglobulin-like receptor, two Ig domains pseudogene 1 OS=Homo sapiens OX=9606 GN=KIR2DP1 PE=4 SV=1
+A0A0G2JNH3|A0A0G2JNH3_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 PE=3 SV=1
+A0A0G2JNJ9|A0A0G2JNJ9_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0G2JNQ3|A0A0G2JNQ3_HUMAN Heterogeneous nuclear ribonucleoprotein C-like 2 OS=Homo sapiens OX=9606 GN=HNRNPCL2 PE=3 SV=1
+A0A0G2JPF8|A0A0G2JPF8_HUMAN Heterogeneous nuclear ribonucleoprotein C-like 4 OS=Homo sapiens OX=9606 GN=HNRNPCL4 PE=3 SV=1
+A0A0G2JPN4|A0A0G2JPN4_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0G2JQF1|A0A0G2JQF1_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A0G2JQZ4|A0A0G2JQZ4_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=4
+A0A0G2JRQ6|A0A0G2JRQ6_HUMAN Ig-like domain-containing protein (Fragment) OS=Homo sapiens OX=9606 PE=1 SV=4
+A0A0J9YVP2|A0A0J9YVP2_HUMAN Immunoglobulin heavy joining 6 (Fragment) OS=Homo sapiens OX=9606 GN=IGHJ6 PE=4 SV=1
+A0A0J9YVP9|A0A0J9YVP9_HUMAN Immunoglobulin heavy joining 5 (Fragment) OS=Homo sapiens OX=9606 GN=IGHJ5 PE=4 SV=1
+A0A0J9YVS3|A0A0J9YVS3_HUMAN Immunoglobulin heavy joining 4 (Fragment) OS=Homo sapiens OX=9606 GN=IGHJ4 PE=4 SV=1
+A0A0J9YW14|A0A0J9YW14_HUMAN Immunoglobulin heavy joining 3 (Fragment) OS=Homo sapiens OX=9606 GN=IGHJ3 PE=4 SV=1
+A0A0J9YW22|A0A0J9YW22_HUMAN Immunoglobulin heavy diversity 3-9 (Fragment) OS=Homo sapiens OX=9606 GN=IGHD3-9 PE=4 SV=1
+A0A0J9YW62|A0A0J9YW62_HUMAN IGv domain-containing protein (Fragment) OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A0J9YWD0|A0A0J9YWD0_HUMAN Immunoglobulin heavy diversity 3-3 (Fragment) OS=Homo sapiens OX=9606 GN=IGHD3-3 PE=4 SV=1
+A0A0J9YWN2|A0A0J9YWN2_HUMAN Immunoglobulin heavy joining 2 (Fragment) OS=Homo sapiens OX=9606 GN=IGHJ2 PE=4 SV=1
+A0A0J9YWU9|A0A0J9YWU9_HUMAN Ig-like domain-containing protein (Fragment) OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A0J9YX57|A0A0J9YX57_HUMAN MAGE family member B6B OS=Homo sapiens OX=9606 GN=MAGEB6B PE=1 SV=1
+A0A0J9YXN1|A0A0J9YXN1_HUMAN Immunoglobulin heavy diversity 3-10 (Fragment) OS=Homo sapiens OX=9606 GN=IGHD3-10 PE=4 SV=1
+A0A0J9YXV3|A0A0J9YXV3_HUMAN Glycine-rich extracellular protein 1 OS=Homo sapiens OX=9606 GN=GREP1 PE=4 SV=1
+A0A0J9YY99|A0A0J9YY99_HUMAN Ig-like domain-containing protein (Fragment) OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A0M3HER8|A0A0M3HER8_HUMAN Golgin subfamily A member 6-like protein 10 OS=Homo sapiens OX=9606 GN=GOLGA6L10 PE=3 SV=1
+A0A0U1RQB9|A0A0U1RQB9_HUMAN Immunoglobulin heavy diversity 5-12 (Fragment) OS=Homo sapiens OX=9606 GN=IGHD5-12 PE=4 SV=2
+A0A0U1RQG5|A0A0U1RQG5_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A126GWB0|A0A126GWB0_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=OR2A2 PE=3 SV=1
+A0A126GWI2|A0A126GWI2_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=OR2A25 PE=3 SV=1
+A0A140T8X8|A0A140T8X8_HUMAN Mucin-21 OS=Homo sapiens OX=9606 GN=MUC21 PE=4 SV=1
+A0A140TA62|A0A140TA62_HUMAN IF rod domain-containing protein OS=Homo sapiens OX=9606 GN=LOC100653049 PE=3 SV=2
+A0A140TA64|A0A140TA64_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC100996750 PE=1 SV=1
+A0A140TA67|A0A140TA67_HUMAN Keratin-associated protein 9-6 OS=Homo sapiens OX=9606 GN=KRTAP9-6 PE=4 SV=1
+A0A191URJ7|A0A191URJ7_HUMAN KIR2DL protein OS=Homo sapiens OX=9606 GN=KIR2DL1 PE=2 SV=1
+A0A1B0GTE1|A0A1B0GTE1_HUMAN Contactin-associated protein family member 3C (Fragment) OS=Homo sapiens OX=9606 GN=CNTNAP3C PE=4 SV=1
+A0A1B0GTG8|A0A1B0GTG8_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC105372440 PE=4 SV=1
+A0A1B0GTH9|A0A1B0GTH9_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC100505841 PE=1 SV=1
+A0A1B0GTJ6|A0A1B0GTJ6_HUMAN HCG1796489 OS=Homo sapiens OX=9606 GN=LOC101059948 PE=1 SV=1
+A0A1B0GTQ1|A0A1B0GTQ1_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=3 SV=3
+A0A1B0GUL7|A0A1B0GUL7_HUMAN Protein kinase domain-containing protein OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A1B0GUV8|A0A1B0GUV8_HUMAN Lipocln_cytosolic_FA-bd_dom domain-containing protein OS=Homo sapiens OX=9606 GN=LOC102723971 PE=3 SV=1
+A0A1B0GUZ9|A0A1B0GUZ9_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A1B0GV96|A0A1B0GV96_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC105371267 PE=1 SV=1
+A0A1B0GVB3|A0A1B0GVB3_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC102725191 PE=4 SV=1
+A0A1B0GVM2|A0A1B0GVM2_HUMAN TRPM8 channel-associated factor 2C (Fragment) OS=Homo sapiens OX=9606 GN=TCAF2C PE=4 SV=1
+A0A1B0GVY2|A0A1B0GVY2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A1B0GW15|A0A1B0GW15_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A1B0GW55|A0A1B0GW55_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A1B0GWH6|A0A1B0GWH6_HUMAN Long intergenic non-protein coding RNA 672 OS=Homo sapiens OX=9606 GN=LINC00672 PE=4 SV=1
+A0A1B0GWI6|A0A1B0GWI6_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC101059915 PE=1 SV=2
+A0A1W2PN81|A0A1W2PN81_HUMAN Neuronal acetylcholine receptor subunit alpha-7 OS=Homo sapiens OX=9606 GN=CHRNA7 PE=3 SV=1
+A0A1W2PNU3|A0A1W2PNU3_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A1W2PP81|A0A1W2PP81_HUMAN HCG1809904 OS=Homo sapiens OX=9606 GN=TAF11L7 PE=3 SV=1
+A0A1W2PPD8|A0A1W2PPD8_HUMAN Lysine demethylase 4F OS=Homo sapiens OX=9606 GN=KDM4F PE=4 SV=1
+A0A1W2PPE2|A0A1W2PPE2_HUMAN TATA-box-binding protein-associated factor 11-like 4 OS=Homo sapiens OX=9606 GN=TAF11L4 PE=3 SV=1
+A0A1W2PPE3|A0A1W2PPE3_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A1W2PPH5|A0A1W2PPH5_HUMAN TATA-box-binding protein-associated factor 11-like 13 OS=Homo sapiens OX=9606 GN=TAF11L13 PE=1 SV=1
+A0A1W2PPL8|A0A1W2PPL8_HUMAN TATA-box-binding protein-associated factor 11-like 14 OS=Homo sapiens OX=9606 GN=TAF11L14 PE=3 SV=1
+A0A1W2PPM0|A0A1W2PPM0_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A1W2PPW3|A0A1W2PPW3_HUMAN TATA-box-binding protein-associated factor 11-like 12 OS=Homo sapiens OX=9606 GN=TAF11L12 PE=1 SV=1
+A0A1W2PQ09|A0A1W2PQ09_HUMAN TATA-box-binding protein-associated factor 11-like 11 OS=Homo sapiens OX=9606 GN=TAF11L11 PE=1 SV=1
+A0A1W2PQ27|A0A1W2PQ27_HUMAN RNA polymerase II subunit A C-terminal domain phosphatase SSU72 OS=Homo sapiens OX=9606 GN=SSU72P7 PE=3 SV=1
+A0A1W2PQ64|A0A1W2PQ64_HUMAN RNA polymerase II subunit A C-terminal domain phosphatase SSU72 OS=Homo sapiens OX=9606 GN=SSU72P5 PE=3 SV=1
+A0A1W2PQ72|A0A1W2PQ72_HUMAN Myb_DNA-bind_4 domain-containing protein OS=Homo sapiens OX=9606 GN=LOC100421372 PE=1 SV=1
+A0A1W2PQC6|A0A1W2PQC6_HUMAN RNA polymerase II subunit A C-terminal domain phosphatase SSU72 OS=Homo sapiens OX=9606 GN=SSU72P4 PE=3 SV=1
+A0A1W2PQD8|A0A1W2PQD8_HUMAN RNA polymerase II subunit A C-terminal domain phosphatase SSU72 OS=Homo sapiens OX=9606 GN=SSU72P2 PE=3 SV=1
+A0A1W2PQF6|A0A1W2PQF6_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=2
+A0A1W2PQJ5|A0A1W2PQJ5_HUMAN RNA polymerase II subunit A C-terminal domain phosphatase SSU72 OS=Homo sapiens OX=9606 GN=SSU72P3 PE=3 SV=1
+A0A1W2PQM1|A0A1W2PQM1_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A1W2PQU2|A0A1W2PQU2_HUMAN KDM5C adjacent transcript OS=Homo sapiens OX=9606 GN=KANTR PE=4 SV=1
+A0A1W2PR64|A0A1W2PR64_HUMAN TATA-box-binding protein-associated factor 11-like 9 OS=Homo sapiens OX=9606 GN=TAF11L9 PE=3 SV=1
+A0A1W2PR75|A0A1W2PR75_HUMAN RNA polymerase II subunit A C-terminal domain phosphatase SSU72 OS=Homo sapiens OX=9606 GN=SSU72P8 PE=3 SV=1
+A0A1W2PR80|A0A1W2PR80_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A1W2PR95|A0A1W2PR95_HUMAN HCG1642624, isoform CRA_a OS=Homo sapiens OX=9606 GN=IGBP1P2 PE=1 SV=1
+A0A1W2PRE2|A0A1W2PRE2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A1W2PRG0|A0A1W2PRG0_HUMAN Glutathione transferase OS=Homo sapiens OX=9606 PE=3 SV=1
+A0A1W2PRN1|A0A1W2PRN1_HUMAN GOLGA2L5 domain-containing protein OS=Homo sapiens OX=9606 PE=4 SV=2
+A0A1W2PRN6|A0A1W2PRN6_HUMAN HCG1807616 OS=Homo sapiens OX=9606 GN=LINC02218 PE=3 SV=1
+A0A1W2PRS3|A0A1W2PRS3_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=2
+A0A1W2PRV1|A0A1W2PRV1_HUMAN TATA-box-binding protein-associated factor 11-like 3 OS=Homo sapiens OX=9606 GN=TAF11L3 PE=3 SV=1
+A0A1Y8EI39|A0A1Y8EI39_HUMAN Immunoglobulin heavy diversity 6-13 (Fragment) OS=Homo sapiens OX=9606 GN=IGHD6-13 PE=4 SV=1
+A0A1Y8EKQ5|A0A1Y8EKQ5_HUMAN Immunoglobulin heavy diversity 6-19 (Fragment) OS=Homo sapiens OX=9606 GN=IGHD6-19 PE=4 SV=1
+A0A286YEU6|A0A286YEU6_HUMAN Olfactory receptor family 1 subfamily R member 1 pseudogene OS=Homo sapiens OX=9606 GN=OR1R1P PE=4 SV=1
+A0A2R8Y2Y2|A0A2R8Y2Y2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2R8Y422|A0A2R8Y422_HUMAN Ubiquitin carboxyl extension protein 80 OS=Homo sapiens OX=9606 GN=RPS27AP5 PE=3 SV=1
+A0A2R8Y4L6|A0A2R8Y4L6_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=OR5D3P PE=3 SV=1
+A0A2R8Y4M2|A0A2R8Y4M2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2R8Y4M4|A0A2R8Y4M4_HUMAN RING-type domain-containing protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2R8Y550|A0A2R8Y550_HUMAN Small integral membrane protein 34B (Fragment) OS=Homo sapiens OX=9606 GN=SMIM34B PE=4 SV=1
+A0A2R8Y556|A0A2R8Y556_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2R8Y5M8|A0A2R8Y5M8_HUMAN Catechol O-methyltransferase 2 OS=Homo sapiens OX=9606 PE=3 SV=1
+A0A2R8Y747|A0A2R8Y747_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2R8Y7Y5|A0A2R8Y7Y5_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC729966 PE=4 SV=1
+A0A2R8YCY7|A0A2R8YCY7_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2R8YD15|A0A2R8YD15_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2R8YE69|A0A2R8YE69_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2R8YED5|A0A2R8YED5_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=OR5BS1P PE=3 SV=1
+A0A2R8YEG4|A0A2R8YEG4_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=OR2A1 PE=3 SV=1
+A0A2R8YEH3|A0A2R8YEH3_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=LOC112268384 PE=3 SV=1
+A0A2R8YEV3|A0A2R8YEV3_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=OR2A42 PE=3 SV=1
+A0A2R8YFR7|A0A2R8YFR7_HUMAN DH domain-containing protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A2U3TZM8|A0A2U3TZM8_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC112694756 PE=4 SV=1
+A0A3B3IRQ3|A0A3B3IRQ3_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC112267897 PE=4 SV=1
+A0A3B3IRS2|A0A3B3IRS2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC647264 PE=4 SV=1
+A0A3B3IRV3|A0A3B3IRV3_HUMAN Malignant T-cell-amplified sequence OS=Homo sapiens OX=9606 GN=MCTS2P PE=1 SV=1
+A0A3B3IT45|A0A3B3IT45_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=OR51C1P PE=3 SV=1
+A0A3B3IU46|A0A3B3IU46_HUMAN RNA guanine-7 methyltransferase-activating subunit-like (pseudogene) OS=Homo sapiens OX=9606 GN=RAMACL PE=4 SV=1
+A0A494BZU2|A0A494BZU2_HUMAN Bladder cancer-associated transcript 1 OS=Homo sapiens OX=9606 GN=BLACAT1 PE=4 SV=1
+A0A494C030|A0A494C030_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC114841035 PE=4 SV=1
+A0A494C071|A0A494C071_HUMAN PWWP domain-containing 4 OS=Homo sapiens OX=9606 GN=PWWP4 PE=3 SV=1
+A0A494C0B9|A0A494C0B9_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A494C0I6|A0A494C0I6_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A494C103|A0A494C103_HUMAN CUB domain-containing protein OS=Homo sapiens OX=9606 GN=LOC112577516 PE=1 SV=1
+A0A494C176|A0A494C176_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A494C1I1|A0A494C1I1_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC728392 PE=4 SV=1
+A0A499FJ85|A0A499FJ85_HUMAN Schlafen family member 12-like OS=Homo sapiens OX=9606 GN=SLFN12L PE=4 SV=1
+A0A499FJF3|A0A499FJF3_HUMAN Rho-GAP domain-containing protein OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A4W9AIG4|A0A4W9AIG4_HUMAN Olfactory receptor OS=Homo sapiens OX=9606 GN=OR2A14 PE=3 SV=1
+A0A590UJ96|A0A590UJ96_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A590UK10|A0A590UK10_HUMAN Rho guanine nucleotide exchange factor 18 (Fragment) OS=Homo sapiens OX=9606 GN=ARHGEF18 PE=4 SV=1
+A0A590UK24|A0A590UK24_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A5F9Z9Y6|A0A5F9Z9Y6_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A5F9ZGZ6|A0A5F9ZGZ6_HUMAN ARHGEF5_35 domain-containing protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A5F9ZH88|A0A5F9ZH88_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A5F9ZHS0|A0A5F9ZHS0_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A5F9ZHU2|A0A5F9ZHU2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A5H1ZRR4|A0A5H1ZRR4_HUMAN T cell receptor gamma joining 2 (Fragment) OS=Homo sapiens OX=9606 GN=TRGJ2 PE=4 SV=1
+A0A5K1VDZ0|A0A5K1VDZ0_HUMAN KIR2DL1 protein OS=Homo sapiens OX=9606 GN=KIR2DL1 PE=2 SV=1
+A0A669KAW2|A0A669KAW2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A669KB60|A0A669KB60_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6I8PS25|A0A6I8PS25_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PFC9|A0A6Q8PFC9_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PFD8|A0A6Q8PFD8_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PFQ6|A0A6Q8PFQ6_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PGL7|A0A6Q8PGL7_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PGS0|A0A6Q8PGS0_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PGZ6|A0A6Q8PGZ6_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PGZ7|A0A6Q8PGZ7_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PHA8|A0A6Q8PHA8_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PHR7|A0A6Q8PHR7_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A6Q8PHS2|A0A6Q8PHS2_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A7I2V2S6|A0A7I2V2S6_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A7I2V3R4|A0A7I2V3R4_HUMAN RING-type domain-containing protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A7I2V4K3|A0A7I2V4K3_HUMAN HCG2038094, isoform CRA_b OS=Homo sapiens OX=9606 GN=TUNAR PE=4 SV=1
+A0A7I2V4U8|A0A7I2V4U8_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A7I2V6D3|A0A7I2V6D3_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A7P0T8H1|A0A7P0T8H1_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A7P0T9M0|A0A7P0T9M0_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A7P0TAN4|A0A7P0TAN4_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=1 SV=1
+A0A7P0TBJ1|A0A7P0TBJ1_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC389895 PE=4 SV=1
+A0A7P0Z4L6|A0A7P0Z4L6_HUMAN XRCC1_N domain-containing protein OS=Homo sapiens OX=9606 GN=LOC100133315 PE=4 SV=1
+A0A804HI29|A0A804HI29_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A804HIB5|A0A804HIB5_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A804HID5|A0A804HID5_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A804HJP8|A0A804HJP8_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A804HJT0|A0A804HJT0_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=4 SV=1
+A0A804HLA8|A0A804HLA8_HUMAN Guanine nucleotide-binding protein subunit gamma OS=Homo sapiens OX=9606 GN=GNG5P2 PE=3 SV=1
+A0N4X2|A0N4X2_HUMAN Possible J 40 gene segment (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ40 PE=4 SV=1
+A0N4X5|A0N4X5_HUMAN HCG2039756 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ34 PE=4 SV=1
+A0N4Z3|A0N4Z3_HUMAN HCG2039775 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ14 PE=4 SV=1
+A0N4Z7|A0N4Z7_HUMAN Possible J 10 gene (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ10 PE=4 SV=1
+A0N4Z8|A0N4Z8_HUMAN HCG2039779 (Fragment) OS=Homo sapiens OX=9606 GN=TRAJ9 PE=4 SV=1
+A3KN74|A3KN74_HUMAN GPX6 protein OS=Homo sapiens OX=9606 GN=GPX6 PE=2 SV=1
+B3KNS4|B3KNS4_HUMAN Endogenous retrovirus group K3 member 1 OS=Homo sapiens OX=9606 GN=ERVK3-1 PE=1 SV=1
+B7Z3J9|B7Z3J9_HUMAN HCG2040265, isoform CRA_a OS=Homo sapiens OX=9606 GN=LOC730098 PE=1 SV=1
+B7ZLF3|B7ZLF3_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC402624 PE=1 SV=1
+C9JA33|C9JA33_HUMAN PALM2 and AKAP2 fusion OS=Homo sapiens OX=9606 GN=PALM2AKAP2 PE=1 SV=1
+F5GYI1|F5GYI1_HUMAN Vanin 3, pseudogene OS=Homo sapiens OX=9606 GN=VNN3P PE=1 SV=1
+J3QSS5|J3QSS5_HUMAN T-complex 10-like 2, pseudogene OS=Homo sapiens OX=9606 GN=TCP10L2 PE=1 SV=1
+M0QZD8|M0QZD8_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 GN=LOC400499 PE=4 SV=3
+Q5VVH2|Q5VVH2_HUMAN Peptidylprolyl isomerase OS=Homo sapiens OX=9606 GN=FKBP1C PE=1 SV=1
+Q68DW6|Q68DW6_HUMAN Uncharacterized protein DKFZp781C0719 OS=Homo sapiens OX=9606 GN=DKFZp781C0719 PE=2 SV=1
+Q6JHZ5|Q6JHZ5_HUMAN NS5ATP13TP1 OS=Homo sapiens OX=9606 PE=2 SV=1
+Q6YL49|Q6YL49_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=2 SV=1
+Q71RC1|Q71RC1_HUMAN PP13850 OS=Homo sapiens OX=9606 PE=2 SV=1
+Q9BZC5|Q9BZC5_HUMAN FKSG35 OS=Homo sapiens OX=9606 GN=FKSG35 PE=2 SV=1
+Q9H3A6|Q9H3A6_HUMAN PRO2179 OS=Homo sapiens OX=9606 PE=2 SV=1
+Q9HB66|Q9HB66_HUMAN Alternative protein MKKS OS=Homo sapiens OX=9606 GN=MKKS PE=1 SV=1
+S4R3C0|S4R3C0_HUMAN Immunoglobulin heavy variable 3/OR16-17 (non-functional) (Fragment) OS=Homo sapiens OX=9606 GN=IGHV3OR16-17 PE=1 SV=1
+V9GZ13|V9GZ13_HUMAN Uncharacterized protein OS=Homo sapiens OX=9606 PE=1 SV=1

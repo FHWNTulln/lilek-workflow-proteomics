@@ -1,0 +1,7 @@
+B7SB92|FAD12_TRICA Acyl-CoA Delta-12 desaturase OS=Tribolium castaneum OX=7070 GN=D12Des PE=1 SV=1
+D2A0H5|SNMP1_TRICA Sensory neuron membrane protein 1 OS=Tribolium castaneum OX=7070 GN=SNMP01 PE=3 SV=1
+D6WI29|CGLR_TRICA Cyclic GMP-AMP synthase-like receptor OS=Tribolium castaneum OX=7070 GN=TcasGA2_TC003965 PE=1 SV=1
+D6WJ77|ICMT_TRICA Protein-S-isoprenylcysteine O-methyltransferase OS=Tribolium castaneum OX=7070 GN=ICMT PE=1 SV=1
+D6WMX4|PINK1_TRICA Serine/threonine-protein kinase Pink1, mitochondrial OS=Tribolium castaneum OX=7070 GN=Pink1 PE=1 SV=1
+D6WMZ8|ESTJ_TRICA Juvenile hormone esterase OS=Tribolium castaneum OX=7070 GN=Tcjhe PE=1 SV=2
+D6WT67|RYA_TRICA RYamide neuropeptides OS=Tribolium castaneum OX=7070 GN=RYa PE=1 SV=1
