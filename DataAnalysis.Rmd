@@ -26,21 +26,38 @@ output:
 #
 ###############################
 
-GET_SAMPLE_NAMES <- FALSE # if set to FALSE define it in the next line
-sample_names_user <- sample(LETTERS,1)
-unique <- 2  #how many peptides should be at least necessary to identify a protein
+GET_SAMPLE_NAMES <- TRUE # if set to FALSE define it in the next line
+#sample_names_user <- c()
 
-RAZOR <- TRUE #TRUE | FALSE
-UNIQUE <- TRUE #TRUE | FALSE
-LFQ <- TRUE #TRUE | FALSE
+unique <- 2  # how many peptides should be at least necessary to identify a protein
 
-path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_pooled_rerun_4masterthesis/"
-#path = "C:/Users/lilek/Desktop/20220406_TR_QC_MBR_rerun_4masterthesis/"
+# which types should be evaluated TRUE or FALSE could be used
+RAZOR <- FALSE
+UNIQUE <- TRUE 
+LFQ <- TRUE 
 
+# define path of the proteinGroups.txt file(s)
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_rerun_4masterthesis/"
+
+# save files | options
+# FALSE - results are not saved
+# "RDS" - save results into R data file format
+# "CSV" - save results into a csv file
+SAVE <- "CSV"
 ```
 
 
 # Introduction
+
+## Unique | Razor&Unique procedure
+
+Filtering:
+
+-   `Potential.contaminant == ""` -> remove where contaminants
+-   `Reverse == ""`-> remove where reverse = +
+-   `Only.identified.by.site == ""` -> remove where only identified by site = +
+
+-   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | typically this is set to 1 or 2
 
 ## LFQ-Procedure
 
@@ -54,17 +71,6 @@ Then the `log2`of the LFQ intensities is calculated and all `-Inf` values were s
 
 Then the number of lfq values is used for the further evaluation, visualization and statistical testing. In the following this data will be called LFQ.
 
-## Unique | Razor&Unique procedure
-
-Filtering:
-
--   `Potential.contaminant == ""` -> remove where contaminants
--   `Reverse == ""`-> remove where reverse = +
--   `Only.identified.by.site == ""` -> remove where only identified by site = +
-
--   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | typically this is set to 1 or 2
-
-
 # Load required packages and functions
 
 ```{r start, message=FALSE, warning=FALSE, include=FALSE}
@@ -73,31 +79,25 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r message=FALSE, warning=FALSE}
-#load libraries
+# load libraries
 library(tidyverse)
 library(dplyr)
-library(gplots)
-library(reshape2) 
 library(pheatmap)
-#load functions
+# load functions
 filtering <- function(data_raw){
-  data_raw %>% filter( 
+  data_raw %>% dplyr::filter( 
     Potential.contaminant == "",
     Reverse == "",
     Only.identified.by.site == "")
-}
-
-CV <- function(x){
-  (sd(x)/mean(x))*100
 }
 ```
 
 # Data Analysis
 
-The txt-files are read in, processed and filtered automatically. This section shows the code, heatmaps for LFQ values and also some summary statistics which are only shown for further discussion on the results, for the documentation of the statistical evaluation and are not labeled/discussed yet. 
+The txt-files of the defined folder are read in, processed and filtered automatically. This section shows the code, heatmaps for LFQ values and also some summary statistics.
 
 ```{r, results="asis"}
-##########read in all data with pattern .txt
+########## read in all data with pattern .txt
 # get file list
 file.list <- list.files(path = path, pattern='*.txt')
 # create file path
@@ -106,6 +106,7 @@ file.path <- paste(path,file.list,sep = "")
 res_raw <- lapply(file.path, read.delim)
 names(res_raw) <- file.list
 
+########## get sample names
 if (GET_SAMPLE_NAMES == TRUE){
   #get sample names
   tmp <- colnames(res_raw[[1]])
@@ -119,24 +120,26 @@ if (GET_SAMPLE_NAMES == TRUE){
   sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
 } else {
   for (i in 1:length(file.list)){
-    #rename columns
+    # rename columns
     res_raw[[i]] <- res_raw[[i]] %>%
-       rename_with(~ paste("Razor_", sample_names_user, sep = ""), starts_with("Razor...unique.peptides.")) %>%
-       rename_with(~ paste("Unique_", sample_names_user, sep = ""), starts_with("Unique.peptides.")) %>%
-       rename_with(~ paste("LFQ_", sample_names_user, sep = ""), starts_with("LFQ.intensity."))
-    #get column names
-    sample_names_razor <- colnames(res_raw[[i]][grep("Razor_", colnames(res_raw[[i]]))])
-    sample_names_unique <- colnames(res_raw[[i]][grep("Unique_", colnames(res_raw[[i]]))])
-    sample_names_lfq <- colnames(res_raw[[i]][grep("LFQ_", colnames(res_raw[[i]]))])
+       rename_with(~ paste("Razor_", sample_names_user, sep = ""),
+                   starts_with("Razor...unique.peptides.")) %>%
+       rename_with(~ paste("Unique_", sample_names_user, sep = ""),
+                   starts_with("Unique.peptides.")) %>%
+       rename_with(~ paste("LFQ_", sample_names_user, sep = ""),
+                   starts_with("LFQ.intensity."))
+    # get column names
+    sample_names_razor <- colnames(res_raw[[i]][grep("Razor_",
+                                                     colnames(res_raw[[i]]))])
+    sample_names_unique <- colnames(res_raw[[i]][grep("Unique_",
+                                                      colnames(res_raw[[i]]))])
+    sample_names_lfq <- colnames(res_raw[[i]][grep("LFQ_",
+                                                   colnames(res_raw[[i]]))])
 }
 }
 
-#another option would be
-#uniq <- data %>% select(starts_with("Unique.peptides."))
-
-
-
-#create data frame for razor
+########## create result data frame & result lists
+# create data frame for razor
 results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_razor), nrow = length(file.list)))
 row.names(results_2gether_razor) <- file.list
 colnames(results_2gether_razor) <- sample_names_razor
@@ -154,62 +157,57 @@ results_razor <- list()
 results_unique <- list()
 results_lfq <- list()
 
+########## perform evaluation
 if (RAZOR == TRUE) {
   cat("\n")
   cat("##","Razor","\n")
   cat("\n")
-for (x in file.list){
-  cat("\n")
-  cat("###",substring(x, 1, nchar(x)-4),"\n")
-  data_raw <- as.data.frame(res_raw[[x]])
-  data <- filtering(data_raw)
-  results <- data.frame(matrix(ncol = length(sample_names_razor), nrow = nrow(data)))
-  colnames(results) <- sample_names_razor
-  i <- 0
-  for (i in 1:length(sample_names_razor)){
-    name <- sample_names_razor[i]
-    tmp <- (data[name] >= unique)
-    results[i] <- tmp
-    cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+  for (x in file.list){
+    cat("\n")
+    cat("###",substring(x, 1, nchar(x)-4),"\n")
+    data_raw <- as.data.frame(res_raw[[x]])
+    data <- filtering(data_raw)
+    results <- data.frame(matrix(ncol = length(sample_names_razor), nrow = nrow(data)))
+    colnames(results) <- sample_names_razor
+    i <- 0
+    for (i in 1:length(sample_names_razor)){
+      name <- sample_names_razor[i]
+      tmp <- (data[name] >= unique)
+      results[i] <- tmp
+      cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+    }
+    results_razor[[x]] <- results
+    results_2gether_razor[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+    cat("\n")
   }
-  
-  results_razor[[x]] <- results
-  #assign(paste("results_razor",x,sep="_"),results) #create individual variable names
-
-  results_2gether_razor[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
-  cat("\n")
-}
 }
 
 if (UNIQUE == TRUE) {
   cat("\n")
   cat("##","Unique","\n")
   cat("\n")
-for (x in file.list){
-  cat("\n")
-  cat("###",substring(x, 1, nchar(x)-4),"\n")
-  data_raw <- as.data.frame(res_raw[[x]])
-  data <- filtering(data_raw)
-  results <- data.frame(matrix(ncol = length(sample_names_unique), nrow = nrow(data)))
-  colnames(results) <- sample_names_unique
-  i <- 0
-  for (i in 1:length(sample_names_unique)){
-    name <- sample_names_unique[i]
-    tmp <- (data[name] >= unique)
-    results[i] <- tmp
-    cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+  for (x in file.list){
+    cat("\n")
+    cat("###",substring(x, 1, nchar(x)-4),"\n")
+    data_raw <- as.data.frame(res_raw[[x]])
+    data <- filtering(data_raw)
+    results <- data.frame(matrix(ncol = length(sample_names_unique), nrow = nrow(data)))
+    colnames(results) <- sample_names_unique
+    i <- 0
+    for (i in 1:length(sample_names_unique)){
+      name <- sample_names_unique[i]
+      tmp <- (data[name] >= unique)
+      results[i] <- tmp
+      cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+    }
+    results_unique[[x]] <- results
+    results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+    cat("\n")
   }
-  
-  results_unique[[x]] <- results
-  #assign(paste("results_razor",x,sep="_"),results) #create individual variable names
-
-  results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
-  cat("\n")
-}
 }
 
 if (LFQ == TRUE) {
-    cat("\n")
+  cat("\n")
   cat("##","LFQ","\n")
   cat("\n")
   for (x in file.list){
@@ -231,7 +229,9 @@ if (LFQ == TRUE) {
     }
     
     results_lfq[[x]] <- results
-    #assign(paste("results_lfq",x,sep="_"),results) #create individual variable names
+    results_2gether_lfq[x,] <- sapply(results,function(x)sum(!is.na(x)))
+    cat("\n")
+    
     #create heatmaps
     paletteLength <- 50
     myColor <- colorRampPalette(c("navy", "white",  "firebrick3"))(paletteLength)
@@ -240,27 +240,18 @@ if (LFQ == TRUE) {
         cat("\n")
         cat("##"," No heatmap possible. Too less columns in the result table.","\n")
       } else {
-      lfq4pheatmap[is.na(lfq4pheatmap)] <- 0
-      
-      pheatmap(lfq4pheatmap,
-         color = myColor,
-         treeheight_row = 10,
-         angle_col ="45",
-         treeheight_col = 10,
-         legend = TRUE,
-         labels_row = rep("",nrow(lfq4pheatmap)))
-
+        lfq4pheatmap[is.na(lfq4pheatmap)] <- 0
+        pheatmap(lfq4pheatmap,
+           color = myColor,
+           treeheight_row = 10,
+           angle_col ="45",
+           treeheight_col = 10,
+           legend = TRUE,
+           labels_row = rep("",nrow(lfq4pheatmap)))
+        cat("\n")
       }
-    results_2gether_lfq[x,] <- sapply(results,function(x)sum(!is.na(x)))
-    cat("\n")
-    
   }
 }
-
-#add number in column 4 for selection
-results_2gether_razor$number <- c(1:length(file.list))
-results_2gether_unique$number <- c(1:length(file.list))
-results_2gether_lfq$number <- c(1:length(file.list))
 
 #remove variables - clean up
 rm(data,
@@ -275,20 +266,10 @@ rm(data,
 
 ```
 
-# Used time
-
-```{r end, message=FALSE, warning=FALSE, include=FALSE}
-end_time = format(Sys.time(), '%X')
-```
-
-```{r used time, echo=FALSE, message=TRUE, warning=FALSE}
-print(paste("Time used for analysis:", round(as.difftime(end_time, units = "mins")-as.difftime(start_time, units = "mins"),digits=2),"minutes"))
-```
 # Summary
 
-
-
 ```{r}
+# show summary
 if (RAZOR == TRUE){
   results_2gether_razor
 }
@@ -298,133 +279,21 @@ if (UNIQUE == TRUE){
 if (LFQ == TRUE){
   results_2gether_lfq
 }
+
+# save results
+results_final <- data.frame(results_2gether_razor,results_2gether_unique,results_2gether_lfq)
+# get rid of NA columns
+results_final <- results_final[,colSums(is.na(results_final))<nrow(results_final)]
+if (SAVE == "RDS"){
+  saveRDS(results_final, "./results_final.RDS")
+} else if (SAVE == "CSV") {
+  write.csv2(results_final, "./results_final.csv")
+} 
 ```
 
+# Used time
 
-# OLD STUFF
-
-
-
-```{r eval=FALSE, include=FALSE}
-razor_comp <- results_2gether_razor[c(1,3,15,25,27,29),-4]
-print(razor_comp)
-boxplot(t(razor_comp), 
-        names=seq(1:6),
-        xlab="Experiment No",
-        ylab="Identifications Razor",
-        cex.lab = 0.8)
-
-res_new <- t(razor_comp[c(1:3),])
-res_old <- t(razor_comp[c(4:6),])
-#print(res_new-res_old)
-
-shapiro.test(res_new-res_old)
-
-t <- t.test(res_new-res_old,
-       µ=0)
-print(t)
-```
-
-
-
-```{r eval=FALSE, include=FALSE}
-lfq_comp <- results_2gether_lfq[c(1,3,15,25,27,29),-4]
-print(lfq_comp)
-boxplot(t(lfq_comp), 
-        names=seq(1:6),
-        xlab="Experiment No",
-        ylab="Identifications LFQ",
-        cex.lab = 0.8)
-
-res_new <- t(lfq_comp[c(1:3),])
-res_old <- t(lfq_comp[c(4:6),])
-#print(res_new-res_old)
-
-shapiro.test(res_new-res_old)
-
-t.test(res_new-res_old,
-       µ=0)
-```
-
-
-
-```{r eval=FALSE, include=FALSE}
-boxplot(results_2gether_razor[c(5:14),-4])
-rsd_002 <- apply(results_2gether_razor[c(5:14),-4],1,CV)
-rsd_003 <- apply(results_2gether_razor[c(15:24),-4],1,CV)
-
-boxplot(rsd_002,rsd_003,
-        xlab="rerun experiment no.",
-        names=c("002","003"),
-        ylab="relative sd")
-```
-
-
-.
-
-```{r eval=FALSE, include=FALSE}
-boxplot(results_2gether_lfq[c(5:14),-4])
-boxplot(results_2gether_lfq[c(15:24),-4])
-rsd_002 <- apply(results_2gether_lfq[c(5:14),-4],1,CV)
-rsd_003 <- apply(results_2gether_lfq[c(15:24),-4],1,CV)
-
-boxplot(rsd_002,rsd_003,
-        xlab="rerun experiment no.",
-        names=c("002","003"),
-        ylab="relative sd")
-```
-
-
-```{r eval=FALSE, include=FALSE}
-rsd_002_r <- apply(results_2gether_razor[c(5:14),-4],1,CV)
-rsd_003_r <- apply(results_2gether_razor[c(15:24),-4],1,CV)
-rsd_002 <- apply(results_2gether_lfq[c(5:14),-4],1,CV)
-rsd_003 <- apply(results_2gether_lfq[c(15:24),-4],1,CV)
-```
-
-
-```{r eval=FALSE, include=FALSE}
-razor <- results_2gether_razor[c(5:24),-4]
-lfq <- results_2gether_lfq[c(5:24),-4]
-
-factor <- factor(c(rep("002_razor",10),rep("003_razor",10)))
-razor$factor <- factor
-factor <- factor(c(rep("002_lfq",10),rep("003_lfq",10)))
-lfq$factor <- factor
-
-data_tmp <- rbind (razor,lfq)
-
-dat.m <- melt(data_tmp, measure.vars=c('A1','A2','A3'))
-
-ggplot(subset(dat.m, factor == "002_razor" | factor == "002_lfq")) +
-  geom_boxplot(aes(x=variable, y=value, color=factor)) +
-  labs(title="Comparison Rerun LFQ-Razor Experiment 002",
-       x ="Extract", y = "No. identified proteins",
-       color="Experiment")
-ggplot(subset(dat.m, factor == "003_razor" | factor == "003_lfq")) +
-  geom_boxplot(aes(x=variable, y=value, color=factor)) +
-  labs(title="Comparison Rerun LFQ-Razor Experimt 003",
-       x ="Extract", y = "No. identified proteins",
-       color="Experiment")
-
-boxplot(rsd_002_r,rsd_003_r,rsd_002,rsd_003,
-        xlab="rerun experiment no.",
-        names=c("002 razor","003 razor","002 lfq", "003 lfq"),
-        ylab="relative sd")
-
-```
-
-
-
-
-**Results Razor**
-
-```{r eval=FALSE, include=FALSE}
-results_2gether_razor[c(1:4),-4]
-```
-
-**Results LFQ**
-
-```{r eval=FALSE, include=FALSE}
-results_2gether_lfq[c(1:4),-4]
+```{r used time, echo=FALSE, message=TRUE, warning=FALSE}
+end_time = format(Sys.time(), '%X')
+print(paste("Time used for analysis:", round(as.difftime(end_time, units = "mins")-as.difftime(start_time, units = "mins"),digits=2),"minutes"))
 ```
