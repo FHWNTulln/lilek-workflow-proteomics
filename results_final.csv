@@ -1,11 +1,2 @@
-"";"Unique.peptides.QC_01_20220406155633";"Unique.peptides.QC_02";"Unique.peptides.QC_03";"Unique.peptides.QC_04";"Unique.peptides.QC_05";"Unique.peptides.QC_06";"Unique.peptides.QC_07";"Unique.peptides.QC_08";"Unique.peptides.QC_09";"Unique.peptides.QC_10";"LFQ.intensity.QC_01_20220406155633";"LFQ.intensity.QC_02";"LFQ.intensity.QC_03";"LFQ.intensity.QC_04";"LFQ.intensity.QC_05";"LFQ.intensity.QC_06";"LFQ.intensity.QC_07";"LFQ.intensity.QC_08";"LFQ.intensity.QC_09";"LFQ.intensity.QC_10"
-"results_run1_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1296;1332;1323;1329;1341;1347;1368;1347;1308;1299;1258;1291;1291;1301;1301;1301;1323;1304;1289;1274
-"results_run10_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1281;1314;1309;1288;1314;1290;1303;1319;1250;1266;1246;1279;1274;1251;1281;1246;1260;1267;1216;1235
-"results_run2_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1292;1326;1325;1329;1337;1344;1355;1349;1302;1302;1256;1296;1290;1301;1303;1301;1323;1299;1287;1272
-"results_run3_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1292;1332;1322;1326;1342;1349;1367;1347;1311;1299;1256;1292;1291;1301;1303;1302;1321;1303;1294;1274
-"results_run4_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1289;1321;1321;1323;1333;1345;1353;1347;1287;1300;1257;1292;1286;1291;1294;1296;1316;1292;1267;1265
-"results_run5_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1295;1330;1322;1326;1340;1345;1365;1346;1305;1297;1256;1291;1291;1301;1301;1301;1320;1305;1290;1276
-"results_run6_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1282;1315;1310;1290;1320;1305;1328;1320;1253;1269;1247;1276;1278;1256;1283;1263;1281;1279;1227;1235
-"results_run7_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1296;1331;1323;1322;1341;1344;1365;1344;1304;1301;1256;1292;1290;1296;1302;1300;1314;1303;1289;1274
-"results_run8_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1284;1324;1319;1309;1321;1322;1330;1334;1270;1281;1252;1284;1284;1277;1287;1278;1295;1286;1250;1248
-"results_run9_mqpar_20220406_TR_QC_MBR_rerun_4masterthesis_combined_txt_proteinGroups.txt";1294;1329;1319;1317;1341;1347;1365;1343;1306;1302;1255;1288;1286;1291;1302;1299;1310;1300;1286;1269
+"";"Razor...unique.peptides.D2_2_gesamt";"Razor...unique.peptides.D2_3_gesamt";"Unique.peptides.D2_2_gesamt";"Unique.peptides.D2_3_gesamt";"LFQ.intensity.D2_2_gesamt";"LFQ.intensity.D2_3_gesamt"
+"proteinGroups.txt";605;645;599;640;466;466

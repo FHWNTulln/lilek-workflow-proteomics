@@ -32,13 +32,13 @@ GET_SAMPLE_NAMES <- TRUE # if set to FALSE define it in the next line
 unique <- 2  # how many peptides should be at least necessary to identify a protein
 
 # which types should be evaluated TRUE or FALSE could be used
-RAZOR <- FALSE
+RAZOR <- TRUE
 UNIQUE <- TRUE 
 LFQ <- TRUE 
 
 # define path of the proteinGroups.txt file(s)
 path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/3_20220406_TR/20220406_TR_QC_MBR_rerun_4masterthesis/"
-
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/10_20220712_TR/mqpar_20220712_extracts/"
 # save files | options
 # FALSE - results are not saved
 # "RDS" - save results into R data file format
@@ -53,9 +53,9 @@ SAVE <- "CSV"
 
 Filtering:
 
--   `Potential.contaminant == ""` -> remove where contaminants
--   `Reverse == ""`-> remove where reverse = +
--   `Only.identified.by.site == ""` -> remove where only identified by site = +
+-   `Potential.contaminant != "+"` -> remove where contaminants
+-   `Reverse != "+"`-> remove where reverse = +
+-   `Only.identified.by.site != "+"` -> remove where only identified by site = +
 
 -   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | typically this is set to 1 or 2
 
@@ -63,13 +63,11 @@ Filtering:
 
 Filtering:
 
--   `Potential.contaminant == ""` -> remove where contaminants
--   `Reverse == ""`-> remove where reverse = +
--   `Only.identified.by.site == ""` -> remove where only identified by site = +
+-   `Potential.contaminant != "+"` -> remove where contaminants = +
+-   `Reverse != "+"`-> remove where reverse = +
+-   `Only.identified.by.site != "+"` -> remove where only identified by site = +
 
 Then the `log2`of the LFQ intensities is calculated and all `-Inf` values were substituted by NA using the following command: `lfq[lfq == -Inf] <- NA`
-
-Then the number of lfq values is used for the further evaluation, visualization and statistical testing. In the following this data will be called LFQ.
 
 # Load required packages and functions
 
@@ -83,12 +81,15 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(dplyr)
 library(pheatmap)
+library(ggplot2)
+library(reshape)
+library(knitr)
 # load functions
-filtering <- function(data_raw){
-  data_raw %>% dplyr::filter( 
-    Potential.contaminant == "",
-    Reverse == "",
-    Only.identified.by.site == "")
+filtering <- function(d){
+  data_raw %>% filter( 
+    Potential.contaminant != "+",
+    Reverse != "+",
+    Only.identified.by.site != "+")
 }
 ```
 
@@ -130,12 +131,12 @@ if (GET_SAMPLE_NAMES == TRUE){
                    starts_with("LFQ.intensity."))
     # get column names
     sample_names_razor <- colnames(res_raw[[i]][grep("Razor_",
-                                                     colnames(res_raw[[i]]))])
+                                                colnames(res_raw[[i]]))])
     sample_names_unique <- colnames(res_raw[[i]][grep("Unique_",
-                                                      colnames(res_raw[[i]]))])
+                                                colnames(res_raw[[i]]))])
     sample_names_lfq <- colnames(res_raw[[i]][grep("LFQ_",
-                                                   colnames(res_raw[[i]]))])
-}
+                                                 colnames(res_raw[[i]]))])
+    }
 }
 
 ########## create result data frame & result lists
@@ -179,6 +180,34 @@ if (RAZOR == TRUE) {
     results_razor[[x]] <- results
     results_2gether_razor[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
     cat("\n")
+    
+        #create heatmaps
+    paletteLength <- 50
+    myColor <- colorRampPalette(c("navy", "white",
+                                  "firebrick3"))(paletteLength)
+      data4pheatmap <- results
+      data4pheatmap <- results
+      data4pheatmap <- data4pheatmap*1
+      data4pheatmap[data4pheatmap == 0] <- NA
+      # remove NA rows
+      ind <- apply(data4pheatmap, 1, function(x) all(is.na(x)))
+      data4pheatmap_clear <- data4pheatmap[!ind,]
+      data4pheatmap_clear[is.na(data4pheatmap_clear)] <- 0
+      if (ncol(data4pheatmap_clear) < 2){
+        cat("\n")
+        cat("##"," No heatmap possible. Too less columns in the result
+            table.","\n")
+      } else {
+        pheatmap(data4pheatmap_clear,
+           color = myColor,
+           treeheight_row = 10,
+           angle_col ="45",
+           treeheight_col = 10,
+           legend = TRUE,
+           labels_row = rep("",nrow(data4pheatmap)),
+           labels_col = sample_names_raw)
+        cat("\n")
+      }
   }
 }
 
@@ -203,6 +232,32 @@ if (UNIQUE == TRUE) {
     results_unique[[x]] <- results
     results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
     cat("\n")
+    #create heatmaps
+    paletteLength <- 50
+    myColor <- colorRampPalette(c("navy", "white",
+                                  "firebrick3"))(paletteLength)
+      data4pheatmap <- results
+      data4pheatmap <- data4pheatmap*1
+      data4pheatmap[data4pheatmap == 0] <- NA
+      # remove NA rows
+      ind <- apply(data4pheatmap, 1, function(x) all(is.na(x)))
+      data4pheatmap_clear <- data4pheatmap[!ind,]
+      data4pheatmap_clear[is.na(data4pheatmap_clear)] <- 0
+      if (ncol(data4pheatmap) < 2){
+        cat("\n")
+        cat("##"," No heatmap possible. Too less columns in the result
+            table.","\n")
+      } else {
+        pheatmap(data4pheatmap_clear,
+           color = myColor,
+           treeheight_row = 10,
+           angle_col ="45",
+           treeheight_col = 10,
+           legend = TRUE,
+           labels_row = rep("",nrow(data4pheatmap)),
+           labels_col = sample_names_raw)
+        cat("\n")
+      }
   }
 }
 
@@ -234,50 +289,77 @@ if (LFQ == TRUE) {
     
     #create heatmaps
     paletteLength <- 50
-    myColor <- colorRampPalette(c("navy", "white",  "firebrick3"))(paletteLength)
-      lfq4pheatmap <- results
-      if (ncol(lfq4pheatmap) < 2){
+    myColor <- colorRampPalette(c("navy", "white",
+                                  "firebrick3"))(paletteLength)
+      data4pheatmap <- results
+      data4pheatmap <- results
+      data4pheatmap <- data4pheatmap*1
+      data4pheatmap[data4pheatmap == 0] <- NA
+      # remove NA rows
+      ind <- apply(data4pheatmap, 1, function(x) all(is.na(x)))
+      data4pheatmap_clear <- data4pheatmap[!ind,]
+      data4pheatmap_clear[is.na(data4pheatmap_clear)] <- 0
+      if (ncol(data4pheatmap) < 2){
         cat("\n")
-        cat("##"," No heatmap possible. Too less columns in the result table.","\n")
+        cat("##"," No heatmap possible. Too less columns in the result
+            table.","\n")
       } else {
-        lfq4pheatmap[is.na(lfq4pheatmap)] <- 0
-        pheatmap(lfq4pheatmap,
+        pheatmap(data4pheatmap_clear,
            color = myColor,
            treeheight_row = 10,
            angle_col ="45",
            treeheight_col = 10,
            legend = TRUE,
-           labels_row = rep("",nrow(lfq4pheatmap)))
+           labels_row = rep("",nrow(data4pheatmap)),
+           labels_col = sample_names_raw)
         cat("\n")
       }
   }
 }
 
-#remove variables - clean up
-rm(data,
-   data_raw,
-   name,
-   results,
-   sample_names_razor,
-   sample_names_unique,
-   sample_names_lfq,
-   tmp,
-   x)
+
 
 ```
 
 # Summary
 
-```{r}
+```{r, results="asis", message=FALSE, warning=FALSE}
 # show summary
 if (RAZOR == TRUE){
-  results_2gether_razor
+  cat("\n")
+  cat("##"," Summary Razor","\n")
+  print(kable(results_2gether_razor))
+  
+  ggplot(melt(results_2gether_razor),aes(x = variable, y = value)) +
+  geom_boxplot() + 
+  xlab("Sample name") + 
+  scale_x_discrete(labels = sample_names_raw) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(title = "Razor")
 }
 if (UNIQUE == TRUE){
-  results_2gether_unique
+  cat("\n")
+  cat("##"," Summary Unique","\n")
+  print(kable(results_2gether_unique))
+  
+  ggplot(melt(results_2gether_unique),aes(x = variable, y = value)) +
+  geom_boxplot() + 
+  xlab("Sample name") + 
+  scale_x_discrete(labels = sample_names_raw) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(title = "Unique")
 }
 if (LFQ == TRUE){
-  results_2gether_lfq
+  cat("\n")
+  cat("##"," Summary LFQ","\n")
+  print(kable(results_2gether_lfq))
+  
+  ggplot(melt(results_2gether_lfq),aes(x = variable, y = value)) +
+  geom_boxplot() + 
+  xlab("Sample name") + 
+  scale_x_discrete(labels = sample_names_raw) +
+  theme(axis.text.x = element_text(angle = 90)) +
+  labs(title = "LFQ")
 }
 
 # save results

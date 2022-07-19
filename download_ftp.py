@@ -7,7 +7,7 @@ to download files run the following command in a bash terminal
 
 python download_ftp.py | wget -c -i- 
 
-flag -c: try to continue abborted download
+flag -c: try to continue aborted download
 flag -i-: read the URL from stdin
 
 @author: david
