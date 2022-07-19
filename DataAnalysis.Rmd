@@ -59,6 +59,8 @@ Filtering:
 
 -   `data[name] >= unique` -> keep only identifications which have greater or equal number (defined via variable `unique`) of `razor/unique peptides ` | typically this is set to 1 or 2
 
+`Data analysis` show the number of identified proteins and the heatmap. In `Summary` the final results are visualized as boxplot and a table with the summarized values is shown.
+
 ## LFQ-Procedure
 
 Filtering:
@@ -68,6 +70,8 @@ Filtering:
 -   `Only.identified.by.site != "+"` -> remove where only identified by site = +
 
 Then the `log2`of the LFQ intensities is calculated and all `-Inf` values were substituted by NA using the following command: `lfq[lfq == -Inf] <- NA`
+
+`Data analysis` show the number of identified proteins and the heatmap. In `Summary` the final results are visualized as boxplot and a table with the summarized values is shown.
 
 # Load required packages and functions
 
@@ -91,6 +95,7 @@ filtering <- function(d){
     Reverse != "+",
     Only.identified.by.site != "+")
 }
+print("loading sucessful")
 ```
 
 # Data Analysis
