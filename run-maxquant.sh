@@ -2,6 +2,8 @@
 set -euo pipefail
 trap 's=$?; echo >&2 "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
+start=`date +%s`
+
 Help()
 {
    # Display Help
@@ -16,10 +18,6 @@ Help()
    echo "h     Print this help"
    echo
 }
-
-
-
-
 
 version="new"
 runs=1
@@ -37,6 +35,32 @@ do
     esac
 done
 
+#######################
+# check directories
+#######################
+folder=/proj/proteomics/
+if [ -d "$folder$projname" ]; then
+  # Take action if $DIR exists. #
+  cd $folder
+  echo "#####################################" | tee -a log.txt
+  echo "check directories" | tee -a log.txt
+  echo "#####################################" | tee -a log.txt
+  echo "Project Folder {$folder$projname} exists. Continue" | tee -a log.txt
+  mkdir -p ./$projname/data ./$projname/mqpar ./$projname/results
+else
+  echo "Project Folder {$folder$projname} doesn't exists. Aborting..." | tee -a log.txt
+  exit 1
+fi
+
+# check if mqpar file exsists
+if [ -f "./$projname/mqpar/$filename.xml" ]; then
+  echo "mqpar file ./$projname/mqpar/$filename.xml already exists. Aborting..." | tee -a log.txt
+  echo "deleting log-file"
+  rm ./log.txt
+  exit 1
+fi
+
+
 
 ########################
 # settings
@@ -51,25 +75,6 @@ echo "Project name: $projname" | tee -a log.txt
 echo "Version: $version" | tee -a log.txt
 echo "No. of runs: $runs" | tee -a log.txt
 
-#######################
-# check directories
-#######################
-echo "#####################################" | tee -a log.txt
-echo "check directories" | tee -a log.txt
-echo "#####################################" | tee -a log.txt
-folder=/proj/proteomics/
-if [ -d "$folder$projname" ]; then
-  # Take action if $DIR exists. #
-  cd $folder
-  echo "Project Folder {$folder$projname} exists. Continue" | tee -a log.txt
-  mkdir -p ./$projname/data ./$projname/mqpar ./$projname/results
-else
-  echo "Project Folder {$folder$projname} doesn't exists. Aborting..." | tee -a log.txt
-  exit 1
-fi
-
-
-
 #########################
 # activate maxquant
 #########################
@@ -79,11 +84,13 @@ echo "#####################################" | tee -a log.txt
 if [ $version = "new" ]
 then
 	echo "new version of maxquant is used"
+  source /apps/anaconda3/etc/profile.d/conda.sh
 	conda activate maxquant2
 	echo "Current conda environment is $CONDA_DEFAULT_ENV" | tee -a log.txt
 
 else
 	echo "old version of maxquant is used"
+  source /apps/anaconda3/etc/profile.d/conda.sh
 	conda activate maxquant
 	echo "Current conda environment is $CONDA_DEFAULT_ENV" | tee -a log.txt
 fi
@@ -114,18 +121,41 @@ echo "#####################################" | tee -a log.txt
 
 maxquant ./mqpar_tmp/$filename.xml --changeFolder ./$projname/mqpar/$filename.xml ./fasta ./$projname/data | tee -a log.txt
 
-#re-name fixed combine folder
-sed -i "/<fixedCombinedFolder>/c\   <fixedCombinedFolder>\/proj\/proteomics\/$projname\/results\/test<\/fixedCombinedFolder>" ./$projname/mqpar/$filename.xml
-echo "re-naming of combined folder sucessful" | tee -a log.txt
+START=1
+END=$runs
+ 
+for (( c=$START; c<=$END; c++ ))
+do
+    #re-name fixed combine folder
+    sed -i "/<fixedCombinedFolder>/c\   <fixedCombinedFolder>\/proj\/proteomics\/$projname\/results\/results_run$c\_$filename<\/fixedCombinedFolder>" ./$projname/mqpar/$filename.xml
+    echo "re-naming of combined folder sucessful" | tee -a log.txt
+    ###############################
+    # start maxquant
+    ###############################
+    echo "#####################################" | tee -a log.txt
+    echo "run maxquant | run no. $c" | tee -a log.txt
+    echo "#####################################" | tee -a log.txt
+    maxquant ./$projname/mqpar/$filename.xml | tee -a log.txt
+done
+
+
+
 
 
 ###############################
-# start maxquant
+# get run time
 ###############################
 echo "#####################################" | tee -a log.txt
-echo "run maxquant" | tee -a log.txt
+echo "runtime" | tee -a log.txt
 echo "#####################################" | tee -a log.txt
-maxquant ./$projname/mqpar/$filename.xml | tee -a log.txt
+#get runtime
+end=`date +%s`
+runtime=$((end-start))
+
+hours=$((runtime / 3600)); minutes=$(( (runtime % 3600) / 60 )); seconds=$(( (runtime % 3600) % 60 ))
+
+echo "Runtime: $hours:$minutes:$seconds (hh:mm:ss)" | tee -a log.txt
+
 
 
 ###############################
@@ -137,6 +167,7 @@ echo "#####################################" | tee -a log.txt
 
 
 #move logfile
-mv ./log.txt ./$projname 
+mv ./log.txt ./$projname/results/results_$filename.txt
 
 #remove mqpar_temp file
+mv ./mqpar_tmp/$filename.xml ./mqpar_tmp/done
