@@ -1,0 +1,827 @@
+---
+title: "DataAnalysis - Extracts Sequence 20220609 - UniProt Info"
+autor: David Lilek
+date: "`r format(Sys.time(), '%d %B %Y, %X')`"
+output:
+  html_document:
+    df_print: paged
+    fig.align: center
+    self_contained: yes
+    fig.height: 4
+    fig.width: 8
+    theme: united
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    number_sections: yes
+    code_folding: hide
+---
+
+# Load data from day1&day2
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+# get results
+# load libraries
+library(tidyverse)
+library(dplyr)
+library(pheatmap)
+library(gplots)
+library(UpSetR)
+library(knitr)
+library(ggvenn)
+library(VennDiagram)
+library(UniprotR)
+# load functions
+filtering <- function(data_raw){
+  data_raw %>% dplyr::filter( 
+    Potential.contaminant == "",
+    Reverse == "",
+    Only.identified.by.site == "")
+}
+
+###############################
+#
+#define settings
+#
+###############################
+
+GET_SAMPLE_NAMES <- TRUE # if set to FALSE define it in the next line
+#sample_names_user <- c()
+
+unique <- 2  # how many peptides should be at least necessary to identify a protein
+
+# which types should be evaluated TRUE or FALSE could be used
+RAZOR <- TRUE
+UNIQUE <- TRUE 
+LFQ <- TRUE 
+
+# save files | options
+# FALSE - results are not saved
+# "RDS" - save results into R data file format
+# "CSV" - save results into a csv file
+SAVE <- "FALSE"
+
+
+######################## extract1
+
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/5_20220609_TR/20220609_FH_TR_extracts/"
+
+########## read in all data with pattern .txt
+# get file list
+file.list <- list.files(path = path, pattern='*.txt')
+# create file path
+file.path <- paste(path,file.list,sep = "")
+# read in files - for each file one variable is created - results are stored in a list
+res_raw <- lapply(file.path, read.delim)
+names(res_raw) <- file.list
+
+########## get sample names
+if (GET_SAMPLE_NAMES == TRUE){
+  #get sample names
+  tmp <- colnames(res_raw[[1]])
+  tmp <- tmp[grep("Razor...unique.peptides.",tmp)]
+  tmp <- sub(".*Razor...unique.peptides.", "",tmp)
+  sample_names_raw <- tmp
+  rm(tmp)
+  #create sample names
+  sample_names_razor <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
+  sample_names_unique <- paste("Unique.peptides.",sample_names_raw, sep="")
+  sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
+} else {
+  for (i in 1:length(file.list)){
+    # rename columns
+    res_raw[[i]] <- res_raw[[i]] %>%
+      rename_with(~ paste("Razor_", sample_names_user, sep = ""),
+                  starts_with("Razor...unique.peptides.")) %>%
+      rename_with(~ paste("Unique_", sample_names_user, sep = ""),
+                  starts_with("Unique.peptides.")) %>%
+      rename_with(~ paste("LFQ_", sample_names_user, sep = ""),
+                  starts_with("LFQ.intensity."))
+    # get column names
+    sample_names_razor <- colnames(res_raw[[i]][grep("Razor_",
+                                                     colnames(res_raw[[i]]))])
+    sample_names_unique <- colnames(res_raw[[i]][grep("Unique_",
+                                                      colnames(res_raw[[i]]))])
+    sample_names_lfq <- colnames(res_raw[[i]][grep("LFQ_",
+                                                   colnames(res_raw[[i]]))])
+  }
+}
+
+########## create result data frame & result lists
+# create data frame for razor
+results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_razor), nrow = length(file.list)))
+row.names(results_2gether_razor) <- file.list
+colnames(results_2gether_razor) <- sample_names_razor
+#create data frame for unique
+results_2gether_unique <- data.frame(matrix(ncol = length(sample_names_unique), nrow = length(file.list)))
+row.names(results_2gether_unique) <- file.list
+colnames(results_2gether_unique) <- sample_names_unique
+#create data frame for lfq
+results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_lfq), nrow = length(file.list)))
+row.names(results_2gether_lfq) <- file.list
+colnames(results_2gether_lfq) <- sample_names_lfq
+
+#results lists
+results_razor <- list()
+results_unique <- list()
+results_lfq <- list()
+
+########## perform evaluation
+if (RAZOR == TRUE) {
+  cat("\n")
+  cat("##","Razor","\n")
+  cat("\n")
+  for (x in file.list){
+    cat("\n")
+    cat("###",substring(x, 1, nchar(x)-4),"\n")
+    data_raw <- as.data.frame(res_raw[[x]])
+    data <- filtering(data_raw)
+    results <- data.frame(matrix(ncol = length(sample_names_razor), nrow = nrow(data)))
+    colnames(results) <- sample_names_razor
+    i <- 0
+    for (i in 1:length(sample_names_razor)){
+      name <- sample_names_razor[i]
+      tmp <- (data[name] >= unique)
+      results[i] <- tmp
+      cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+    }
+    results_razor[[x]] <- results
+    results_2gether_razor[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+    cat("\n")
+  }
+}
+
+if (UNIQUE == TRUE) {
+  cat("\n")
+  cat("##","Unique","\n")
+  cat("\n")
+  for (x in file.list){
+    cat("\n")
+    cat("###",substring(x, 1, nchar(x)-4),"\n")
+    data_raw <- as.data.frame(res_raw[[x]])
+    data <- filtering(data_raw)
+    results <- data.frame(matrix(ncol = length(sample_names_unique), nrow = nrow(data)))
+    colnames(results) <- sample_names_unique
+    i <- 0
+    for (i in 1:length(sample_names_unique)){
+      name <- sample_names_unique[i]
+      tmp <- (data[name] >= unique)
+      results[i] <- tmp
+      cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+    }
+    results_unique[[x]] <- results
+    results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+    cat("\n")
+  }
+}
+
+if (LFQ == TRUE) {
+  cat("\n")
+  cat("##","LFQ","\n")
+  cat("\n")
+  for (x in file.list){
+    cat("\n")
+    cat("###",substring(x, 1, nchar(x)-4),"\n")
+    data_raw <- as.data.frame(res_raw[[x]])
+    data <- filtering(data_raw)
+    
+    results <- data.frame(matrix(ncol = length(sample_names_lfq), nrow = nrow(data)))
+    colnames(results) <- sample_names_lfq
+    i <- 0
+    for (i in 1:length(sample_names_lfq)){
+      name <- sample_names_lfq[i]
+      tmp <- log2(data[name])
+      tmp[tmp == -Inf] <- NA
+      results[i] <- tmp
+      cat(name,"<br/>",sum(!is.na(tmp)),"<br/>")
+      
+    }
+    
+    results_lfq[[x]] <- results
+    results_2gether_lfq[x,] <- sapply(results,function(x)sum(!is.na(x)))
+    cat("\n")
+    
+    #create heatmaps
+    paletteLength <- 50
+    myColor <- colorRampPalette(c("navy", "white",  "firebrick3"))(paletteLength)
+    lfq4pheatmap <- results
+    if (ncol(lfq4pheatmap) < 2){
+      cat("\n")
+      cat("##"," No heatmap possible. Too less columns in the result table.","\n")
+    } else {
+      lfq4pheatmap[is.na(lfq4pheatmap)] <- 0
+      pheatmap(lfq4pheatmap,
+               color = myColor,
+               treeheight_row = 10,
+               angle_col ="45",
+               treeheight_col = 10,
+               legend = TRUE,
+               labels_row = rep("",nrow(lfq4pheatmap)))
+      cat("\n")
+    }
+  }
+}
+
+protein_day1 <- data$Fasta.headers
+
+
+######################## extract2
+
+path = "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/5_20220609_TR/20220609_FH_TR_extracts_day2/"
+
+########## read in all data with pattern .txt
+# get file list
+file.list <- list.files(path = path, pattern='*.txt')
+# create file path
+file.path <- paste(path,file.list,sep = "")
+# read in files - for each file one variable is created - results are stored in a list
+res_raw <- lapply(file.path, read.delim)
+names(res_raw) <- file.list
+
+########## get sample names
+if (GET_SAMPLE_NAMES == TRUE){
+  #get sample names
+  tmp <- colnames(res_raw[[1]])
+  tmp <- tmp[grep("Razor...unique.peptides.",tmp)]
+  tmp <- sub(".*Razor...unique.peptides.", "",tmp)
+  sample_names_raw <- tmp
+  rm(tmp)
+  #create sample names
+  sample_names_razor <- paste("Razor...unique.peptides.",sample_names_raw, sep="")
+  sample_names_unique <- paste("Unique.peptides.",sample_names_raw, sep="")
+  sample_names_lfq <- paste("LFQ.intensity.",sample_names_raw, sep="")
+} else {
+  for (i in 1:length(file.list)){
+    # rename columns
+    res_raw[[i]] <- res_raw[[i]] %>%
+      rename_with(~ paste("Razor_", sample_names_user, sep = ""),
+                  starts_with("Razor...unique.peptides.")) %>%
+      rename_with(~ paste("Unique_", sample_names_user, sep = ""),
+                  starts_with("Unique.peptides.")) %>%
+      rename_with(~ paste("LFQ_", sample_names_user, sep = ""),
+                  starts_with("LFQ.intensity."))
+    # get column names
+    sample_names_razor <- colnames(res_raw[[i]][grep("Razor_",
+                                                     colnames(res_raw[[i]]))])
+    sample_names_unique <- colnames(res_raw[[i]][grep("Unique_",
+                                                      colnames(res_raw[[i]]))])
+    sample_names_lfq <- colnames(res_raw[[i]][grep("LFQ_",
+                                                   colnames(res_raw[[i]]))])
+  }
+}
+
+########## create result data frame & result lists
+# create data frame for razor
+results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_razor), nrow = length(file.list)))
+row.names(results_2gether_razor) <- file.list
+colnames(results_2gether_razor) <- sample_names_razor
+#create data frame for unique
+results_2gether_unique <- data.frame(matrix(ncol = length(sample_names_unique), nrow = length(file.list)))
+row.names(results_2gether_unique) <- file.list
+colnames(results_2gether_unique) <- sample_names_unique
+#create data frame for lfq
+results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_lfq), nrow = length(file.list)))
+row.names(results_2gether_lfq) <- file.list
+colnames(results_2gether_lfq) <- sample_names_lfq
+
+########## perform evaluation
+if (RAZOR == TRUE) {
+  cat("\n")
+  cat("##","Razor","\n")
+  cat("\n")
+  for (x in file.list){
+    cat("\n")
+    cat("###",substring(x, 1, nchar(x)-4),"\n")
+    data_raw <- as.data.frame(res_raw[[x]])
+    data <- filtering(data_raw)
+    results <- data.frame(matrix(ncol = length(sample_names_razor), nrow = nrow(data)))
+    colnames(results) <- sample_names_razor
+    i <- 0
+    for (i in 1:length(sample_names_razor)){
+      name <- sample_names_razor[i]
+      tmp <- (data[name] >= unique)
+      results[i] <- tmp
+      cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+    }
+    results_razor[[2]] <- results
+    results_2gether_razor[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+    cat("\n")
+  }
+}
+
+if (UNIQUE == TRUE) {
+  cat("\n")
+  cat("##","Unique","\n")
+  cat("\n")
+  for (x in file.list){
+    cat("\n")
+    cat("###",substring(x, 1, nchar(x)-4),"\n")
+    data_raw <- as.data.frame(res_raw[[x]])
+    data <- filtering(data_raw)
+    results <- data.frame(matrix(ncol = length(sample_names_unique), nrow = nrow(data)))
+    colnames(results) <- sample_names_unique
+    i <- 0
+    for (i in 1:length(sample_names_unique)){
+      name <- sample_names_unique[i]
+      tmp <- (data[name] >= unique)
+      results[i] <- tmp
+      cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
+    }
+    results_unique[[2]] <- results
+    results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+    cat("\n")
+  }
+}
+
+if (LFQ == TRUE) {
+  cat("\n")
+  cat("##","LFQ","\n")
+  cat("\n")
+  for (x in file.list){
+    cat("\n")
+    cat("###",substring(x, 1, nchar(x)-4),"\n")
+    data_raw <- as.data.frame(res_raw[[x]])
+    data <- filtering(data_raw)
+    
+    results <- data.frame(matrix(ncol = length(sample_names_lfq), nrow = nrow(data)))
+    colnames(results) <- sample_names_lfq
+    i <- 0
+    for (i in 1:length(sample_names_lfq)){
+      name <- sample_names_lfq[i]
+      tmp <- log2(data[name])
+      tmp[tmp == -Inf] <- NA
+      results[i] <- tmp
+      cat(name,"<br/>",sum(!is.na(tmp)),"<br/>")
+      
+    }
+    
+    results_lfq[[2]] <- results
+    results_2gether_lfq[x,] <- sapply(results,function(x)sum(!is.na(x)))
+    cat("\n")
+    
+    #create heatmaps
+    paletteLength <- 50
+    myColor <- colorRampPalette(c("navy", "white",  "firebrick3"))(paletteLength)
+    lfq4pheatmap <- results
+    if (ncol(lfq4pheatmap) < 2){
+      cat("\n")
+      cat("##"," No heatmap possible. Too less columns in the result table.","\n")
+    } else {
+      lfq4pheatmap[is.na(lfq4pheatmap)] <- 0
+      pheatmap(lfq4pheatmap,
+               color = myColor,
+               treeheight_row = 10,
+               angle_col ="45",
+               treeheight_col = 10,
+               legend = TRUE,
+               labels_row = rep("",nrow(lfq4pheatmap)))
+      cat("\n")
+    }
+  }
+}
+
+protein_day2 <- data$Fasta.headers
+
+
+```
+
+# Compare unique proteins B and Pool
+```{r}
+day1 <- data.frame(results_unique[[1]])
+day1$proteins <- protein_day1
+
+day2 <- data.frame(results_unique[[2]])
+day2$proteins <- protein_day2
+
+results_2gether <- merge(day1, day2,
+      all = TRUE,
+      by = "proteins")
+
+AF <- dplyr::select(results_2gether, contains("AF"))
+#get rid of FALSE values
+AF <- AF*1
+AF[AF==0] <- NA
+ind <- apply(AF, 1, function(x) all(is.na(x)))
+
+AF <- which(!ind)
+B <- dplyr::select(results_2gether, contains("B"))
+B <- B*1
+B[B==0] <- NA
+ind <- apply(B, 1, function(x) all(is.na(x)))
+
+B <- which(!ind)
+TF <- dplyr::select(results_2gether, contains("TF"))
+TF <- dplyr::select(results_2gether, contains("TF"))
+TF <- TF*1
+TF[TF==0] <- NA
+ind <- apply(TF, 1, function(x) all(is.na(x)))
+
+TF <- which(!ind)
+POOL <- dplyr::select(results_2gether, contains("Pool"))
+POOL[POOL==0] <- NA
+ind <- apply(POOL, 1, function(x) all(is.na(x)))
+POOL <- which(!ind)
+
+
+lst <- list(B = as.double(B),
+            POOL = as.double(POOL))
+
+
+ggvenn(lst,
+       fill_color = c("#0073C2FF", "#EFC000FF"),
+       stroke_size = 1, set_name_size = 7, text_size = 3)
+upset(fromList(lst), order.by = "freq", nsets = 10,  keep.order = TRUE)
+
+```
+
+# Get protein functions for proteins
+
+* Functions are shortened in the plots because  they are quite long
+* a table with the whole function name is provided after each plot
+```{r message=FALSE, warning=FALSE}
+library(reshape)
+library(ggplot2)
+library(dplyr)
+library(knitr)
+GO <- readRDS("GO.rds")
+#GeneOntologyObj$Gene.ontology..biological.process.
+#GeneOntologyObj$Gene.ontology..molecular.function.
+#GeneOntologyObj$Gene.ontology..cellular.component
+
+################################# Biological process
+
+t_BP <- as.data.frame(table(GO[[1]]$Gene.ontology..biological.process.))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_1 <- t_BP_sorted[c(1:10),]
+t_BP <- as.data.frame(table(GO[[2]]$Gene.ontology..biological.process.))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_2 <- t_BP_sorted[c(1:10),]
+t_BP <- as.data.frame(table(GO[[3]]$Gene.ontology..biological.process.))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_3 <- t_BP_sorted[c(1:10),]
+
+BP <- merge(t_BP_sorted_1, t_BP_sorted_2,
+            all = TRUE,
+            by = "Var1")
+
+BP <- merge(BP, t_BP_sorted_3,
+            all = TRUE,
+            by = "Var1")
+
+colnames(BP) <- c("Function", "Pool", "B&Pool", "B")
+
+BP_4ggplot <- melt(BP)
+
+BP_4ggplot$Function_short <- substr(BP_4ggplot$Function,1,15)
+
+ggplot(BP_4ggplot, aes(x=Function_short, y=value, fill=variable)) +
+  geom_bar(stat='identity', position='dodge') +
+  theme_minimal() +
+  scale_fill_brewer(palette="Dark2") +
+  theme(legend.position="bottom") +
+  theme(legend.key.size = unit(0.15, 'cm')) +
+  guides(fill=guide_legend(nrow=2, byrow=TRUE)) +
+  ylab("Counts") +
+  labs(fill = "Proteins") +
+  ggtitle("Biological processes") +
+  coord_flip()
+#theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size =8))+
+kable(BP_4ggplot$Function)
+
+################################# Molecular Function
+
+t_BP <- as.data.frame(table(GO[[1]]$Gene.ontology..molecular.function.))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_1 <- t_BP_sorted[c(1:10),]
+t_BP <- as.data.frame(table(GO[[2]]$Gene.ontology..molecular.function.))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_2 <- t_BP_sorted[c(1:10),]
+t_BP <- as.data.frame(table(GO[[3]]$Gene.ontology..molecular.function.))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_3 <- t_BP_sorted[c(1:10),]
+
+BP <- merge(t_BP_sorted_1, t_BP_sorted_2,
+            all = TRUE,
+            by = "Var1")
+
+BP <- merge(BP, t_BP_sorted_3,
+            all = TRUE,
+            by = "Var1")
+
+colnames(BP) <- c("Function", "Pool", "B&Pool", "B")
+
+BP_4ggplot <- melt(BP)
+
+BP_4ggplot$Function_short <- substr(BP_4ggplot$Function,1,15)
+
+ggplot(BP_4ggplot, aes(x=Function_short, y=value, fill=variable)) +
+  geom_bar(stat='identity', position='dodge') +
+  theme_minimal() +
+  scale_fill_brewer(palette="Dark2") +
+  theme(legend.position="bottom") +
+  theme(legend.key.size = unit(0.15, 'cm')) +
+  guides(fill=guide_legend(nrow=2, byrow=TRUE)) +
+  ylab("Counts") +
+  labs(fill = "Proteins") +
+  ggtitle("Molecular Function")+
+  coord_flip()
+kable(BP_4ggplot$Function)
+################################# Cellular component
+
+t_BP <- as.data.frame(table(GO[[1]]$Gene.ontology..cellular.component))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_1 <- t_BP_sorted[c(1:10),]
+t_BP <- as.data.frame(table(GO[[2]]$Gene.ontology..cellular.component))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_2 <- t_BP_sorted[c(1:10),]
+t_BP <- as.data.frame(table(GO[[3]]$Gene.ontology..cellular.component))
+t_BP_sorted <- arrange(t_BP, desc(Freq))
+t_BP_sorted_3 <- t_BP_sorted[c(1:10),]
+
+BP <- merge(t_BP_sorted_1, t_BP_sorted_2,
+            all = TRUE,
+            by = "Var1")
+
+BP <- merge(BP, t_BP_sorted_3,
+            all = TRUE,
+            by = "Var1")
+
+colnames(BP) <- c("Function", "Pool", "B&Pool", "B")
+
+BP_4ggplot <- melt(BP)
+
+BP_4ggplot$Function_short <- substr(BP_4ggplot$Function,1,15)
+
+ggplot(BP_4ggplot, aes(x=Function_short, y=value, fill=variable)) +
+  geom_bar(stat='identity', position='dodge') +
+  theme_minimal() +
+  scale_fill_brewer(palette="Dark2") +
+  theme(legend.position="bottom") +
+  theme(legend.key.size = unit(0.15, 'cm')) +
+  guides(fill=guide_legend(nrow=2, byrow=TRUE)) +
+  ylab("Counts") +
+  labs(fill = "Proteins") +
+  ggtitle("Cellular component")+
+  coord_flip()
+kable(BP_4ggplot$Function)
+```
+
+
+
+# Old code
+
+```{r eval=FALSE, include=FALSE, results='asis'}
+ cat("\n")
+  cat("##","Unique","\n")
+  cat("\n")
+day1 <- data.frame(results_unique[[1]])
+day1$proteins <- protein_day1
+
+day2 <- data.frame(results_unique[[2]])
+day2$proteins <- protein_day2
+
+results_2gether <- merge(day1, day2,
+      all = TRUE,
+      by = "proteins")
+
+AF <- dplyr::select(results_2gether, contains("AF"))
+#get rid of FALSE values
+AF <- AF*1
+AF[AF==0] <- NA
+ind <- apply(AF, 1, function(x) all(is.na(x)))
+
+AF <- which(!ind)
+B <- dplyr::select(results_2gether, contains("B"))
+B <- B*1
+B[B==0] <- NA
+ind <- apply(B, 1, function(x) all(is.na(x)))
+
+B <- which(!ind)
+TF <- dplyr::select(results_2gether, contains("TF"))
+TF <- dplyr::select(results_2gether, contains("TF"))
+TF <- TF*1
+TF[TF==0] <- NA
+ind <- apply(TF, 1, function(x) all(is.na(x)))
+
+TF <- which(!ind)
+POOL <- dplyr::select(results_2gether, contains("Pool"))
+POOL[POOL==0] <- NA
+ind <- apply(POOL, 1, function(x) all(is.na(x)))
+POOL <- which(!ind)
+# combine to list
+lst <- list(AF = as.double(AF),
+            B = as.double(B),
+            TF = as.double(TF))
+
+ cat("\n")
+  cat("###","AF vs B vs TF","\n")
+  cat("\n")
+  
+ggvenn(lst,
+       fill_color = c("#0073C2FF", "#EFC000FF", "#868686FF"),
+       stroke_size = 1, set_name_size = 7, text_size = 3)
+upset(fromList(lst), order.by = "freq", nsets = 10,  keep.order = TRUE)
+
+
+
+lst <- list(AF = as.double(AF),
+            B = as.double(B),
+            TF = as.double(TF),
+            POOL = as.double(POOL))
+
+ cat("\n")
+  cat("###","AF vs B vs TF vs POOL","\n")
+  cat("\n")
+  
+ggvenn(lst,
+       fill_color = c("#0073C2FF", "#EFC000FF", "#868686FF","#CD534CFF"),
+       stroke_size = 1, set_name_size = 7, text_size = 3)
+upset(fromList(lst), order.by = "freq", nsets = 10,  keep.order = TRUE)
+
+
+lst <- list(B = as.double(B),
+            POOL = as.double(POOL))
+
+ cat("\n")
+  cat("###","B vs Pool","\n")
+  cat("\n")
+  
+ggvenn(lst,
+       fill_color = c("#0073C2FF", "#EFC000FF"),
+       stroke_size = 1, set_name_size = 7, text_size = 3)
+upset(fromList(lst), order.by = "freq", nsets = 10,  keep.order = TRUE)
+
+
+# first get number of elements in each intersection
+ItemsList <- venn(lst, show.plot = FALSE)
+groups <- lengths(attributes(ItemsList)$intersections)
+groups_sorted <- sort(groups)
+# get proteins
+overlap <- calculate.overlap(lst)
+# sort list of lists
+len <- sapply(overlap, length)
+overlap_sorted <- overlap[order(len)]
+# rename overlap_sorted
+names(overlap_sorted) <- names(groups_sorted)
+GO <- list()
+i=0
+for (i in 1:3){
+print(names(overlap_sorted)[i])
+  #get fasta information
+fasta <- results_2gether$proteins[overlap_sorted[[i]]]
+# extract identifier for uniprot
+fasta <- as.data.frame(stringr::str_split(fasta, '\\|', simplify = T))
+fasta <- fasta$V2
+Accessions <- fasta
+#Get Gene ontolgy Information 
+GeneOntologyObj <- GetProteinGOInfo(Accessions) 
+GO[[i]] <- GeneOntologyObj
+#Handycc visualization for publications 
+PlotGOAll(GOObj = GeneOntologyObj, Top = 10, width = 8, height = 5)
+}
+
+
+
+
+
+
+
+
+ cat("\n")
+  cat("##","LFQ","\n")
+  cat("\n")
+day1 <- data.frame(results_lfq[[1]])
+day1$proteins <- protein_day1
+
+day2 <- data.frame(results_lfq[[2]])
+day2$proteins <- protein_day2
+
+results_2gether <- merge(day1, day2,
+      all = TRUE,
+      by = "proteins")
+
+results_2gether <- merge(day1, day2,
+      all = TRUE,
+      by = "proteins")
+
+AF <- dplyr::select(results_2gether, contains("AF"))
+#get rid of FALSE values
+AF <- AF*1
+AF[AF==0] <- NA
+ind <- apply(AF, 1, function(x) all(is.na(x)))
+print("AF total proteins")
+sum(!ind, na.rm = TRUE)
+AF <- which(!ind)
+B <- dplyr::select(results_2gether, contains("B"))
+B <- B*1
+B[B==0] <- NA
+ind <- apply(B, 1, function(x) all(is.na(x)))
+print("B total proteins")
+sum(!ind, na.rm = TRUE)
+B <- which(!ind)
+TF <- dplyr::select(results_2gether, contains("TF"))
+TF <- dplyr::select(results_2gether, contains("TF"))
+TF <- TF*1
+TF[TF==0] <- NA
+ind <- apply(TF, 1, function(x) all(is.na(x)))
+print("TF total proteins")
+sum(!ind, na.rm = TRUE)
+TF <- which(!ind)
+POOL <- dplyr::select(results_2gether, contains("Pool"))
+POOL[POOL==0] <- NA
+ind <- apply(POOL, 1, function(x) all(is.na(x)))
+print("POOL total proteins")
+sum(!ind, na.rm = TRUE)
+POOL <- which(!ind)
+# combine to list
+lst <- list(AF = as.double(AF),
+            B = as.double(B),
+            TF = as.double(TF))
+ cat("\n")
+  cat("###","AF vs B vs TF","\n")
+  cat("\n")
+  
+ggvenn(lst,
+       fill_color = c("#0073C2FF", "#EFC000FF", "#868686FF"),
+       stroke_size = 1, set_name_size = 7, text_size = 3)
+upset(fromList(lst), order.by = "freq", nsets = 10,  keep.order = TRUE)
+
+
+
+
+
+lst <- list(AF = as.double(AF),
+            B = as.double(B),
+            TF = as.double(TF),
+            POOL = as.double(POOL))
+
+ cat("\n")
+  cat("###","AF vs B vs TF vs Pool","\n")
+  cat("\n")
+  
+  
+ggvenn(lst,
+       fill_color = c("#0073C2FF", "#EFC000FF", "#868686FF","#CD534CFF"),
+       stroke_size = 1, set_name_size = 7, text_size = 3)
+upset(fromList(lst), order.by = "freq", nsets = 10,  keep.order = TRUE)
+
+
+lst <- list(B = as.double(B),
+            POOL = as.double(POOL))
+
+ cat("\n")
+  cat("###","B vs Pool","\n")
+  cat("\n")
+  
+  
+ggvenn(lst,
+       fill_color = c("#0073C2FF", "#EFC000FF"),
+       stroke_size = 1, set_name_size = 7, text_size = 3)
+upset(fromList(lst), order.by = "freq", nsets = 10,  keep.order = TRUE)
+
+# first get number of elements in each intersection
+ItemsList <- venn(lst, show.plot = FALSE)
+groups <- lengths(attributes(ItemsList)$intersections)
+groups_sorted <- sort(groups)
+# get proteins
+overlap <- calculate.overlap(lst)
+# sort list of lists
+len <- sapply(overlap, length)
+overlap_sorted <- overlap[order(len)]
+# rename overlap_sorted
+names(overlap_sorted) <- names(groups_sorted)
+
+i=0
+for (i in 1:3){
+ print(names(overlap_sorted)[i])
+  #get fasta information
+fasta <- results_2gether$proteins[overlap_sorted[[i]]]
+# extract identifier for uniprot
+fasta <- as.data.frame(stringr::str_split(fasta, '\\|', simplify = T))
+fasta <- fasta$V2
+Accessions <- fasta
+#Get Gene ontolgy Information 
+GeneOntologyObj <- GetProteinGOInfo(Accessions) 
+#Handy visualization for publications 
+PlotGOAll(GOObj = GeneOntologyObj, Top = 10, width = 8, height = 5)
+}
+
+```
+
+
+
+# get proteins overlap
+ https://stackoverflow.com/questions/23559371/get-the-list-of-items-in-venn-diagram
+
+# first get number of elements in each intersection
+ItemsList <- venn(lst, show.plot = FALSE)
+groups <- lengths(attributes(ItemsList)$intersections)
+groups_sorted <- sort(groups)
+# get proteins
+overlap <- calculate.overlap(lst)
+# sort list of lists
+len <- sapply(overlap, length)
+overlap_sorted <- overlap[order(len)]
+# rename overlap_sorted
+names(overlap_sorted) <- names(groups_sorted)

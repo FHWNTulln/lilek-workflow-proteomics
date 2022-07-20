@@ -1,7 +1,19 @@
 #!/bin/bash
+
+# bash script for the comparison of fasta file using different download option
+#
+#
+#
+
+
+
 # for human files 
+# files one to four can be found in the folder human
+# can also applied to tribolium castaneum (TC) fasta
 
 # compare fasta method on and two
+# the number of all proteins (>) sp proteins and tr proteins are counted 
+# additionally the files are sorted 
 grep -F ">" one.fasta | wc -l
 grep -F ">" two.fasta | wc -l
 grep -F ">sp" one.fasta | wc -l
@@ -12,7 +24,7 @@ grep -F ">" one.fasta | cut -c 5- | sort | tee one.sorted.txt >/dev/null
 grep -F ">" two.fasta | cut -c 5- | sort | tee two.sorted.txt >/dev/null
 diff -u one.sorted.txt two.sorted.txt 
 
-# compare human fasta new (one) to old one from * uniprot-proteome:UP000005640: S:\Diplomanden\NFB-Projekt2_Maisl\210111 QC copied @220420 from here
+# compare human fasta new (one) downloaded at 220420 to old one (downloaded 4 years earlier)
 grep -F ">" uniprot-proteomeUP000005640.fasta | wc -l
 grep -F ">sp" uniprot-proteomeUP000005640.fasta | wc -l
 grep -F ">tr" uniprot-proteomeUP000005640.fasta | wc -l
@@ -28,6 +40,7 @@ grep -F ">tr" four.fasta | wc -l
 diff -u ./three.fasta ./four.fasta
 
 # compare three and five
+# additionally to the sum of total, sp and tr proteins the FASTA header starting with the accession number are compared
 grep -F ">" three.fasta | wc -l
 grep -F ">sp" three.fasta | wc -l
 grep -F ">tr" three.fasta | wc -l
@@ -43,6 +56,7 @@ grep -F ">sp" five.fasta | cut -c 5- | sort | tee five.sp.txt >/dev/null
 # + : It indicates a line in the second file that needs to be added to the first file to make them identical. 
 # – : It indicates a line in the first file that needs to be deleted to make them identical. 
 
+# get differences between three and five
 diff -u three.sp.txt five.sp.txt | tee diff.three.five.txt >/dev/null
 
 grep "^+" diff.three.five.txt | wc -l
