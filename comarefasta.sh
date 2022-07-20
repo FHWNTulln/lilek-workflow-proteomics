@@ -1,15 +1,17 @@
 #!/bin/bash
 
-# bash script for the comparison of fasta file using different download option
-#
-#
-#
+# bash script for the comparison of fasta file using different download option at uniprot kb
+# this file can be found adapted also as run.sh file in the respective folder
+# the options are explained for homo sapiens (human)
+# option1: use advanced search to search e.g. "Homo sapiens (Human) [9606]" then select the proteome and then use the download button
+# option2: use proteome database https://www.uniprot.org/proteomes/UP000005640%20 | next Download protein entries from all 26 components was used for downloading
+# option3: as above but use Download one protein sequence per gene (FASTA) for downloading
+# option4: use FTP server for download https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/reference_proteomes/
+Eukaryota/UP000005640/
 
 
 
-# for human files 
-# files one to four can be found in the folder human
-# can also applied to tribolium castaneum (TC) fasta
+# example human fasta files
 
 # compare fasta method on and two
 # the number of all proteins (>) sp proteins and tr proteins are counted 
