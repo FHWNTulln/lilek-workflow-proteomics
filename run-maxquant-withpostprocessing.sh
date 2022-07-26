@@ -144,14 +144,15 @@ done
 ###############################
 # post-processing
 ###############################
-if [ $R ==  "yes" ]; then
-echo "#####################################" | tee -a log.txt
-echo "post-processing R" | tee -a log.txt
-echo "#####################################" | tee -a log.txt
-path="/proj/proteomics/testR/proteinGroups.txt"
-#path=".\/$projname\/results\/results_run$c\_$filename\/combined\/txt\/proteinGroups.txt"
-Rscript ./bin/workflow-proteomics/run-R.R $path
-echo "post-processing R sucessful" | tee -a log.txt
+if [ $R ==  "yes" ] && [[ $runs == 1 ]]; then
+    echo "#####################################" | tee -a log.txt
+    echo "post-processing R" | tee -a log.txt
+    echo "#####################################" | tee -a log.txt
+    mkdir -p ./$projname/evaluation
+    path="/proj/proteomics/testR"
+    #path=".\/$projname\/results\/results_run$c\_$filename"
+    Rscript ./bin/run-R.R $path
+    echo "post-processing R sucessful" | tee -a log.txt
 fi
 
 ###############################

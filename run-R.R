@@ -11,10 +11,11 @@ print(args)
 pth <- args[6]
 
 if (grepl("QC", pth, ignore.case = TRUE)){
-  rmarkdown::render("/proj/proteomics/bin/workflow-proteomics/post-processing.Rmd", run_pandoc = FALSE,
-       params = list(
-         path = pth
-       ))
+  rmarkdown::render("/proj/proteomics/bin/workflow-proteomics/post-processing-QC.Rmd", run_pandoc = FALSE,
+                    params = list(
+                      path = paste(pth,"/combined/txt/proteinGroups.txt",sep="")))
+} else {
+  rmarkdown::render("/proj/proteomics/bin/post-processing-4-automated-dataanalysis.Rmd", run_pandoc = FALSE,
+                    params = list(
+                      path = paste(pth,"/combined/txt/proteinGroups.txt",sep="")))
 }
-
-
