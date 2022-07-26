@@ -33,6 +33,7 @@ Help()
    echo
 }
 
+# pre-settings for variables
 version="new"
 runs=1
 R="no"

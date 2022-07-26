@@ -9,7 +9,7 @@ function cleanup()
 	echo "/proj/proteomics/$projname/mqpar/$filename.xml"
 	rm -f "/proj/proteomics/log.txt"
 	rm -f "/proj/proteomics/$projname/mqpar/$filename.xml"
-	rm -rf "/proj/proteomics/$projname/results/results_run$c_$filename/"
+	rm -rf "/proj/proteomics/$projname/results/results_run$runs_$filename"
 }
 
 trap cleanup ERR
@@ -171,16 +171,14 @@ if [ $R ==  "yes" ] && [[ $runs == 1 ]]; then
     echo "#####################################" | tee -a log.txt
     echo "post-processing R" | tee -a log.txt
     echo "#####################################" | tee -a log.txt
-    #mkdir -p ./$projname/evaluation
+    mkdir -p ./$projname/evaluation
     #path="/proj/proteomics/testR"
-    #echo "proj/proteomics/$projname/results/results_run$c_$filename"
-    #echo "proj/proteomics/$projname/results/results_run$c_$filename"
-    path="proj/proteomics/$projname/results/results_run$c_$filename"
+    path="/proj/proteomics/$projname/results/results\_run$runs\_$filename"
     Rscript ./bin/run-R.R $path
     #move log-file
-    #mv ./$projname/results/results_run$c_$filename/XXX.md ./$projname/evaluation/XXX.md
+    mv ./$projname/results/results\_run$runs\_$filename/post-processing-QC_files ./$projname/evaluation/post-processing-QC_files
     echo "post-processing R sucessful" | tee -a log.txt
-    echo "result file: ./$projname/evaluation/XXX.md" | tee -a log.txt
+    #echo "result file: ./$projname/evaluation/XXX.md" | tee -a log.txt
 fi
 
 ###############################
