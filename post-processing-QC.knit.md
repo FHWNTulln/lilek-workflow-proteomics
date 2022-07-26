@@ -24,7 +24,7 @@ params:
     value: "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/11_20220713_TR/mqpar_20220713_QC/proteinGroups.txt"
 title: "DataAnalysis - Postprocessing Results MaxQuant QC samples"
 author: ""
-date: "26 July 2022, 04:20:50 PM"
+date: "26 July 2022, 05:34:59 PM"
 ---
 
 
@@ -88,7 +88,7 @@ print(m)
 ```
 
 ```
-## [1] 1287.333
+## [1] 1303.333
 ```
 
 ## More than 2 peptides 
@@ -119,6 +119,6 @@ print(m)
 ```
 
 ```
-## [1] 849.6667
+## [1] 863
 ```
 

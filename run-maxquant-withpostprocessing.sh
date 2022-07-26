@@ -176,7 +176,7 @@ if [ $R ==  "yes" ] && [[ $runs == 1 ]]; then
     path="/proj/proteomics/$projname/results/results\_run$runs\_$filename"
     Rscript ./bin/run-R.R $path
     #move log-file
-    mv ./$projname/results/results\_run$runs\_$filename/post-processing-QC_files ./$projname/evaluation/post-processing-QC_files
+    mv -f ./$projname/results/results\_run$runs\_$filename/post-processing-QC_files ./$projname/evaluation/post-processing-QC_files
     echo "post-processing R sucessful" | tee -a log.txt
     echo "result file: ./$projname/evaluation/post-processing-QC_files" | tee -a log.txt
 fi
