@@ -178,7 +178,7 @@ if [ $R ==  "yes" ] && [[ $runs == 1 ]]; then
     #move log-file
     mv ./$projname/results/results\_run$runs\_$filename/post-processing-QC_files ./$projname/evaluation/post-processing-QC_files
     echo "post-processing R sucessful" | tee -a log.txt
-    #echo "result file: ./$projname/evaluation/XXX.md" | tee -a log.txt
+    echo "result file: ./$projname/evaluation/post-processing-QC_files" | tee -a log.txt
 fi
 
 ###############################
