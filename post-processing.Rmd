@@ -226,7 +226,7 @@ if (RAZOR == TRUE) {
     cat("\n")
     
         #create heatmaps
-    paletteLength <- 50
+    paletteLength <- 2
     myColor <- colorRampPalette(c("navy", "white",
                                   "firebrick3"))(paletteLength)
       data4pheatmap <- results
@@ -243,13 +243,14 @@ if (RAZOR == TRUE) {
             table.","\n")
       } else {
         pheatmap(data4pheatmap_clear,
-           color = myColor,
-           treeheight_row = 10,
-           angle_col ="45",
-           treeheight_col = 10,
-           legend = TRUE,
-           labels_row = rep("",nrow(data4pheatmap)),
-           labels_col = sample_names_raw)
+                 legend_breaks = c(0,1),
+                 color = myColor,
+                 treeheight_row = 10,
+                 angle_col ="45",
+                 treeheight_col = 10,
+                 legend = TRUE,
+                 labels_row = rep("",nrow(data4pheatmap)),
+                 labels_col = sample_names_raw)
         cat("\n")
       }
   }
@@ -277,7 +278,7 @@ if (UNIQUE == TRUE) {
     results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
     cat("\n")
     #create heatmaps
-    paletteLength <- 50
+    paletteLength <- 2
     myColor <- colorRampPalette(c("navy", "white",
                                   "firebrick3"))(paletteLength)
       data4pheatmap <- results
@@ -293,13 +294,14 @@ if (UNIQUE == TRUE) {
             table.","\n")
       } else {
         pheatmap(data4pheatmap_clear,
-           color = myColor,
-           treeheight_row = 10,
-           angle_col ="45",
-           treeheight_col = 10,
-           legend = TRUE,
-           labels_row = rep("",nrow(data4pheatmap)),
-           labels_col = sample_names_raw)
+                 legend_breaks = c(0,1),
+                 color = myColor,
+                 treeheight_row = 10,
+                 angle_col ="45",
+                 treeheight_col = 10,
+                 legend = TRUE,
+                 labels_row = rep("",nrow(data4pheatmap)),
+                 labels_col = sample_names_raw)
         cat("\n")
       }
   }
@@ -349,13 +351,13 @@ if (LFQ == TRUE) {
             table.","\n")
       } else {
         pheatmap(data4pheatmap_clear,
-           color = myColor,
-           treeheight_row = 10,
-           angle_col ="45",
-           treeheight_col = 10,
-           legend = TRUE,
-           labels_row = rep("",nrow(data4pheatmap)),
-           labels_col = sample_names_raw)
+                 color = myColor,
+                 treeheight_row = 10,
+                 angle_col ="45",
+                 treeheight_col = 10,
+                 legend = TRUE,
+                 labels_row = rep("",nrow(data4pheatmap)),
+                 labels_col = sample_names_raw)
         cat("\n")
       }
   }

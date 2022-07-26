@@ -177,16 +177,13 @@ if (GET_SAMPLE_NAMES == TRUE){
 
 ########## create result data frame & result lists
 # create data frame for razor
-results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_razor), nrow = length(file.list)))
-row.names(results_2gether_razor) <- file.list
+results_2gether_razor <- data.frame(matrix(ncol = length(sample_names_razor), nrow = 1))
 colnames(results_2gether_razor) <- sample_names_razor
 #create data frame for unique
-results_2gether_unique <- data.frame(matrix(ncol = length(sample_names_unique), nrow = length(file.list)))
-row.names(results_2gether_unique) <- file.list
+results_2gether_unique <- data.frame(matrix(ncol = length(sample_names_unique), nrow = 1))
 colnames(results_2gether_unique) <- sample_names_unique
 #create data frame for lfq
-results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_lfq), nrow = length(file.list)))
-row.names(results_2gether_lfq) <- file.list
+results_2gether_lfq <- data.frame(matrix(ncol = length(sample_names_lfq), nrow = 1))
 colnames(results_2gether_lfq) <- sample_names_lfq
 
 #results lists
@@ -199,7 +196,6 @@ if (RAZOR == TRUE) {
   cat("\n")
   cat("##","Razor","\n")
   cat("\n")
-  for (x in file.list){
     data_raw <- as.data.frame(res_raw[[1]])
     data <- filtering(data_raw)
     results <- data.frame(matrix(ncol = length(sample_names_razor), nrow = nrow(data)))
@@ -211,12 +207,12 @@ if (RAZOR == TRUE) {
       results[i] <- tmp
       cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
     }
-    results_razor[[x]] <- results
-    results_2gether_razor[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+    results_razor[[1]] <- results
+    results_2gether_razor[1,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
     cat("\n")
     
         #create heatmaps
-    paletteLength <- 50
+    paletteLength <- 2
     myColor <- colorRampPalette(c("navy", "white",
                                   "firebrick3"))(paletteLength)
       data4pheatmap <- results
@@ -232,23 +228,23 @@ if (RAZOR == TRUE) {
             table.","\n")
       } else {
         pheatmap(data4pheatmap_clear,
-           color = myColor,
-           treeheight_row = 10,
-           angle_col ="45",
-           treeheight_col = 10,
-           legend = TRUE,
-           labels_row = rep("",nrow(data4pheatmap)),
-           labels_col = sample_names_raw)
+                 legend_breaks = c(0,1),
+                 color = myColor,
+                 treeheight_row = 10,
+                 angle_col ="45",
+                 treeheight_col = 10,
+                 legend = TRUE,
+                 labels_row = rep("",nrow(data4pheatmap)),
+                 labels_col = sample_names_raw)
         cat("\n")
       }
-  }
+  
 }
 
 if (UNIQUE == TRUE) {
   cat("\n")
   cat("##","Unique","\n")
   cat("\n")
-  for (x in file.list){
     data_raw <- as.data.frame(res_raw[[1]])
     data <- filtering(data_raw)
     results <- data.frame(matrix(ncol = length(sample_names_unique), nrow = nrow(data)))
@@ -260,11 +256,11 @@ if (UNIQUE == TRUE) {
       results[i] <- tmp
       cat(name,"<br/>",sum(tmp, na.rm = TRUE),"<br/>")
     }
-    results_unique[[x]] <- results
-    results_2gether_unique[x,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
+    results_unique[[1]] <- results
+    results_2gether_unique[1,] <- sapply(results,function(x)sum(x, na.rm = TRUE))
     cat("\n")
     #create heatmaps
-    paletteLength <- 50
+    paletteLength <- 2
     myColor <- colorRampPalette(c("navy", "white",
                                   "firebrick3"))(paletteLength)
       data4pheatmap <- results
@@ -280,23 +276,22 @@ if (UNIQUE == TRUE) {
             table.","\n")
       } else {
         pheatmap(data4pheatmap_clear,
-           color = myColor,
-           treeheight_row = 10,
-           angle_col ="45",
-           treeheight_col = 10,
-           legend = TRUE,
-           labels_row = rep("",nrow(data4pheatmap)),
-           labels_col = sample_names_raw)
+                 legend_breaks = c(0,1),
+                 color = myColor,
+                 treeheight_row = 10,
+                 angle_col ="45",
+                 treeheight_col = 10,
+                 legend = TRUE,
+                 labels_row = rep("",nrow(data4pheatmap)),
+                 labels_col = sample_names_raw)
         cat("\n")
       }
-  }
 }
 
 if (LFQ == TRUE) {
   cat("\n")
   cat("##","LFQ","\n")
   cat("\n")
-  for (x in file.list){
     data_raw <- as.data.frame(res_raw[[1]])
     data <- filtering(data_raw)
     
@@ -312,8 +307,8 @@ if (LFQ == TRUE) {
       
     }
     
-    results_lfq[[x]] <- results
-    results_2gether_lfq[x,] <- sapply(results,function(x)sum(!is.na(x)))
+    results_lfq[[1]] <- results
+    results_2gether_lfq[1,] <- sapply(results,function(x)sum(!is.na(x)))
     cat("\n")
     
     #create heatmaps
@@ -334,16 +329,15 @@ if (LFQ == TRUE) {
             table.","\n")
       } else {
         pheatmap(data4pheatmap_clear,
-           color = myColor,
-           treeheight_row = 10,
-           angle_col ="45",
-           treeheight_col = 10,
-           legend = TRUE,
-           labels_row = rep("",nrow(data4pheatmap)),
-           labels_col = sample_names_raw)
+                 color = myColor,
+                 treeheight_row = 10,
+                 angle_col ="45",
+                 treeheight_col = 10,
+                 legend = TRUE,
+                 labels_row = rep("",nrow(data4pheatmap)),
+                 labels_col = sample_names_raw)
         cat("\n")
       }
-  }
 }
 
 
