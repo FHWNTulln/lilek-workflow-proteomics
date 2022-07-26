@@ -4,9 +4,10 @@ library(rmarkdown)
 
 # https://www.r-bloggers.com/2015/02/bashr-howto-pass-parameters-from-bash-script-to-r/
 args <- commandArgs()
-print(args)
+
 # render post-processing script
 # args[6] is the path defined in the bash script
+# e.g. /proj/proteomics/11_20220713_FH/results/results_run1_mqpar_20220713_QC_delete
 
 pth <- args[6]
 
