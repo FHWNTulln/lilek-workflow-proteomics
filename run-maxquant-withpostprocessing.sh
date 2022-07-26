@@ -2,6 +2,18 @@
 set -euo pipefail
 trap 's=$?; echo >&2 "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 
+function cleanup()
+{
+	echo "####################################ERROR#################################"
+	echo "Process terminated - deleting log-file, mqpar-file and temporary results"
+	echo "/proj/proteomics/$projname/mqpar/$filename.xml"
+	rm -f "/proj/proteomics/log.txt"
+	rm -f "/proj/proteomics/$projname/mqpar/$filename.xml"
+	rm -rf "/proj/proteomics/$projname/results/results_run$c_$filename/"
+}
+
+trap cleanup ERR
+
 start=`date +%s`
 
 Help()
@@ -9,13 +21,14 @@ Help()
    # Display Help
    echo "Run MaxQuant Analysis"
    echo
-   echo "Syntax: run-maxquant.sh [-m|v|r|h|p|R]"
+   echo "Syntax: run-maxquant.sh [-m|v|r|h|p|R|c]"
    echo "options:"
    echo "m     MaxQuant Filename without ending .xml - e.g. mqpar_210830"
    echo "p     Project Name - e.g. 20220406_FH_TR"
    echo "v     Version: new or old"
    echo "r     no. of runs"
    echo "R     perform post-processing in R"
+   echo "c     use config-file"
    echo "h     Print this help"
    echo
 }
@@ -23,8 +36,9 @@ Help()
 version="new"
 runs=1
 R="no"
+c="no"
 
-while getopts hm:v:r:p:R: flag
+while getopts hm:v:r:p:R:c: flag
 do
     case "${flag}" in
         m) filename=${OPTARG};;
@@ -32,11 +46,21 @@ do
         r) runs=${OPTARG};;
         p) projname=${OPTARG};;
         R) R=${OPTARG};;
+	c) c=${OPTARG};;
         h) # display Help
            Help
            exit;;
     esac
 done
+
+if [ $c ==  "yes" ]; then
+	source /proj/proteomics/config-file-proteomics
+	filename=$m
+	version=$v
+	runs=$r
+	projname=$p
+	R=$R
+fi
 
 #######################
 # check directories
@@ -62,7 +86,6 @@ if [ -f "./$projname/mqpar/$filename.xml" ]; then
   rm ./log.txt
   exit 1
 fi
-
 
 
 ########################
@@ -138,7 +161,7 @@ do
     echo "#####################################" | tee -a log.txt
     echo "run maxquant | run no. $c" | tee -a log.txt
     echo "#####################################" | tee -a log.txt
-    #maxquant ./$projname/mqpar/$filename.xml | tee -a log.txt
+    maxquant ./$projname/mqpar/$filename.xml | tee -a log.txt
 done
 
 ###############################
@@ -148,11 +171,16 @@ if [ $R ==  "yes" ] && [[ $runs == 1 ]]; then
     echo "#####################################" | tee -a log.txt
     echo "post-processing R" | tee -a log.txt
     echo "#####################################" | tee -a log.txt
-    mkdir -p ./$projname/evaluation
-    path="/proj/proteomics/testR"
-    #path=".\/$projname\/results\/results_run$c\_$filename"
+    #mkdir -p ./$projname/evaluation
+    #path="/proj/proteomics/testR"
+    #echo "proj/proteomics/$projname/results/results_run$c_$filename"
+    #echo "proj/proteomics/$projname/results/results_run$c_$filename"
+    path="proj/proteomics/$projname/results/results_run$c_$filename"
     Rscript ./bin/run-R.R $path
+    #move log-file
+    #mv ./$projname/results/results_run$c_$filename/XXX.md ./$projname/evaluation/XXX.md
     echo "post-processing R sucessful" | tee -a log.txt
+    echo "result file: ./$projname/evaluation/XXX.md" | tee -a log.txt
 fi
 
 ###############################
