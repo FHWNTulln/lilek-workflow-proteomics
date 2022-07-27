@@ -18,11 +18,15 @@ After uploading the script run-maxquant.sh which is available at `/proj/proteomi
 `run-maxquant.sh −m <file −name mqpar file> −p <name project directory> −r <number
 of runs> −v <used MaxQuant version> -R <perform post-processing>`
 
-The script contains also a help function which can be called using `run-maxquant.sh -h`. Additionally a config-file could be used to run the script.
+The script contains also a help function which can be called using `run-maxquant.sh -h`. 
+
+Additionally a config-file could be used to run the script.
 
 `run-maxquant.sh −c yes`
 
-The final results with the log file of data-analysis can be found in the folder `/proj/proteomics/<project directory>/results/`. If post-processing is performed the results can be found in the folder `/proj/proteomics/<project directory>/evaluation/`.
+The final results with the log file of data-analysis can be found in the folder `/proj/proteomics/<project directory>/results/`.
+
+If post-processing is performed the results can be found in the folder `/proj/proteomics/<project directory>/evaluation/`.
 
 For post-processing using R the markdown file `post-processing.Rmd` can be used. Here the user can define various settings. Based on the the data are filtered, summarized and vizualized. More details and explaination could be found in the Rmd file.
 
