@@ -126,7 +126,7 @@ library(tidyverse)
 library(dplyr)
 library(pheatmap)
 library(ggplot2)
-#library(reshape)
+library(reshape)
 library(knitr)
 # load functions
 filtering <- function(d){
