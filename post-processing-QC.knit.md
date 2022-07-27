@@ -24,7 +24,7 @@ params:
     value: "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/11_20220713_TR/mqpar_20220713_QC/proteinGroups.txt"
 title: "DataAnalysis - Postprocessing Results MaxQuant QC samples"
 author: ""
-date: "27 July 2022, 10:24:09 AM"
+date: "27 July 2022, 11:32:15 AM"
 ---
 
 
