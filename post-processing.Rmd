@@ -128,12 +128,7 @@ library(ggplot2)
 library(reshape)
 library(knitr)
 # load functions
-filtering <- function(d){
-  data_raw %>% filter( 
-    Potential.contaminant != "+",
-    Reverse != "+",
-    Only.identified.by.site != "+")
-}
+source("filtering_function.R")
 print("loading sucessful")
 ```
 

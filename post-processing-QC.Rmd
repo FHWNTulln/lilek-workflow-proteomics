@@ -40,24 +40,18 @@ library(gplots)
 ```
 
 ```{r}
-##################
-#
-#Experiment 001
-#
-##################
-path = params$path
+#load data and filtering function
+
+path <- params$path
 data_raw <- read.csv(path, dec=".", sep="\t")
-filtering <- function(data_raw){
-  data_raw %>% filter( 
-    Potential.contaminant == "",
-    Reverse == "",
-    Only.identified.by.site == "")
-}
+
+source("filtering_function.R")
 data <- filtering(data_raw) 
 
 filteredout <- nrow(data_raw)-nrow(data)
-#print("Filtered out")
-#filteredout
+
+print("Filtered out")
+filteredout
 ```
 
 # More than 1 peptide
@@ -70,9 +64,11 @@ uniq.razor[uniq.razor < 1] <- NA
 #get sums of identified proteins
 boxplot(colSums(!is.na(uniq.razor[-1])))
 m <- mean(colSums(!is.na(uniq.razor[-1])))
-print("Mean no protein identifications ID more than 1 peptide")
-print(m)
 ```
+
+**Mean no protein identifications ID more than 1 peptide**
+
+`r m`
 
 ## More than 2 peptides 
 
@@ -84,7 +80,8 @@ uniq.razor[uniq.razor < 2] <- NA
 #get sums of identified proteins
 boxplot(colSums(!is.na(uniq.razor[-1])))
 m <- mean(colSums(!is.na(uniq.razor[-1])))
-print("Mean no protein identifications ID more than 2 peptides")
-print(m)
 ```
 
+**Mean no protein identifications ID more than 2 peptides**
+
+`r m`
