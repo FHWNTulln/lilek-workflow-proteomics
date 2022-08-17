@@ -33,7 +33,7 @@ params:
     choices: ["RAZOR","UNIQUE","LFQ"]  
   SAVE: 
     label: "Save summarized results"
-    value: "FALSE"
+    value: "CSV"
     input: select
     choices: ["FALSE","CSV","RDS"]
 title: "`r params$title`"

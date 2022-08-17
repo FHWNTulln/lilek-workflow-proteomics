@@ -23,10 +23,12 @@ if (grepl("QC", pth, ignore.case = TRUE)){
   rmarkdown::render("/proj/proteomics/bin/post-processing-QC.Rmd", 
                     params = list(
                       path = paste(pth,"/combined/txt/proteinGroups.txt",sep="")),
-                    output_dir = pth)
+                    output_dir = pth,
+		    output_file = "post-processing.html")
 } else {
   rmarkdown::render("/proj/proteomics/bin/post-processing-4-automated-dataanalysis.Rmd", 
                     params = list(
                       path = paste(pth,"/combined/txt/proteinGroups.txt",sep="")),
-                    output_dir = pth)
+                    output_dir = pth,
+                    output_file = "post-processing.html")
 }

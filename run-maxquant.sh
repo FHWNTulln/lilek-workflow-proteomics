@@ -184,10 +184,10 @@ if [ $R ==  "yes" ] && [[ $runs == 1 ]]; then
     path="/proj/proteomics/$projname/results/results\_run$runs\_$filename"
     Rscript ./bin/run-R.R $path
     #move file
-    cp -rf ./$projname/results/results\_run$runs\_$filename/post-processing-QC.html ./$projname/evaluation/post-processing-QC.html
-    rm -rf ./$projname/results/results\_run$runs\_$filename/post-processing-QC.html
+    cp -rf ./$projname/results/results\_run$runs\_$filename/post-processing.html ./$projname/evaluation/post-processing.html
+    rm -rf ./$projname/results/results\_run$runs\_$filename/post-processing.html
     echo "post-processing R sucessful" | tee -a log.txt
-    echo "result file: ./$projname/evaluation/post-processing-QC_files" | tee -a log.txt
+    echo "result file: ./$projname/evaluation/post-processing.html" | tee -a log.txt
 fi
 
 ###############################
