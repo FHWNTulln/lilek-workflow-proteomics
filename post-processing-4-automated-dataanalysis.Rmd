@@ -21,7 +21,7 @@ params:
     value: ""
   path:
     label: "File path"
-    value: "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/11_20220713_TR/mqpar_20220713_QC/proteinGroups.txt"
+    value: "/proj/proteomics/"
   unique: 
     label: "Number of unique peptides for identification"
     value: 2
@@ -31,11 +31,6 @@ params:
     value: ["RAZOR","UNIQUE","LFQ"]
     multiple: TRUE
     choices: ["RAZOR","UNIQUE","LFQ"]  
-  SAVE: 
-    label: "Save summarized results"
-    value: "CSV"
-    input: select
-    choices: ["FALSE","CSV","RDS"]
 title: "`r params$title`"
 author: "`r params$author`"
 date: "`r format(Sys.time(), '%d %B %Y, %X')`"
@@ -69,22 +64,10 @@ if (any(grepl("UNIQUE",params$protein_types))){
 if (any(grepl("LFQ",params$protein_types))){
   LFQ <- TRUE
 }
-LFQ <- FALSE
 
 # define path of the proteinGroups.txt file(s)
 path = params$path
 
-# save files | options
-# FALSE - results are not saved
-# "RDS" - save results into R data file format
-# "CSV" - save results into a csv file
-SAVE <- "FALSE"
-if (any(grepl("RDS",params$SAVE))){
-  SAVE <- "RDS"
-}
-if (any(grepl("CSV",params$SAVE))){
-  SAVE <- "CSV"
-}
 ```
 
 # Introduction
@@ -135,12 +118,11 @@ print("loading sucessful")
 
 # Data Analysis
 
-The txt-files of the defined folder are read in, processed and filtered automatically. This section shows the code, heatmaps for LFQ values and also some summary statistics.
+The txt-files of the defined folder are read in, processed and filtered automatically. This section shows the code, heatmaps and also some summary statistics.
 
-```{r, results="asis"}
+```{r message=FALSE, warning=FALSE, results="asis"}
 infile <- read.csv(path, dec=".", sep="\t")
 res_raw <- list(infile)
-file.list <- c("test")
 ########## get sample names
 if (GET_SAMPLE_NAMES == TRUE){
   #get sample names
@@ -341,7 +323,7 @@ if (LFQ == TRUE) {
 
 # Summary
 
-```{r, results="asis", message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE, results="asis"}
 # show summary
 if (RAZOR == TRUE){
   cat("\n")
@@ -384,11 +366,7 @@ if (LFQ == TRUE){
 results_final <- data.frame(results_2gether_razor,results_2gether_unique,results_2gether_lfq)
 # get rid of NA columns
 results_final <- results_final[,colSums(is.na(results_final))<nrow(results_final)]
-if (SAVE == "RDS"){
-  saveRDS(results_final, "./results_final.RDS")
-} else if (SAVE == "CSV") {
-  write.csv2(results_final, "./results_final.csv")
-} 
+write.csv2(results_final, "/proj/proteomics/results_final.csv") 
 ```
 
 # Used time
