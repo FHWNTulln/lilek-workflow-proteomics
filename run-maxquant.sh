@@ -186,8 +186,10 @@ if [ $R ==  "yes" ] && [[ $runs == 1 ]]; then
     #move file
     cp -rf ./$projname/results/results\_run$runs\_$filename/post-processing.html ./$projname/evaluation/post-processing-$filename.html
     rm -rf ./$projname/results/results\_run$runs\_$filename/post-processing.html
-    cp -rf /proj/proteomics/results_final.csv ./$projname/evaluation/results-$filename.csv
-    rm -rf /proj/proteomics/results_final.csv
+    if [ -f "/proj/proteomics/results_final.csv" ] ; then
+        cp -rf /proj/proteomics/results_final.csv ./$projname/evaluation/results-$filename.csv
+    	rm -rf /proj/proteomics/results_final.csv
+    fi
     echo "post-processing R sucessful" | tee -a log.txt
     echo "result file: ./$projname/evaluation/post-processing-$filename.html" | tee -a log.txt
 fi
