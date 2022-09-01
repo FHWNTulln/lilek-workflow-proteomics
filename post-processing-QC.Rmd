@@ -21,7 +21,7 @@ params:
     value: ""
   path:
     label: "File path"
-    value: "N:/1_A_Bachelor_Master_Intern/00_M_2022/David/Data/11_20220713_TR/mqpar_20220713_QC/proteinGroups.txt"
+    value: "<path to protein groupus file>/proteinGroups.txt"
 title: "`r params$title`"
 author: "`r params$author`"
 date: "`r format(Sys.time(), '%d %B %Y, %X')`"
@@ -65,6 +65,9 @@ uniq.razor[uniq.razor < 1] <- NA
 boxplot(colSums(!is.na(uniq.razor[-1])))
 m <- mean(colSums(!is.na(uniq.razor[-1])))
 ```
+**Results**
+
+`r print(colSums(!is.na(uniq.razor[-1])))`
 
 **Mean no protein identifications ID more than 1 peptide**
 
@@ -81,6 +84,9 @@ uniq.razor[uniq.razor < 2] <- NA
 boxplot(colSums(!is.na(uniq.razor[-1])))
 m <- mean(colSums(!is.na(uniq.razor[-1])))
 ```
+**Results**
+
+`r print(colSums(!is.na(uniq.razor[-1])))`
 
 **Mean no protein identifications ID more than 2 peptides**
 
