@@ -82,10 +82,6 @@ boxplot(colSums(!is.na(uniq.razor[-1])))
 print(colSums(!is.na(uniq.razor[-1])))
 m <- mean(colSums(!is.na(uniq.razor[-1])))
 ```
-**Results**
-
-`r print(colSums(!is.na(uniq.razor[-1])))`
-
 **Mean no protein identifications ID more than 2 peptides**
 
 `r m`
