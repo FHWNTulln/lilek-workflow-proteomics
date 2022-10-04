@@ -54,7 +54,7 @@ print("Filtered out")
 filteredout
 ```
 
-# More than 1 peptide
+# At least 1 peptide
 
 ```{r}
 #select only unique peptides
@@ -63,17 +63,14 @@ uniq.razor <- data %>% select(starts_with("Razor...unique.peptides"))
 uniq.razor[uniq.razor < 1] <- NA
 #get sums of identified proteins
 boxplot(colSums(!is.na(uniq.razor[-1])))
+print(colSums(!is.na(uniq.razor[-1])))
 m <- mean(colSums(!is.na(uniq.razor[-1])))
 ```
-**Results**
-
-`r print(colSums(!is.na(uniq.razor[-1])))`
-
 **Mean no protein identifications ID more than 1 peptide**
 
 `r m`
 
-## More than 2 peptides 
+## At least 2 peptides 
 
 ```{r}
 #select only unique peptides
@@ -82,6 +79,7 @@ uniq.razor <- data %>% select(starts_with("Razor...unique.peptides"))
 uniq.razor[uniq.razor < 2] <- NA
 #get sums of identified proteins
 boxplot(colSums(!is.na(uniq.razor[-1])))
+print(colSums(!is.na(uniq.razor[-1])))
 m <- mean(colSums(!is.na(uniq.razor[-1])))
 ```
 **Results**
