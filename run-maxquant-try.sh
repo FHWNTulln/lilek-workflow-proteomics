@@ -101,7 +101,8 @@ if [[ "$filename" == "QC" ]]; then
   echo "QC samples"
   export projname
   python ./bin/test.py
-  filename="mqpar_QC_updated"
+  filename="mqpar_$projname"
+  mv ./mqpar_tmp/mqpar_QC_updated.xml ./mqpar_tmp/$filename.xml
 fi 
 
 ########################

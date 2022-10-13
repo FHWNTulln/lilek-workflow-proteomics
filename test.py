@@ -1,5 +1,5 @@
+#!/usr/bin/python3
 import xml.etree.ElementTree as ET
-#from lxml import etree
 from os import listdir
 import os
 
@@ -12,10 +12,8 @@ def find_raw_filenames( path_to_dir, suffix=".raw" ):
 # define proj directory
 projname = os.environ["projname"]
 path = "/proj/proteomics/"+projname+"/data"
-print(path)
 filenames = find_raw_filenames(path)
 filenames.sort()
-print(filenames)
 # change xml file
 for i in range(len(filenames)):
     find = root.find("filePaths")
@@ -43,9 +41,8 @@ for i in range(len(filenames)):
     define_tag = ET.SubElement(find, "string")
     define_tag.text = "" 
 
-print("JUHU geschafft")  
 # save results
 # https://stackoverflow.com/questions/39890217/python-xml-modifying-by-elementtree-destroys-the-xml-structure
 # https://stackoverflow.com/questions/3095434/inserting-newlines-in-xml-file-generated-via-xml-etree-elementtree-in-python
 ET.indent(tree, '  ')
-tree.write('/proj/proteomics/mqpar_tmp/mqpar_QC_updated.xml', method = "html", encoding="utf-8", xml_declaration=True)            
+tree.write('/proj/proteomics/mqpar_tmp/mqpar_QC_updated.xml', method = "html", encoding="utf-8", xml_declaration=True)
