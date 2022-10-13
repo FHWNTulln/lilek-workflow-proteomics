@@ -93,6 +93,16 @@ if [ -f "./$projname/mqpar/$filename.xml" ]; then
   exit 1
 fi
 
+source /apps/anaconda3/etc/profile.d/conda.sh
+conda activate base
+
+# create mqpar files for QC samples
+if [[ "$filename" == "QC" ]]; then
+  echo "QC samples"
+  export projname
+  python ./bin/test.py
+  filename="mqpar_QC_updated"
+fi 
 
 ########################
 # settings
