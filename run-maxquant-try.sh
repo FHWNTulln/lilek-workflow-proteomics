@@ -65,6 +65,7 @@ if [ $c ==  "yes" ]; then
 	runs=$r
 	projname=$p
 	R=$R
+	echo "Config-file used for data analysis" | tee -a log.txt
 fi
 
 #######################
@@ -93,16 +94,17 @@ if [ -f "./$projname/mqpar/$filename.xml" ]; then
   exit 1
 fi
 
+# activate conda base environment
 source /apps/anaconda3/etc/profile.d/conda.sh
 conda activate base
 
-# create mqpar files for QC samples
+# create mqpar file for QC samples
 if [[ "$filename" == "QC" ]]; then
-  echo "QC samples"
   export projname
-  python ./bin/test.py
-  filename="mqpar_$projname"
+  python ./bin/create-mqpar-file.py
+  filename="mqpar_QC_$projname"
   mv ./mqpar_tmp/mqpar_QC_updated.xml ./mqpar_tmp/$filename.xml
+  echo "mqpar file automated created - name: ./mqpar_tmp/$filename.xml" | tee -a log.txt
 fi 
 
 ########################
