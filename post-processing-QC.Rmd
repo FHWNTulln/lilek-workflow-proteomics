@@ -68,7 +68,7 @@ m <- mean(colSums(!is.na(uniq.razor[-1])))
 ```
 **Mean no protein identifications ID more than 1 peptide**
 
-`r m`
+`r round(m, 2)`
 
 ## At least 2 peptides 
 
@@ -84,4 +84,4 @@ m <- mean(colSums(!is.na(uniq.razor[-1])))
 ```
 **Mean no protein identifications ID more than 2 peptides**
 
-`r m`
+`r round(m, 2)`
