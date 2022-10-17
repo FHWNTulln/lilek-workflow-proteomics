@@ -22,9 +22,8 @@ for i in range(len(filenames)):
     
     find = root.find("experiments")
     define_tag = ET.SubElement(find, "string")
-    exp = i + 1
-    define_tag.text = str(exp)
-    
+    define_tag.text = str.split(filenames[i],".")[0]    
+
     find = root.find("fractions")
     define_tag = ET.SubElement(find, "short")
     define_tag.text = "32767"
